@@ -1,0 +1,9 @@
+[submodule "skin/themeroller"]
+	path = skin/themeroller
+	url = git://github.com/MkLabs/wheat-themeroller-theme.git
+[submodule "skin/default"]
+	path = skin/default
+	url = git://github.com/MkLabs/wheat-boilerplate-theme.git
+[submodule "skin/harmonious"]
+	path = skin/harmonious
+	url = git@github.com:MkLabs/wheat-harmonious-theme.git

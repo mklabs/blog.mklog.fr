@@ -1,0 +1,82 @@
+Title: What exactly is the middle-end?
+Author: Mickael Daniel
+Date: Nov 11 2010 19:51:00 GMT-0500 (CDT)
+Note: This post is an import from an older wordpress post, as a results not markdown formated
+Categories: middle-end
+
+<a href="http://blog.getify.com"><img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/logo-medium.png" alt="Getiblog from Getify Solutions"  /></a>
+
+<strong><em>Cet article est le premier d’une longue série dédiée au sujet du “middle-end”. Ces posts sont une traduction des articles de <a href="http://getify.me">Kyle Simpson</a>, précurseur et développeur frontend génial basé à Austin. Je vous invite à faire un tour sur son <a href="http://blog.getify.com/">blog</a> qui est une vrai mine d’or. J’ai eu l’insigne honneur par son accord de pouvoir traduire l’ensemble des posts relatifs au concept de middle-end, que je trouve génialissime. Ce sujet mérite vraiment réflexion. Voici le premier article de cette série, traduction de <a href="http://blog.getify.com/2010/07/what-exactly-is-the-middle-end/">“What exactly is the “middle-end”?”</a></em></strong>
+
+Ceux qui me suivent sur <a href="http://twitter.com/getify">Twitter</a> ou m'ont déjà entendu <a href="http://slideshare.net/shadedecho">parler à des conférences techniques</a> cette année m’ont déjà entendu à plusieurs reprises réclamer quelque chose que j’appelle le “middle-end”, ou spécifié différement, “UI Architecture”. En fait, je viens de terminer une série d’articles en 3 parties pour <a href="http://jsmag.com/">JSMag</a> sur la "montée du Middle-End”. Si vous êtes à la recherche d’une discussion sur ce sujet ou même du code qui s’y rapporte, je vous encourage fortement à vous abonner, ou au moins à acheter les exemplaire de Mai / Juin / Juillet pour cette série. Mais pour le reste d’entre vous, j’ai senti qu’il était temps que je vous présente en une explication simple et courte, le sujet comme je le vois. Ce message sera alors le précurseur de plusieurs autres à venir où je décrirais en détail la mise en œuvre, en pratique, du “middle-end” dans les applications web.
+
+<!--more-->
+
+<h2>Apéritif</h2>
+
+Qu’est ce qui est situé entre le front-end le back-end d’une application? Le “middle-end”, naturellement! Qui est responsable d’embaler, ‘de packager’ toutes les pièces de l’interface utilisateur et de les livrer efficacement au client (navigateur), puis faciliter la communication bidirectionnelle entre le serveur et le client? Une UI Architecture "middle-end". Bien sûr, “middle-end” est une sorte de terme artificiel pour décrire un concept qui existe depuis plus longtemps que le terme lui-même. Mais “middleware” est un peu plus commun, et décrit les tentatives de réponse aux besoins “middle-end”, ainsi ces notions ne vous seront pas totalement étrangères.
+“Je ne pense pas que j’ai de couche middle-end dans mon application web.” Oh si, vous en avez une. Croyez moi, vous en avez une. Chaque application dispose d’une couche middle-end, qu’elle soit visible et bien définie, ou confuse et cachée. Le question n’est pas de savoir si “Dois-je avoir une couche middle-end?” – La question est “Où est ma couche middle-end, et en ai-je le contrôle?”
+Afin de mieux répondre à cette question, essayons d’être précis sur les composantes d’une application qui font partie de la notion de middle-end. Tout d’abord, comment puis-je définir une tâche comme faisant partie du “middle-end”?
+
+<ol>
+	<li>Si la tâche peut être (et est généralement) faite, ou du moins est utile, à la fois au niveau front-end et au niveau back-end d’une application</li>
+        <ul>
+	    <li>Templating (statiques et dynamiques)</li>
+            <li>Validation des données (règles champ de formulaire, etc)</li>
+            <li>Mise en forme des données (internationalisation, encoding, escape de caractères, etc)</li>
+        </ul>
+	<li>Si la tâche est directement liée au support du front-end, ou adapte le front-end et le back-end</li>
+        <ul>
+	    <li>URL routing (décider quels contrôleurs gérent telles actions, etc)</li>
+	    <li>La gestion des en-tête (Requête et Réponse)</li>
+	    <li>Les cookies, sessions</li>
+	    <li>Ajax et transport de données (réception, transmission)</li>
+	    <li>La gestion du cache (coté serveur)</li>
+	    <li>Packaging (Concaténation de fichiers, Minification, etc.)</li>
+        </ul>
+</ol>
+
+Je pourrais détailler chacun de ces points en détail, mais cela prendrait beaucoup trop de temps pour un article. Toutefois, si une tâche est candidate (et souvent dupliquée) autant niveau front-end que back-end, il devient évident de considérer cette tâche comme étant une tâche “middle-end. En fait, c’est encore mieux si exactement le même code middle-end, pour une tâche donnée, peut être réutilisé aussi bien au niveau front-end que back-end (plus de détails dans un prochain billet).
+
+De même, si une tâche est spécifiquement dédiée à aider la transition entre les parties front-end et back-end (et vice versa), ou représente les détails concrets du support de votre partie front-end, il est logique d’appeler cette couche “middle-end”.
+
+<h2>Juste une couverture</h2>
+Il est tentant de penser que, depuis que toutes les applications web ont, pour la plupart ou la totalité de ces tâches, ces notions intégrées dans les entrailles d’un framework sous une forme ou une autre, leur donner un nom spécifique et/ou une définition, est un peu inutile ou simplement, c’est “essayer trop dur.”
+
+Pour cela, je réponds: Il n’y a que par la tentative d’identifier ces tâches, les définir, et parler de la façon dont elles sont implémentées, que nous pourrons espérer avoir assez de contrôle pour suffisamment optimiser, rendre “scalable” ou améliorer. Ce n’est pas parce qu’elle a toujours été faite dans les entrailles de notre pile applicative, sans que nous n’ayons jamais à y penser, que cette pratique constitue une bonne approche ou rencontre le plus grand succès. Peut-être qu’il est temps de repenser à tout cela un petit peu?
+Si vous êtes simplement satisfait de laisser votre framework ou plateforme de choix prendre toutes ces décisions pour vous, ou de gérer ces tâches à votre insu, alors tout va bien. Profitez de votre existence heureuse. Circulez, plus rien à voir ici.
+
+<h2>Plus de viande</h2>
+Le vilain petit secret de l’optimisation des performances Web est le suivant: alors que presque toute l’optimisation des performances web se concentre à rendre le front-end plus efficace et l’expérience utilisateur plus conviviale, la plupart des tâches que vous devez effectuer pour optimiser le front-end ont vraiment besoin d’un certain (si ce n’est pas beaucoup!) de contrôle sur le “middle-end”.
+Par exemple, si vous souhaitez optimiser les performances de chargement d’une page en s’attaquant au chargement des ressources, vous pouvez tout de suite penser: "Eh bien, j’ai juste besoin de quelque chose pour combiner mes fichiers, afin de réduire le nombre de mes requêtes HTTP.” S’il vous arrive de travailler dans un environnement où l’accumulation de processus est déjà la norme, ajouter une telle tâche n’est probablement pas trop fastidieux.
+Mais que faire si vous êtes dans un CMS sur-mesure au-dessus de PHP? Que faire si des ressources (images, scripts, CSS) sont éparpillés dans vos différents fichiers de templates? Qu’est-ce que vous allez faire? Probablement le seul choix à ce stade est un gros travail manuel et intervenir à peu prés partout. Ce que vous allez probablement faire est d’insérer une sorte de solution pour cette tâche dans votre application.
+OUI! C’est du “middle-end”. Dans la mesure où vous, les gars front-end, avez le contrôle de ce code, ce ne sera pas si mal. Mais dans la mesure où vous devez coordonner vos efforts avec une équipe de développeurs back-end qui “détienne” la partie PHP (Ou java, Ou Ruby ou n'importe quel langage back-end que ce soit) et qui ne se soucient pas particulièrement d’optimisation front-end, vous êtes en plein de dedans, dans un exercice pas des plus fun.
+
+
+<h2>Spaghetti pour dîner?</h2>
+Le souci d’optimisation des performance n’est pas le seul facteur de motivation pour essayer de tendre vers une stratégie bien mieux définie de “middle-end”. Un autre petit secret, cette fois sur les modèles d’architecture populaire comme MVC, est le suivant: de loin, la plupart des implémentations de ces idées sont (au mieux) imparfaits dans leur manque de détails d’implémentation entre les partie M, V et C.
+Par exemple, prenons ce code V-view:
+<script src="https://gist.github.com/659686.js"> </script>
+
+Même si nous disposons de ce qui semble être un décemment bien architecturé objet M-model orientée objet, il est effroyablement commun, facile et tentant d’utiliser le M-model à l’intérieur de notre V-view d’une manière qui constitue notre “business logic”, notre logique métier. (Vous savez la composante qui ne devrait exister que dans nos C-contrôleur).
+Je ne vais pas m’attarder sur ce sujet, je suis sûr qu’il y a un million d’opinions différentes par ici pour savoir si cela est bon, mauvais, ou hors de propos. Il ya aussi probablement un million de variations, dans d’autres plates-formes où les gens pensent qu’ils ont plus ou moins répondu à ces questions. Permettez-moi de dire ceci: Si vous avez des appels de fonction / méthode, et de la logique conditionnelle ou combinatoire dans votre V-view … Vous êtes probablement en train de “mal faire”.
+
+
+<h2>Où est le dessert?</h2>
+Mais comment une couche “middle-end” mieux définie peut aider ici? La réponse est plutôt complexe et je ne dispose pas d’assez d’espace ni d’envie pour y répondre complètement dans cet article. Mais une réponse, courte, serait de proposer un modèle alternatif d’architecture MVC que j’appellerais CVC (Client-View-Controller) qui est plus centrée sur l’interface utilisateur (alors que MVC a été clairement conçu par un architecte back-end!).
+CVC dispose de beaucoup de détails, mais le principal point sur lequel je veux attirer l’attention ici est le suivant: une mise en œuvre correcte implique le fait qu’il y ait une séparation stricte et sans faille entre le code applicatif (les contrôleurs ou les modèles) et la présentation (lire templates). Cette séparation est réalisée principalement en démontant et transformant le M-model vers quelque chose de plus dépouillé, juste les données (D-data nue), avant qu’il ne soit envoyé dans la V-view.
+
+Avec CVC, vous pouvez toujours maintenir n’importe quel type de plate-forme ou d’environnement dont vous disposez actuellement pour votre application back-end. Le seul changement nécessaire, se situe dans l’effort de sortir tout le code qui est lié à la présentation, sous quelque forme que ce soit, et de laisser cette préocupation à la séparation stricte et bien définie de la couche “middle-end”. Tout ce que votre application back-end a à faire est de sérialiser les données à remettre à la couche middle-end. Ainsi la partie back-end devient une boîte noire, entièrement conduit par l’API.
+
+Et votre code middle-end est désormais libre de prendre des données et de les formater pour présentation dans des système de templates entièrement indépendant de la manière dont ont été construites les données par la logique métier.
+
+<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/cvc-ui.png" alt="CVC UI Architecture (from getify)" />
+
+
+Le plus gros gain, en termes de processus de développement, issu de ce middle-end repensé sera plus de maintenabilité et un code plus robuste. Les développeurs front-end n’auront pas à se soucier de changer tous leurs templates quand les développeurs back-end apportent une modification à la signature du M-model. Les développeurs back-end n’auront pas à faire d’exception, de contournement dans leur code quand les développeurs front-end souhaitent, pour diverses raisons, que le transfert de données vers / depuis le client se fasse via un tableau au lieu d’un autre format (hash object).
+
+
+<h2>Plats à emporter</h2>
+Si cet article ne vous apporte rien, lisez ceci: <strong>les parties front-end et back-end forment naturellement et automatiquement un socle plus ordonnée lorsque vous insérez une couche “middle-end” clairement définie entre les deux.</strong> Faudra t’il repenser nos méthodologies? Ceci demandera t-il un peu de refactoring (refractorisation en bon anglicisme)? Oui. Devrez-vous oublier tout ce que vous connaissez de l’infrastructure de votre application et recommencer from scratch? <strong>Absolument pas.</strong>
+
+Mot de la fin: Votre application dispose déjà d’une partie “middle-end”. Vous ignorez probablement que c’est là, ou n’y avez jamais pensé. Le temps n’est-il pas venu de le faire?
