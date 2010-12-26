@@ -1,6 +1,18 @@
 
 This repo holds the actual (well not yet..) articles for my personal blog. [Wheat](https://github.com/creationix/wheat) is used as a blog engine which is based on git filefilesystem and written to run in node.js
 
+## Install
+
+Even though the wheat engine used is held in this repo, most of wheat dependencies are not. Just run:
+
+    npm install wheat
+    
+which will take care of that for us. Wheat is nicely packaged.
+
+And then
+
+    node app.js
+
 ## Themes
 Slight changes were made to wheat in there to allow the definition of several themes in skin/ directory.
 
@@ -19,14 +31,6 @@ Wheat can be set up to use a specific theme when requiring and invoking wheat, u
     ).listen(3000);
 
 Just change the value of the theme configuration options to match a correct theme in the skin/ directory.
-
-### Boilerplate Theme
-A default theme (skin/default) brings the basic markup and structure followed by html5 boilerplate in a blank theme.
-
-### jQuery UI CSS Framework Theme
-You could also find a simple themeroller theme that uses the jQuery UI themeroller framework (just some header/content markup), firstly to act as a simple example of building its own theme, secondly because I love the the jQuery UI CSS Framework.
-
-[github.com/MkLabs/wheat-themeroller-theme](https://github.com/MkLabs/wheat-themeroller-theme)
 
 ### Themes as submodules
 Default & themeroller themes are set up as git submodules.
@@ -56,4 +60,4 @@ To bring them up, just init & update theme using the following command:
 * CSS Reset Reloaded: Public Domain
 
 #### Everything else:
-* Articles and content: [WTF Public License](http://sam.zoy.org/wtfpl/COPYING) 
+* Articles and content: [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE](http://sam.zoy.org/wtfpl/COPYING) 
