@@ -1,36 +1,42 @@
-Title: Large application et jQuery
+Title: Création d'application jQuery à grande échelle - Guide par Addy Osmani
 Author: Mickael Daniel
 Date: Dec 27 2010 12:00:00 GMT-0500 (CDT)
-Translation: This article is the french translation of excellent Addy osmani's post[http://addyosmani.com/blog/large-scale-jquery/](http://addyosmani.com/blog/large-scale-jquery/)
+Translation: This article is the french translation of excellent Addy Osmani's post[http://addyosmani.com/blog/large-scale-jquery/](http://addyosmani.com/blog/large-scale-jquery/). Awesome work, thank you Addy for letting me translate this. All credits is due to you.
 Categories: Javascript, jQuery
 Tags: Code org., Webapp Architecture
 
-Aujourd'hui, nous allons nous pencher sur les outils et options que vous avez pour concevoir des applications d'entreprise à grande échelle utilisant jQuery. Bien que jQuery soit une excellente librairie et offre une collection d'outil très bien conçus pour le développement. Sa tendance à rester compact et à rendre le DOM facile à utiliser implique qu'il ne fournit pas une infrastructure clairement définie pour créer de larges applications.
+**Récemment [Addy Osmani](http://addyosmani.com) à publié un article incroyablement fourni et détaillé sur [les solutions que nous avons à notre disposition pour construire des applis jQuery à grande échelle](http://addyosmani.com/blog/large-scale-jquery/). Superbe travail et offrant à la communauté dans son ensemble une incroyable ressource autour de l'architecture des applications web modernes. Je suis réellement fasciné par ce sujet, principalement du au fait d'être intervenu pendant plus de deux ans sur une application de grande envergure utilisant massivement jQuery (et jQuery UI) coincé avec une toolkit maison malheureusement loin de toutes les bonnes pratiques et designs patterns qui émergent aujourd'hui, avec les conséquences que ça implique sur un projet d'une telle taille. Je pense sérieusement que le post d'Addy représente une des ressources les plus aboutis sur le sujet, avec une liste complète et détaillé des solutions à notre disposition pour simplifier et industrialiser notre pratique du front-end dans le contexte d'application jQuery (et JavaScript en général).**
 
-jQuery permet par contre de normaliser les choses à travers les différents navigateurs et se place comme un superbe outil de manipulation du DOM et helper Ajax. En l'utilisant pour ces forces, vous pouvez sélectionner quelques excellents ouitls à utiliser avec jQuery en tant que toolkit pour vos développement de web apps à plus grande échelle.
+**Merci M. Osmani pour avoir écrit ce brillant article et me donner l'accord de le traduire en Français, tout le crédit vous ait dû. Je pense sincèrement qu'il est dans notre intérêt de prendre conscience des solutions à notre disposition et des problèmes qu'ils tentent de résoudre. Le but ici est, avant tout, d'aider à promouvoir ces bonnes pratiques et professionnalisation de la pratique du front-end.**
+
+_**Post original: [http://addyosmani.com/blog/large-scale-jquery/](http://addyosmani.com/blog/large-scale-jquery/)**_
+
+Aujourd'hui, nous allons nous pencher sur les outils et options que vous avez à votre disposition pour concevoir des applications d'entreprise à grande échelle utilisant jQuery. Bien que jQuery soit une excellente librairie offrant une collection d'outil très bien conçus pour le développement, sa tendance à rester compact et à rendre le DOM facile à utiliser implique qu'il ne fournit pas forcément une infrastructure clairement définie pour créer de larges applications.
+
+jQuery permet par contre de normaliser les choses à travers les différents navigateurs et se place comme un superbe outil de manipulation du DOM et helper Ajax. En l'utilisant pour ces forces, vous pouvez sélectionner quelques excellents outils à utiliser avec jQuery en tant que toolkit pour vos développement de web apps à plus grande échelle.
 
 Quelques développeurs ont soutenu dans le passé que concevoir des applications RIAs en utilisant Dojo, MooTools ou YUI pouvait être plus approprié pour des applications Javascript à grande échelle que de simplement opter pour jQuery. Cependant, je crois que vous pouvez implémenter une solution utilisant jQuery qui est tout autant approprié sans trop d'effort additionnels.
 
-Dans cet article, nous nous pencherons sur les manières de concevoir un toolkit pour application d'application à grande échelle avec jQuery en identifiant les solutions que vous avez de disponible pour le moment concernant la gestion des dépendances, MVC avec jQuery, templating, tests, minification et plus.
+Dans cet article, nous nous pencherons sur les manières de concevoir un toolkit pour application à grande échelle avec jQuery en identifiant les solutions que vous avez de disponible pour le moment concernant la gestion des dépendances, MVC avec jQuery, templating, tests, minification et plus.
 
 ## Gestion des dépendances
 
-Quand vous concevez des applications à large échelle avec jQuery, il se peut que vous ayez des dépendances entre vous scripts que vous souhaiteriez charger dans un certain ordre ou dynamiquement dépendant de leur besoin (en prenant un exemple très simple, vous pouvez avoir le souhait de charger function.js avant de charger app.js) - un script loader peut vous assister dans cette voie. Bien que la technique traditionnelle qui n'utilise que le structure hiérarchisée de tags est également valide, les script loaders, de nos jours, offre quelques fonctionnalités supplémentaires que vous pouvez trouver utile, eg. charger des scripts différents dépendant des fonctionnalités qu'un navigateur supporte ou comme mentionné plus tôt, dynamiquement dépendant de certaine condition ou besoin.
+Quand vous concevez des applications à large échelle avec jQuery, il se peut que vous ayez des dépendances entre vos scripts que vous souhaiteriez charger dans un certain ordre ou dynamiquement dépendant de leur besoin (en prenant un exemple très simple, vous pouvez avoir le souhait de charger function.js avant de charger app.js) - un script loader peut vous assister dans cette voie. Bien que la technique traditionnelle qui n'utilise que la structure hiérarchisée de tags est également valide, les script loaders, de nos jours, offre quelques fonctionnalités supplémentaires que vous pouvez trouver utile, eg. charger des scripts différents dépendant des fonctionnalités qu'un navigateur supporte ou comme mentionné plus tôt, dynamiquement dépendant de certaines conditions ou besoins.
 
 Les deux scripts loaders les plus plébiscités sur le marché en ce moment sont RequireJS(de James Burke) et LabJS(par Kyle Thompson). Depuis quelques temps, il y avait une discussion pour savoir si l'un ou l'autre était meilleur, mais en réalité, ils ont tout deux leurs propres avantages. De mon expérience, une des meilleures fonctionnalités de RequireJS est son support de ‘modules’ structurés pour votre code tandis que LabJS est le meilleur quand vous n'avez pas besoin de fonctionnalités additionnelles et préférez quelque chose de plus léger.
 
 Si vous souhaitez en lire plus sur le choix d'utilisation de Require ou LabJS pour votre projet, jetez un oeil à [ce post](http://msdn.microsoft.com/en-us/scriptjunkie/ff943568). Dans le but de vous faire gagnez un peu de temps, j'ai aussi inclus quelques autre options pour la gestion des dépendances si ces deux solutions ne correspondent pas tout à fait vos besoins.
 
-* RequireJS – J'en recommande l'utilisation si vous prévoyez de garder votre code modulaire. Les modules tentent de limiter leur impact sur le namespace global et d'être plus explicite à propos de leur dépendances immédiates. RequireJS offre également un outil d'optiomisation qui vous permet de combiner et grouper vos scripts en une collection plus concises de scripts minifiés qui se charge rapidement. 
+* RequireJS – J'en recommande l'utilisation si vous prévoyez de garder votre code modulaire. Les modules tentent de limiter leur impact sur le namespace global et d'être plus explicite à propos de leur dépendances immédiates. RequireJS offre également un outil d'optimisation qui vous permet de combiner et grouper vos scripts en une collection plus concises de scripts minifiés qui se charge rapidement. 
 [http://requirejs.org/docs/jquery.html](http://requirejs.org/docs/jquery.html)
 
 * LabJS – Il marche le mieux quand vos scripts ont besoin d'être chargé efficacement dans un ordre particulier et que vous êtes à la recherche d'une solution plus légère que RequireJS ou n'êtes pas intéressé dans son approche modulaire de la gestion des dépendances. [http://www.labjs.com](http://www.labjs.com) (et tentez YepNope JS, un excellent script loader conditionnel qui fonctionne par dessus LabJS d'Alex Sexton - [http://www.yepnopejs.com](http://www.yepnopejs.com)).
 
 * StealJS – Un autre excellent gestionnaire de dépendances. Steal fait parti de JavascriptMVC mais vous pouvez l'utiliser individuellement. Inclut également concaténation, compression et nettoyage du code. [http://jupiterjs.com/news/stealjs-script-manager](http://jupiterjs.com/news/stealjs-script-manager)
 
-* JSL Script Loader – Encore une autre décente alternative qui supporte le lazy loading, chargement ordonné, prévention de code dupliqué et caching. Peut-être pas aussi bien testé que LabJS ou Require [http://www.andresvidal.com/jsl](http://www.andresvidal.com/jsl)
+* JSL Script Loader – Encore une autre alternative décente qui supporte le lazy loading, chargement ordonné, prévention de code dupliqué et caching. Peut-être pas aussi bien testé que LabJS ou Require [http://www.andresvidal.com/jsl](http://www.andresvidal.com/jsl)
 
-* Bootstrap - une options moins garni en fonctionnalités que les autres mais fait son boulot. Meilleure option si vous êtes à la recherche d'une solution minimale sans fioritures [https://bitbucket.org/scott_koon/bootstrap](https://bitbucket.org/scott_koon/bootstrap)
+* Bootstrap - une option moins garni en fonctionnalités que les autres mais fait son boulot. Meilleure option si vous êtes à la recherche d'une solution minimale sans fioritures [https://bitbucket.org/scott_koon/bootstrap](https://bitbucket.org/scott_koon/bootstrap)
  
 
 ## MVC & Organisation pour les applications jQuery à grande échelle
