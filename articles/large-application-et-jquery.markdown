@@ -134,7 +134,7 @@ Sammy.js est une plugin jQuery léger qui vous permet de facilement définir des
 * [https://github.com/quirkey/sammy](https://github.com/quirkey/sammy)
 
 
-** Ressources additionnelles concernant les patterns pour applications jQuery à grande échelle:**
+**Ressources additionnelles concernant les patterns pour applications jQuery à grande échelle:**
 
 * [Simple Inheritence](http://ejohn.org/blog/simple-javascript-inheritance/) de John Resig
 * [Using Inheritence Patterns To Organize Large jQuery Apps](Using Inheritence Patterns To Organize Large jQuery Apps) avec Alex Sexton
@@ -280,8 +280,6 @@ UITest est framework de test d'UI automatisé recommandé pour les projet jQuery
 
 J'espère que vous avez trouvé ce guide sur la création d'applications jQuery à grand échelle utile. Tandis qu'une une solution unique et globale peut paraître quelque chose de souhaitable pour la communié dans son ensemble, le but de ce post était de vous fournir toutes les options qui sont (à ma connaissance) disponible pour à la fois mettre en place votre propre toolkit pour le développement d'application à grande échelle.
 
-En vous ayant offert, à vous et votre équipe, la flexibilité pour décider la chose la plus utile 
-
 Si vous et votre équipe avez la flexibilité nécessaire pour décider la meilleure chose qui peut être accomplie avec cette information à cette égard, j'espère avoir réussi  à réduire une partie du temps que vous pourriez avoir par ailleurs consacré à la recherche sur ce sujet.
 
 Si vous êtes à la recherche d'une solution tout-en-un, JavaScriptMVC est probablement la solution la plus proche disponible, option mature et soutenue. Je vous encourage à l'essayer si vous vous sentez qu'il vous bénéficiera plus qu'une solution maison le ferait. Rappelez-vous que bien qu'allant dans le détail, JMVC est également entièrement modulaire. Ceci signifier que si vous le souhaitez, vous pouvez juste utiliser FuncUnit, le Controller et StealJS et les utiliser en tant que toolkit personnel sans trop de travail supplémentaire.
@@ -292,11 +290,11 @@ Quelque soit la direction que vous vous prendrez vec la création d'application 
 
 ## Pour aller plus loin
 
-[On jQuery and large applications with  Rebecca Murphey](http://blog.rebeccamurphey.com/on-jquery-large-applications)
-[On ‘Rolling Your Own’ Large jQuery Apps with Alex Sexton](http://alexsexton.com/?p=106)
-[jQuery UI Developer’s Guide (for those wishing to use $.widget etc)](http://jqueryui.com/docs/Developer_Guide)
-[Nicholas Zakas – Scalable JavaScript Application Architecture](http://developer.yahoo.com/yui/theater/video.php?v=zakas-architecture)
-[Tech Behind The New GrooveShark (Good Article On Large Scale jQuery App Dev)](http://blog.jerodsanto.net/2010/12/the-tech-behind-the-new-grooveshark/)
-[Cody Lindley’s excellent list of client-side development links for app development](http://blog.codylindley.com/links)
-JavaScript Documentation Tools: [JSDoc](http://jsdoc.sourceforge.net/), [YUI Doc](http://developer.yahoo.com/yui/yuidoc/) or [PDoc](http://pdoc.org/)
+* [On jQuery and large applications with  Rebecca Murphey](http://blog.rebeccamurphey.com/on-jquery-large-applications)
+* [On ‘Rolling Your Own’ Large jQuery Apps with Alex Sexton](http://alexsexton.com/?p=106)
+* [jQuery UI Developer’s Guide (for those wishing to use $.widget etc)](http://jqueryui.com/docs/Developer_Guide)
+* [Nicholas Zakas – Scalable JavaScript Application Architecture](http://developer.yahoo.com/yui/theater/video.php?v=zakas-architecture)
+* [Tech Behind The New GrooveShark (Good Article On Large Scale jQuery App Dev)](http://blog.jerodsanto.net/2010/12/the-tech-behind-the-new-grooveshark/)
+* [Cody Lindley’s excellent list of client-side development links for app development](http://blog.codylindley.com/links)
+* JavaScript Documentation Tools: [JSDoc](http://jsdoc.sourceforge.net/), [YUI Doc](http://developer.yahoo.com/yui/yuidoc/) or [PDoc](http://pdoc.org/)
 
