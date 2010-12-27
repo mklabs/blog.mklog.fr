@@ -256,48 +256,47 @@ Le concept de développement piloté par les tests est plutôt simple. A chaque 
 
 [http://msdn.microsoft.com/en-us/scriptjunkie/ff452703.aspx](http://msdn.microsoft.com/en-us/scriptjunkie/ff452703.aspx)
 
-### Test jQuery autmatique avec lancement de navigateur, Execution de test et Rapport de résultats
+### Test jQuery automatique avec lancement de navigateur, Execution de test et Rapport de résultats
 
 Si vous concevez une application web à grande échelle qui repose lourdement sur du Javascript, il y a des chances pour vouloir tester votre code sur des navigateurs différents, mais aussi sur différentes plateformes. Vous pouvez y parvenir sans le besoin d'effectuer beaucoup de travail manuel en utilisant quelques frameworks existants. John Resig recommande [Web Driver](http://code.google.com/p/webdriver) (Java), [Watir](http://wtr.rubyforge.org/) (Ruby) and [JSTestDriver](http://code.google.com/p/js-test-driver) pour y parvenir. [Selenium RC](http://seleniumhq.org/projects/remote-control) est aussi populaire à cette tâche. Ceux-ci sont les meilleurs outils à utiliser si le test est effectuer en interne. Si vous souhaitez utiliser une source externe de système pour le test, se référer à la secion suivant.
 
-### Debugging And Testing JavaScript In A Scripting Environment With Envjs and BumbleBee
+### Debugguer et tester JavaScript dans un environnement scripté avec Envjs et BumbleBee
 
 Evnjs est un outil offrant une implémentation Javascript du navigateur en un environnement de scripting réutilisable. Ceci permet aux développeurs d'efficacement exécuter jQuery et Javascript dans une console ce qui peut se prouver utile à des fins de debug. L'implémentation par défaut d'Envjs est Rhino.
 
-Rhino (Java) est un superbe outil pour éxecuter du Javascript soit dans une forme shell ou contenu dans une autre application - en mode shell il peut être utilisé en tant que debuggueur comme mentionné précédemment. Rhino convertit le code Javascript en des classes Java et son but principal est d'être utilisé 
+Rhino (Java) est un superbe outil pour éxecuter du Javascript soit dans une forme shell ou contenu dans une autre application - en mode shell il peut être utilisé en tant que debuggueur comme mentionné précédemment. Rhino convertit essentiellement du code JavaScript en des classes Java destinés à être utilisés dans des applications côté serveur. Si votre build process est basé sur Ant ou quelque chose de similaire, placer le jar de Rhino dans votre classpath vous permettrait d'exécuter facilement du JavaScript.
 
- 
-Rhino (Java) is a great tool for running JavaScript in either shell form or embedded in other applications – in shell form it can be used as the debugger mentioned above. Rhino convertit essentiellement du code JavaScript en des classes Java destinés à être utilisés dans des applications côté serveur. Si votre build process est basé sur Ant or quelque chose de similaire, placer le jar de Rhino dans votre classpath vous permettrait d'exécuter du JavaScript.
+Un bon toolkit de test pour Envjs est BumbleBee qui a été publié cette année. BumbleBee combine Rhino, JSpec, Envjs et Ant pour fournir une solution "out of the box" où les tests et les specs peuvent facilement être ajoutés dans votre build automatisé.
 
-Un bon toolkit de test pour Envjs est BumbleBee qui a été publié cette année. BumbleBee combine Rhino, JSpec, Envjs et Ant pour fournir une solution "out of the box" om les tests et les specs peuvent facilement être ajoutés dans votre build automatisé.
+### Test automatisé d'interface utilisateur piloté par jQuery
 
-### jQuery Driven Automated User Interface Testing
+UITest est framework de test d'UI automatisé recommandé pour les projet jQuery écrit par Menno van Slooten. Bien que encore assez jeune en terme de maturité, vous pouvez trouver quelques bons exemples sur comment utiliser ce framework sur la page officiel github ou via la conférence originale de Menni sur ce sujet à la jQuery Bay Area Conference, slides [ici](http://www.slideshare.net/mennovanslooten/jquery-bay-area-conference-2010). Vous pouvez également trouver des informations additionnelles récentes sur le testing d'interface utilisateur pour des applications Javascript, [ce post](http://devermind.com/testing/selenium-vs-coded-ui-my-perspective/) discuttant de Selenium et Coded UI en tant qu'alternatives.
 
-UITest is a recommended automated UI testing framework for jQuery projects written by Menno van Slooten. While quite young in terms of it’s maturity, you can find some good examples of how to use this framework on the official github page or via Menno’s original talk on the topic from his jQuery Bay Area Conference slides here. You can also find out some additional recent information on user-interface testing for generic JavaScript applications at this post which discusses Selenium and Coded UI as alternatives.
-
-https://github.com/mennovanslooten/UITest
+[https://github.com/mennovanslooten/UITest](https://github.com/mennovanslooten/UITest)
 
  
 
-Conclusions
+## Conclusion
 
-I hope you’ve found this guide to building large-scale jQuery applications useful. Whilst a single all-encompassing solution may very be something desirable to the community at large, the aim of this post was to provide you with all of the options that are (to my knowledge) available for both rolling your own large-scale toolkit for application development.
+J'espère que vous avez trouvé ce guide sur la création d'applications jQuery à grand échelle utile. Tandis qu'une une solution unique et globale peut paraître quelque chose de souhaitable pour la communié dans son ensemble, le but de ce post était de vous fournir toutes les options qui sont (à ma connaissance) disponible pour à la fois mettre en place votre propre toolkit pour le développement d'application à grande échelle.
 
-Providing you and your team with the flexibility to decide is the most useful thing that could be done with this information and in that regard, I hope I’ve managed to trim down some of the time you may have otherwise spent researching this topic.
+En vous ayant offert, à vous et votre équipe, la flexibilité pour décider la chose la plus utile 
 
-At the end of the day, if you are looking for an all-inclusive solution, JavaScriptMVC is probably the closest thing available to a mature, well-supported option and I encourage you to check it out if you feel it would benefit you more than a custom-rolled toolkit would. Remember that while comprehensive, JMVC is also completely modular. What this means is that if you desired, you could just take FuncUnit, the Controller and StealJS and use them as your own personal toolkit without much heavy-lifting at all. 
+Si vous et votre équipe avez la flexibilité nécessaire pour décider la meilleure chose qui peut être accomplie avec cette information à cette égard, j'espère avoir réussi  à réduire une partie du temps que vous pourriez avoir par ailleurs consacré à la recherche sur ce sujet.
 
-Whatever direction you do take with building your large-scale application, know that there are enough tools and resources within the JavaScript community to help get you started.
+Si vous êtes à la recherche d'une solution tout-en-un, JavaScriptMVC est probablement la solution la plus proche disponible, option mature et soutenue. Je vous encourage à l'essayer si vous vous sentez qu'il vous bénéficiera plus qu'une solution maison le ferait. Rappelez-vous que bien qu'allant dans le détail, JMVC est également entièrement modulaire. Ceci signifier que si vous le souhaitez, vous pouvez juste utiliser FuncUnit, le Controller et StealJS et les utiliser en tant que toolkit personnel sans trop de travail supplémentaire.
+
+Quelque soit la direction que vous vous prendrez vec la création d'application à grande échelle, sachez qu'il existe suffisamment d'outils et ressources au sein de la communauté JavaScript pour vous aider à débuter.
 
  
 
-Further Reading & Resources
+## Pour aller plus loin
 
-On jQuery and large applications with Rebecca Murphy
-On ‘Rolling Your Own’ Large jQuery Apps with Alex Sexton
-jQuery UI Developer’s Guide (for those wishing to use $.widget etc)
-Nicholas Zakas – Scalable JavaScript Application Architecture
-Tech Behind The New GrooveShark (Good Article On Large Scale jQuery App Dev)
-Cody Lindley’s excellent list of client-side development links for app development
-JavaScript Documentation Tools: JSDoc, YUI Doc or PDoc
+[On jQuery and large applications with  Rebecca Murphey](http://blog.rebeccamurphey.com/on-jquery-large-applications)
+[On ‘Rolling Your Own’ Large jQuery Apps with Alex Sexton](http://alexsexton.com/?p=106)
+[jQuery UI Developer’s Guide (for those wishing to use $.widget etc)](http://jqueryui.com/docs/Developer_Guide)
+[Nicholas Zakas – Scalable JavaScript Application Architecture](http://developer.yahoo.com/yui/theater/video.php?v=zakas-architecture)
+[Tech Behind The New GrooveShark (Good Article On Large Scale jQuery App Dev)](http://blog.jerodsanto.net/2010/12/the-tech-behind-the-new-grooveshark/)
+[Cody Lindley’s excellent list of client-side development links for app development](http://blog.codylindley.com/links)
+JavaScript Documentation Tools: [JSDoc](http://jsdoc.sourceforge.net/), [YUI Doc](http://developer.yahoo.com/yui/yuidoc/) or [PDoc](http://pdoc.org/)
 
