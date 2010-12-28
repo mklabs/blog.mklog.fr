@@ -187,7 +187,7 @@ Categories: Javascript, node.js
 <p>Le nom du projet n'est vraiment pas très originale et j'avoue avoir manquer d'inspiration sur le coup. Je n'avais pas d'idée de nom, le projet s'est alors appelé de lui même idonthaveanameyet...</p>
 
 <p>Dont voici un petit screenshot:
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/12/node-md-githubapi-sample.png" alt="Demo"></p>
+<img class="mk-blog-img-center" src="/express/node-md-githubapi-sample.png" alt="Demo"></p>
 
 <p>L'interface très épuré reprends la structure et le style de la nouvelle interface twitter (sans bien sûr aller aussi loin). Une simple liste accessible depuis l'accueil permet de cliquer sur chacun des fichiers markdown du repo afin d'afficher leur contenu. Ici, l'exemple porte sur le repo npm qui dispose de l'ensemble de la documentation sous ce format.</p>
 

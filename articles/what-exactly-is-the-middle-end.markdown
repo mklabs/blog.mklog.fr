@@ -4,7 +4,7 @@ Date: Nov 11 2010 19:51:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
 Categories: middle-end
 
-<a href="http://blog.getify.com"><img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/logo-medium.png" alt="Getiblog from Getify Solutions"  /></a>
+<a href="http://blog.getify.com"><img class="mk-blog-img" src="/middle-end/logo-medium.png" alt="Getiblog from Getify Solutions" /></a>
 
 <strong><em>Cet article est le premier d’une longue série dédiée au sujet du “middle-end”. Ces posts sont une traduction des articles de <a href="http://getify.me">Kyle Simpson</a>, précurseur et développeur frontend génial basé à Austin. Je vous invite à faire un tour sur son <a href="http://blog.getify.com/">blog</a> qui est une vrai mine d’or. J’ai eu l’insigne honneur par son accord de pouvoir traduire l’ensemble des posts relatifs au concept de middle-end, que je trouve génialissime. Ce sujet mérite vraiment réflexion. Voici le premier article de cette série, traduction de <a href="http://blog.getify.com/2010/07/what-exactly-is-the-middle-end/">“What exactly is the “middle-end”?”</a></em></strong>
 
@@ -70,7 +70,7 @@ Avec CVC, vous pouvez toujours maintenir n’importe quel type de plate-forme ou
 
 Et votre code middle-end est désormais libre de prendre des données et de les formater pour présentation dans des système de templates entièrement indépendant de la manière dont ont été construites les données par la logique métier.
 
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/cvc-ui.png" alt="CVC UI Architecture (from getify)" />
+<img class="mk-blog-img-center" src="/middle-end/cvc-ui.png" alt="CVC UI Architecture (from getify)" />
 
 
 Le plus gros gain, en termes de processus de développement, issu de ce middle-end repensé sera plus de maintenabilité et un code plus robuste. Les développeurs front-end n’auront pas à se soucier de changer tous leurs templates quand les développeurs back-end apportent une modification à la signature du M-model. Les développeurs back-end n’auront pas à faire d’exception, de contournement dans leur code quand les développeurs front-end souhaitent, pour diverses raisons, que le transfert de données vers / depuis le client se fasse via un tableau au lieu d’un autre format (hash object).

@@ -4,7 +4,7 @@ Date: Nov 6 2010 16:31:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
 Categories: HTML5
 
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/html5boilerplate_600.jpg" alt="" width="600" height="234" /> 
+<img class="mk-blog-img-center" src="/boilerplate/html5boilerplate_600.jpg" alt="" width="600" height="234" /> 
 
 Je vous propose aujourd'hui de faire un tour d'horizon d'<a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>.
 

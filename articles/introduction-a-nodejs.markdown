@@ -4,7 +4,7 @@ Date: Nov 13 2010 21:55:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
 Categories: Javascript, node.js
 
-<img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/nodejs-attitude.jpg"></img>
+<img class="mk-blog-img" src="node/nodejs-attitude.jpg"></img>
 
 Plus je joue avec node.js, plus j'aime cette plate-forme. Le projet est passé en version 0.2.0 il y a peu (la v0.3.0 étant en dev et la v0.2.4 étant la version stable à l'heure ou j'écris ces lignes), marquant une première stabilisation du projet. Jusqu'à maintenant, il était difficile de suivre, avec des versions s'enchaînant à un rythme soutenu, apportant incompatibilité d'API et difficulté pour les auteurs de framework et module node.js à les maintenir. Ryan Dahl a promis d'assurer la compatibilité de l'API pour les versions 0.2.x. 
 

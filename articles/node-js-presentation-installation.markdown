@@ -4,7 +4,7 @@ Date: Nov 16 2010 23:46:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
 Categories: Javascript, node.js
 
-<img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/node1.png"></img>
+<img class="mk-blog-img" src="/node/node1.png"></img>
 
 Comme introduit précédemment dans le <a href="blog.mklog.fr/2010/11/13/introduction-a-node-js/">post de présentation consacré à cette série</a>, nous allons aujourd'hui nous intéresser à l'installation de Node sur notre machine et à sa prise en main. A la fin de cet article, vous aurez une installation Node complètement fonctionnelle de laquelle vous pourrez concevoir des tas d'applications basées sur ce fantastique framework. Mais avant de rentrer dans le vif du sujet, j'ai pensé qu'il était intéressant et important de définir Node, ce qui le caractérise et fait qu'il rencontre le succès qu'il connaît aujourd'hui.
 <div class="clear"></div>
@@ -13,13 +13,13 @@ Comme introduit précédemment dans le <a href="blog.mklog.fr/2010/11/13/introdu
 <h2>Node.js, c'est quoi?</h2>
 Alors Node.js, c'est quoi? On peut commencer par dire qu'il represente le 3e projet le plus suivi sur Github (Juste derrière Rails et jQuery). Et c'est une tendance qui ne risque pas de s'arrêter:
 
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/github-popular1.png" alt="Github: Third most popular project!" />
+<img class="mk-blog-img-center" src="/node/github-popular1.png" alt="Github: Third most popular project!" />
 
 Au premier abord, Node ressemble juste à une autre implémentation du Javascript coté serveur, mais c'est beaucoup, beaucoup plus intéressant que cela. Il s'appuie sur l'excellent support du Javascript pour la programmation basée sur les évènements et s'en sert pour créer quelque chose qui utilise et "embrasse" vraiment les points forts du langage.
 
 Node.js est un projet open-source géré par <a href="https://github.com/ry">Ryan Dahl</a> et soutenu par <a href="http://www.joyent.com/">Joyent</a>. Le projet se décrit lui-même comme "evented I/O for V8 Javascript" (E/S évènementielle pour le moteur Javascript V8). C'est un framework vous permettant de concevoir des applications réseaux extrêmement rapides, efficaces et performantes, spécialement dans des contextes hautement concurrent. Il permet vraiment une programmation basée sur les événements (event-driven) et de manière non bloquante (toutes les E/S sont traitées de manière non bloquante). Pensez à quelque chose de similaire à Twisted ou EventMachine, mais pour Javascript au lieu de Python ou Ruby.
 
-<img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/nodejsarch.png" alt="nodeJS Architecture globale" />
+<img class="mk-blog-img" src="/node/nodejsarch.png" alt="nodeJS Architecture globale" />
 
 Ceci est complètement différent (si ce n'est à l'opposé) des méthodologies plus communes employées jusqu'alors, où les threads OS sont employés pour gérer de nombreuses requêtes et où les E/S sont synchrones (bloquantes).
 
@@ -98,12 +98,12 @@ Une fois le répertoire node est ses sources prêt, se placer à la racine et ex
 <script src="https://gist.github.com/702382.js"> </script>
  
 Le première devrait vous donner quelque chose comme: 
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/screen-node-configure-e1289939993766.png" alt="./configure" />
+<img class="mk-blog-img-center" src="/node/screen-node-configure-e1289939993766.png" alt="./configure" />
 
 Ceci permet au système de déterminer l'architecture de la machine et les librairies disponible sur le système, et de les faire correspondre avec celles exigées par le programme, juste avant la compilation de son code source.
 
 Les deux dernière commandes servent à compiler les sources de Node et à l'installer sur votre environnement. Un grand nombre de messages défileront pendant que Node est compilé et installé (Le processus peut prendre un peu de temps):
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/screen-node-make-e1289941130397.png" alt="make && make install" />
+<img class="mk-blog-img-center" src="/node/screen-node-make-e1289941130397.png" alt="make && make install" />
 
 Vous devriez pouvoir taper "node -v" ou "node --version", ce qui devrait vous retourner le numéro de version de Node que vous venez d'installer.
 
@@ -116,7 +116,7 @@ Créons un simple fichier server.js:
 Ce script importe le module http et crée un serveur HTTP. La fonction anonyme qui est passé dans la méthode http.createServer sera appelé dès qu'une requête entrante arrive au serveur, celui-ci écoutant sur le port 8080. A chaque requête, la fonction passée en paramètre a createServer reçoit deux paramètres correspondant à l'objet request et response. Dans ce script, nous envoyons d'abord les en-tête HTTP avec le content-type et le status code (200: succesful). puis le message "Hello World!". Remarquez l'utilisation de la méthode .end qui permet de spécifier au serveur que nous souhaitons clore la connexion HTTP.
 
 Si vous lancer la commande "node server.js" et aller faire un tour sur votre navigateur, vous devriez voir:
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/screen-hello-e1289941585163.png" alt="Hello Node!" />
+<img class="mk-blog-img-center" src="/node/screen-hello-e1289941585163.png" alt="Hello Node!" />
 
 Et voilà, nous avons une installation de Node fonctionelle et avons créé notre toute première application.
 

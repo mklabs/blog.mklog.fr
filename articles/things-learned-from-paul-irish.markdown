@@ -40,12 +40,12 @@ L'équivalent de:
 Mais que se passe t-il? (Façon <a href="http://www.youtube.com/watch?v=5KVw8lIosWI">Les Inconnus</a>)
 
 SI l'on se risque à tenter dans notre console javascript le statement (new Function("return x = 10")), vous devriez voir: 
-<img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/anonymous.png" />
+<img class="mk-blog-img" src="/things-learned-from-paul-irish/anonymous.png" />
 <div class="clear"></div>
 Ce code ici n'est pas très propre et n'est que prétexte à expliquer ce qu'il se passe. Assigner 10 à la variable globale x est à éviter <span>;)</span>
 
 L'utilisation du constructor Function vous permet de créer une fonction anonyme (qui n'est pas nommé) à partir d'une string. Appliqué à un retour JSON, cela donnerait: 
-<img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/badass-not-evals.png" alt="BadAss not evals" />
+<img class="mk-blog-img" src="/things-learned-from-paul-irish/badass-not-evals.png" alt="BadAss not evals" />
 <div class="clear"></div>
 
 Wooow, je viens juste d'apprendre comment me passer d'eval... Bien que la meilleure façon reste de ne pas en avoir besoin <span rt-90>;)</span>

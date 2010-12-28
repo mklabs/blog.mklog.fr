@@ -5,7 +5,7 @@ Note: This post is an import from an older wordpress post, as a results not mark
 Categories: Javascript, jQuery
 
 jQuery Harmony
-<img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/jquery_logo.gif" height="108" width="170" />Si vous avez lu mon précédent post sur <a href="http://blog.mklog.fr/2010/11/06/harmony-sexy-background-canvas/">Harmony et sa déclinaison background</a>, vous savez à quel point j'ai adoré  le <a href="http://mrdoob.com/">travail de Mr. Doob</a>. Que ce soit au niveau de l'idée ou de la mise en oeuvre, <a href="http://mrdoob.com/projects/harmony/">Harmony</a> est vraiment magique.
+<img class="mk-blog-img" src="/jquery/jquery_logo.gif" height="108" width="170" />Si vous avez lu mon précédent post sur <a href="http://blog.mklog.fr/2010/11/06/harmony-sexy-background-canvas/">Harmony et sa déclinaison background</a>, vous savez à quel point j'ai adoré  le <a href="http://mrdoob.com/">travail de Mr. Doob</a>. Que ce soit au niveau de l'idée ou de la mise en oeuvre, <a href="http://mrdoob.com/projects/harmony/">Harmony</a> est vraiment magique.
 
 Vous avez peut-être également remarqué que j'ai pas pu m'empêcher de l'intégrer dans la zone d'entête du site, complètement inspiré par le thème du blog de <a href="http://paulirish.com/">Paul Irish</a>.
 

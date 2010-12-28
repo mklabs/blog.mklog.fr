@@ -4,7 +4,7 @@ Date: Nov 23 2010 22:18:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
 Categories: Javascript, node.js
 
-<img class="mk-blog-img" src="http://blog.mklog.fr/wp-content/uploads/2010/11/node-boilerplate-featured.jpg" />Troisième article consacré à cette série, nous allons aujourd'hui nous pencher sur <a href="https://github.com/robrighter/node-boilerplate">Node Boilerplate</a> et à la mise en en place du squelette de notre appli Node.
+<img class="mk-blog-img" src="/node-boilerplate/node-boilerplate-featured.jpg" />Troisième article consacré à cette série, nous allons aujourd'hui nous pencher sur <a href="https://github.com/robrighter/node-boilerplate">Node Boilerplate</a> et à la mise en en place du squelette de notre appli Node.
 
 Inspiré par <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>, <a href="http://robrighter.com/">Rob Righter</a> eut l'idée de créer un outil permettant de générer tout ce dont nous pouvons avoir besoin pour mettre en place une appli ou un site Node. 
 
@@ -35,7 +35,7 @@ Ceci permettra de télécharger sur votre poste local les sources de node-boiler
 
 Vous devriez voir l'arborescence suivante:
 
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/node-boilerplate-tree.png" alt="" />
+<img class="mk-blog-img-center" src="/node-boilerplate/node-boilerplate-tree.png" alt="" />
 
 Elle contient notamment les répertoires /lib et /bin, le premier contenant <a href="https://github.com/robrighter/node-boilerplate/tree/master/lib">les modules</a> socket.IO, socket.IO-node, Express et HTML5 Boilerplate qui ne sont pour l'instant que des répertoires vides, le second contenant le script d'installation initproject.sh dont vous pouvez voir le contenu ci-dessous.
 
@@ -57,19 +57,19 @@ Lançons donc le script d'install via la commande suivante, depuis la racine de 
 
 Le téléchargement de chacun des submodules peut prendre un peu de temps, et votre terminal deviendra très verbeux, avec à la fin quelque chose comme:
 
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/node-boilerplate-initproject.png" alt="" />
+<img class="mk-blog-img-center" src="/node-boilerplate/node-boilerplate-initproject.png" alt="" />
 
 <h2>Que le squelette soit</h2>
 Ok, nous avons désormais une appli Node prête et fonctionnelle qui utilise express et socket.IO, avec un repository git tout neuf et le premier commit effectué. Il ne reste plus qu'a exécuter la commande 'node server.js':
 
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/node-boilerplate-run.png" alt="" />
+<img class="mk-blog-img-center" src="/node-boilerplate/node-boilerplate-run.png" alt="" />
 
 Vous pourrez voir ce que cela donne en visitant <a href="http//localhost:8081">http//localhost:8081</a>
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/11/node-boilerplate-test.png" alt="" />
+<img class="mk-blog-img-center" src="/node-boilerplate/node-boilerplate-test.png" alt="" />
 
 
 node-boilerplate est fourni  avec une configuration d'express par défaut, facilement adaptable et représentant un très bon point de départ:
-<img class="mk-blog-img-right" src="http://blog.mklog.fr/wp-content/uploads/2010/11/node-boilerplate-tree2.png?v=1" alt="" />
+<img class="mk-blog-img-right" src="/node-boilerplate/node-boilerplate-tree2.png" alt="" />
 
 <ul>
 	<li>Les vues sont stockées dans le répertoire /views</li>
