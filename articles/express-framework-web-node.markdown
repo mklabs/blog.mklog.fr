@@ -122,7 +122,7 @@ Categories: Javascript, node.js
 
 <p>Pour se faire la main, nous pouvons également utiliser node en ligne de commande, importer le module github et commencer à jouer avec son API, voici un exemple d'utilisation de l'API Repo pour récupérer la liste des repositories d'un utilisateur (ici, moi-même).</p>
 
-<img class="mk-blog-img-center" src="http://blog.mklog.fr/wp-content/uploads/2010/12/node-github-cmd-e1291511000234.png" alt="node command line">
+<img class="mk-blog-img-center" src="/express/node-github-cmd-e1291511000234.png" alt="node command line">
 
 <h3>Conception du module githuber</h3>
 
