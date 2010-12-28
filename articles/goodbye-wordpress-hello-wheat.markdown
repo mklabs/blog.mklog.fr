@@ -1,8 +1,8 @@
 Title: Goodbye Wordpress, Hello Wheat! Une solution basée sur node.js et Git
 Author: Mickael Daniel
-Date: Dec 28 2012 17:00:00 GMT+0100 (CDT)
-Categories: node.js, CSS3, HTML5
-Tags: Blog, Moi, 
+Date: Dec 28 2010 20:00:00 GMT+0100 (CDT)
+Categories: node.js
+Tags: Blog, Moi
 
 <img class="mk-blog-img" src="/wheat/wheat-field.jpg" alt="Wheat!" title="Wheat!">
 Le titre résume parfaitement cet article, j'ai finalement basculé mon blog depuis Wordpress pour utiliser [Wheat](https://github.com/creationix/wheat), un moteur de blog écrit par Tim Caswell basé sur [node.js](http://nodejs.org/) et utilisant brillamment [Git](https://github.com/creationix/node-git) et son système de fichier comme support. Wheat est d'ailleurs utilisé sur le site [howtonode.org](http://howtonode.org/), que les amateurs de node.js ne manqueront pas de connaître. 
