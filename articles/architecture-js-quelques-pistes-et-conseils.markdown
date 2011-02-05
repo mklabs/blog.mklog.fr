@@ -11,7 +11,7 @@ Parce qu'une architecture bien pensée et et correctement implémentée est une 
 
 L'architecture d'applications web modernes (nous resterons partie Front, ces principes peuvent être appliqués indépendamment du langage coté backend mis en oeuvre) est un vaste sujet qui ne saurait être résumé à la taille d'un post, nous ne verrons ici que certains points / conseils qui pourront réellement vous sauver la vie (surtout si votre application est ammenée à prendre de l'ampleur).
 
-Ce post parlera plus particulièrement de jQuery étant donné qu'il représente aujourd'hui le fwk le plus utilisé et qu'il représente peut-être celui nécessitant le plus de travail de réflexion lorsque l'on se heurte au problème d'organisation de code) mais ces principes peuvent prendre sens avec tout autre toolkit/fwk.
+Ce post parlera plus particulièrement de jQuery étant donné qu'il représente aujourd'hui le fwk le plus utilisé (et qu'il représente peut-être celui nécessitant le plus de travail de réflexion lorsque l'on se heurte au problème d'organisation de code) mais ces principes peuvent prendre sens avec tout autre toolkit/fwk.
 
 Qui ne s'est jamais retrouvé devant un document.ready interminable, faisant tout et n'importe quoi et qui au fur et à mesure de l'avancement du projet devient tout sauf propre et maintenable? Parce qu'une approche centré sur le DOM avec des chaînes jQuery interminables ne suffit plus. Il est facile de produire du code médiocre avec jQuery mais il n'est pas impossible de garder les chôses "clean".
 
@@ -31,7 +31,7 @@ Superbe screencast des concepts de custom events et système pub/sub par Rebecca
 
 Exemple d'application: [github.com/rmurphey/ffco](http://github.com/rmurphey/ffco)
 
-Encore une superbe présentation offert à la communauté par Rebecca Murphey. Très bonne vue d'ensemble des problèmes que l'on sera amené à résoudre et approche pragmatique de ceux-ci avec un exemple concret d'application mettent en oeuvre:
+Encore une superbe présentation offert à la communauté par Rebecca Murphey. Très bonne vue d'ensemble des problèmes que l'on sera amené à résoudre et approche pragmatique de ceux-ci avec un exemple concret d'application mettant en oeuvre:
 
 #### 1. L'approche pubsub     
     // En utilisant un plugin pubsub
