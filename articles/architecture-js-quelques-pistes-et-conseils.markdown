@@ -128,7 +128,7 @@ Encore une superbe présentation offert à la communauté par Rebecca Murphey. T
 > Configurent les vues et services et gère la communication entre eux, éliminant le besoin de communication directe.
 
 * Views
-> Affichent les données, observent les événements utilisateurs et propage des messages que les mediators peuvent écouter et y réagir. Peut également fournir une API pour mettre à jour les données.
+> Affichent les données, observent les événements utilisateurs et propagent des messages que les mediators peuvent écouter et y réagir. Peut également fournir une API pour mettre à jour les données.
 
 * Services
 > Gèrent les données et états, exposent une API publique limité pour les mediators.
