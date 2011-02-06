@@ -3,7 +3,7 @@ Author: Mickael Daniel
 Date: Feb 06 2011 15:00:00 GMT+0100 (CDT)
 Categories: Javascript
 
-Alex Sexton (membre de la team jQuery, co-host YayQuery, créateur de la librairie YepNope, etc.) a écrit un article fabuleux il y a quelques temps de cela sur l'[utilisation de patterns d'héritage](http://alexsexton.com/?p=51) pour organiser une application Javascript utilisant jQuery et adoptant une approche "bridge" particulièrement élégante et s'inspirant énormément de la Widget Factory de jQuery UI (Scott Gonzalez).
+Alex Sexton (membre de la team jQuery, co-host YayQuery, créateur de la librairie YepNope, etc.) a écrit un article excellent il y a quelques temps de cela sur l'[utilisation de patterns d'héritage](http://alexsexton.com/?p=51) pour organiser une application Javascript utilisant jQuery et adoptant une approche "bridge" particulièrement élégante et s'inspirant énormément de la Widget Factory de jQuery UI (Scott Gonzalez).
 
 Il explique que de nos jours, la plupart des développeurs web tendent à oublier les paradigmes appris dans les autres langages pour écrire du code correctement structuré. Il l'explique par le fait que jQuery vous laisse une grande liberté quand l'on vient à penser en terme de structuration de code ou d'héritage et ne pousse donc personne dans une direction ou une autre. Bien souvent, dans d'autres framework, un pattern est offert et exclusivement utilisé (dojo declare/provide/require et son système de package, MooTools Class, YUI, etc.), ce qui généralement abouti sur un code plus uniforme et robuste qu'une chaîne indentée interminable d'instructions jQuery.
 
