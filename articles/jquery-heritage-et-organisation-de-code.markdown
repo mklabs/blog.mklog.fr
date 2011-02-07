@@ -136,7 +136,7 @@ L'utilisation d'un objet littéral me propulse directement dans l'approche proto
     var Feature = (function() {
 
     	var build = function() {
-    		this.$elem.html('<h1>'+this.options.name+'</h1>');
+    		this.element.html('<h1>'+this.options.name+'</h1>');
     	};
 
     	return {
@@ -508,7 +508,7 @@ On y vient! La façon dont vous ferez héritez vos objets d'autres objets dépen
 
 Ce que j'aime dans la prototypal way, c'est qu'elle se marie trés bien avec les modules patterns et litteral object et l'utilisation de la fonction extend de jQuery. On accède ainsi très simplement é une forme d'héritage multiples.
 
-    var Thinger = $.extend(Object.create(Base()), Object.create(AnotherObject()), {
+    var thinger = $.extend(Object.create(Base()), Object.create(AnotherObject()), {
     	// litteral ici, mais nous aurions pu utiliser le module pattern
     	myStuff: function() {
     		// On ajoute ici toute propriétés / méthodes spécifique é notre object Thinger
