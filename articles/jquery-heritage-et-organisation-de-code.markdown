@@ -1,7 +1,7 @@
 Title: jQuery, héritage et organisation de code
 Author: Mickael Daniel
 Date: Feb 06 2011 15:00:00 GMT+0100 (CDT)
-Categories: Javascript
+Categories: Javascript, jQuery
 
 Alex Sexton (membre de la team jQuery, co-host YayQuery, créateur de la librairie YepNope, etc.) a écrit un article excellent il y a quelques temps de cela sur l'[utilisation de patterns d'héritage](http://alexsexton.com/?p=51) pour organiser une application Javascript utilisant jQuery et adoptant une approche "bridge" particulièrement élégante et s'inspirant énormément de la Widget Factory de jQuery UI (Scott Gonzalez).
 
@@ -91,13 +91,13 @@ Ce niveau d'abstraction permet de garder le quoi et le comment séparé, ou faib
 * Si votre point d'entrée est un élement DOM, vous pouvez facilement accéder à son Object relatif dans votre App, ce qui est particulièrement utile pour répondre aux interactions utilisateurs.
 * Codez votre site en utilisant des objets, mais avez toujours un accès facile à son élement DOM relatif.
 
-Ce concept que l'on peut retrouver dans la Widget Factory revient à stocker l'instance de notre objet dans le data-store de l'élement DOM via l'utilisation de la méthode $.data de jQuery.
+Ce concept que l'on peut retrouver dans la Widget Factory revient à stocker l'instance de notre objet dans le data-store de l'élément DOM via l'utilisation de la méthode $.data de jQuery.
 
 Comme vous pouvez le voir, implémenter cette technique est plutôt simple (le tout est d'avoir l'idée et l'inspiration) et comme l'explique Alex, l'implémentation devrait nécessiter beaucoup moins de réflexions et de difficultés que de traverser le dom via une immense châine jQuery.
 
 ## L'école prototype (the prototypal way)
 
-    var Feature = {
+    var feature = {
     	init: function(options, elem) {
     		// Merge des options passés en paramétres avec les options par défaut
     		// Nos fameux mixins options
@@ -127,13 +127,13 @@ Comme vous pouvez le voir, implémenter cette technique est plutôt simple (le t
     	}
     };
 
-    var feature = Object.create(Feature);
+    var f = Object.create(feature);
 		
 L'utilisation d'un objet littéral me propulse directement dans l'approche prototype. L'utilisation du module pattern est également possible et se marie plutôt bien avec l'approche prototype. Le module pattern est idéal pour gérer et implémenter la notions de variables / méthodes privées, simplement une fonction qui utilise à son avantage le pouvoir des closures et retourne un objet qui dispose d'un accès privé à des variables qui ne seront pas disponible en dehors du scope de la fonction.
 
     // Module Pattern (kind of), sans les () sur la fin pour auto-exécuter la fonction anonyme. Ce sera fait 
     // lors de l'appel à Object.create
-    var Feature = (function() {
+    var module = (function() {
 
     	var build = function() {
     		this.element.html('<h1>'+this.options.name+'</h1>');
@@ -167,7 +167,7 @@ L'utilisation d'un objet littéral me propulse directement dans l'approche proto
     	}
     });
 
-    var feature = Object.create(Feature());
+    var feature = Object.create(module());
     feature.init({some: 'option'}, domElement);
     feature.doSomething(); // ok
     feature.build(); // error
