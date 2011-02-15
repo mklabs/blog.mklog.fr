@@ -13,9 +13,9 @@ L'idée était de localement ou à distance (via les webservices github):
 
 Je trouvais intéressant l'idée de récupérer le contenu du wiki boilerplate au format markdown (un des formats utilisés sur les wikis github), de les convertir en markup html et de les afficher avec ce style si particulier qu'a le site officiel d'[html5 boilerplate](html5boilerplate.com). Le tout donnant prétexte à construire une petite webapp.
 
-Vous pouvez voir une petite démo actuellement disponible [ici](//mklabs.github.com/html5boilerplate-site/) et le source [ici](//github.com/mklabs/html5boilerplate-site/).
+Vous pouvez voir une petite démo actuellement disponible [ici](//mklabs.github.com/html5boilerplate-site/) et le source [ici](//github.com/mklabs/html5boilerplate-site/tree/gh-pages).
 
-## HTML5 ♥ Boilerplate
+## HTML5  ♥ Boilerplate
 
 A la base, cette petite expérience menée sur un weekend était avant toute chose une opportunité pour moi de travailler sur des trucs cools. Un prétexte à créer quelque chose qui se rapproche d'une wepapp et me donner l'opportunité d'essayer "dans la vrai vie" quelques uns des patterns présentés par certains génies dans le domaine (Rebecca Murphey, Alex Sexton dans ce cas précis). C'était aussi ma façon d'exprimer my boilerplate love.
 
