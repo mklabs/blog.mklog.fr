@@ -11,5 +11,5 @@ module.exports = Connect.createServer(
   Connect.favicon(),
   Connect.cache(),
   Connect.gzip(),
-  wheat(__dirname, {theme: 'harmonious'})
+  wheat(__dirname, {theme: 'wheat-harmonious-theme'})
 ).listen(3000);

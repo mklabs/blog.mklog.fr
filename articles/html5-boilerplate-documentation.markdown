@@ -41,14 +41,14 @@ En vrac, voici les composants mis en oeuvre dans la dernière version:
 
 Absolument tout est fait client-side et a été décomposé en modules bien distincts qui sont au nombre de quatre:
 
-* [le module wiki](//mklabs.github.com/html5boilerplate-site/docs/js/app/modules/wiki.js) - Module principal responsable de la plupart des actions utilisateurs et manipulation du DOM.
-* [le module history](//mklabs.github.com/html5boilerplate-site/docs/js/app/modules/history.js) - pour ajouter la gestion du back/forward button.
-* [le module messaging](//mklabs.github.com/html5boilerplate-site/docs/js/app/modules/messaging.js) - pour gérer les retours utilisateurs (notemment sur xhr), mais pourrait être étendue à la gestion d'un widget dédié (affichant des messages applicatifs par exemples ou gérant plus finement les différents cas d'erreurs).
-* [le module highlight](//mklabs.github.com/html5boilerplate-site/docs/js/app/modules/highlight.js) - pour ajouter la fonction de coloration des extraits de code provenant du wiki
+* [le module wiki](//mklabs.github.com/html5boilerplate-site/src/docs/js/app/modules/wiki.js) - Module principal responsable de la plupart des actions utilisateurs et manipulation du DOM.
+* [le module history](//mklabs.github.com/html5boilerplate-site/src/docs/js/app/modules/history.js) - pour ajouter la gestion du back/forward button.
+* [le module messaging](//mklabs.github.com/html5boilerplate-site/src/docs/js/app/modules/messaging.js) - pour gérer les retours utilisateurs (notemment sur xhr), mais pourrait être étendue à la gestion d'un widget dédié (affichant des messages applicatifs par exemples ou gérant plus finement les différents cas d'erreurs).
+* [le module highlight](//mklabs.github.com/html5boilerplate-site/src/docs/js/app/modules/highlight.js) - pour ajouter la fonction de coloration des extraits de code provenant du wiki
 
 La communication entre les composants est géré via pubsub et permet vraiment de limiter le couplage de chacune des parties de l'appli. Chaque module s'enregistre ou écoute des ‘topics’ et réagit en fonction. Si jamais un module est n'est pas initialisé ou inclus, le reste de l'application continue de fonctionner parfaitement.
 
-Un module particulier de [type service](//mklabs.github.com/html5boilerplate-site/docs/js/app/services/markdown.js) est responsable des manipulations xhr et fournit une API que peuvent consommer les autres modules. Il s'agit fondamentalement d'une abstraction envers $.ajax et intègre également un mécanisme simplifié de cache (toute requête xhr déjà effectuée est évitée et les données sont récupérées du cache).
+Un module particulier de [type service](//mklabs.github.com/html5boilerplate-site/src/docs/js/app/services/markdown.js) est responsable des manipulations xhr et fournit une API que peuvent consommer les autres modules. Il s'agit fondamentalement d'une abstraction envers $.ajax et intègre également un mécanisme simplifié de cache (toute requête xhr déjà effectuée est évitée et les données sont récupérées du cache).
 
 Le tout a été mis en oeuvre en suivant quelques patterns d'organisation de code:
 
