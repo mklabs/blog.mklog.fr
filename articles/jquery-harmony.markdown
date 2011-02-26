@@ -33,9 +33,9 @@ J'ajouterais peut-être cette option dans une future révision, et faire en sort
 Voici le bout de code qui m'initialise maintenant les différents élements "harmonisés" du site. 
 <script src="https://gist.github.com/672845.js"> </script>
 
-Pour une démo un peu plus complète: <a href="http://mklabs.github.com/jquery-harmony/">mklabs.github.com/jquery-harmony/</a>.
+Pour une démo un peu plus complète: <a href="http://mklabs.github.com/jquery-plugs/jquery-harmony/">mklabs.github.com/jquery-harmony/</a>.
 
-Si vous êtes intéressé par le code,  et accessoirement un peu de doc: <a href="https://github.com/mklabs/jquery-harmony/">github.com/mklabs/jquery-harmony/</a>
+Si vous êtes intéressé par le code, et accessoirement un peu de doc: <a href="http://github.com/mklabs/jquery-plugs/tree/master/jquery-harmony/">github.com/mklabs/jquery-harmony/</a>
 
 Le plugin est encore clairement perfectible, j'ai fait ça pour le fun. C'est définitivement un gagdet surtout qu'il est dépouillé de toutes les fonctionnalités de base d'Harmony (clear, save as image, etc.) mais c'était vraiment un bon prétexte pour coder un truc sympa.
 

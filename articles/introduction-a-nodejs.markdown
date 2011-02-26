@@ -24,9 +24,9 @@ Ce billet prendra la forme d'un tutorial, vraisemblablement en plusieurs parties
 
 <h2>Au menu</h2> 
 <ol>
-	<li><a href="http://blog.mklog.fr/2010/11/16/node-js-presentation-installation-et-prise-en-main/">Présentation, installation, et prise en main</a>. Nous parlerons un peu plus en détail des caractéristiques du projet et de sa prise en main.</li>
-	<li><a href="http://blog.mklog.fr/2010/11/node-boilerplate/">Mise en place du squelette de notre appli</a> en utilisant <a href="https://github.com/robrighter/node-boilerplate">node-boilerplate</a>, pour une mise en route simple et rapide. Avec tout ce qu'il faut, prêt et fonctionnel, pour commencer à développer.</li>
-	<li><a href="http://blog.mklog.fr/2010/12/express-js/">Dev. coté serveur et prise en main d'Express</a>, sans oublier l'implémentation et la configuration de Socket.IO coté node.js grâce à <a href="https://github.com/LearnBoost/Socket.IO-node">Socket.IO-node</a></li>
+	<li><a href="/article/node-js-presentation-installation">Présentation, installation, et prise en main</a>. Nous parlerons un peu plus en détail des caractéristiques du projet et de sa prise en main.</li>
+	<li><a href="/article/node-boilerplate">Mise en place du squelette de notre appli</a> en utilisant <a href="https://github.com/robrighter/node-boilerplate">node-boilerplate</a>, pour une mise en route simple et rapide. Avec tout ce qu'il faut, prêt et fonctionnel, pour commencer à développer.</li>
+	<li><a href="/article/express-framework-web-node">Dev. coté serveur et prise en main d'Express</a>, sans oublier l'implémentation et la configuration de Socket.IO coté node.js grâce à <a href="https://github.com/LearnBoost/Socket.IO-node">Socket.IO-node</a></li>
 	<li>Dev. et mise en place de Socket.IO coté client. On adaptera également un peu le comportement d'harmony pour qu'il permette d'envoyer les événements qui nous intéressent pour transmission des informations au serveur. Ce dernier s'occupera de broadcaster les données à l'ensemble des clients connectés.</li>
 	<li>Enfin, nous aborderons la question du déploiement avec la mise en ligne de l'appli sur des serveurs distants.</li>
 </ol>

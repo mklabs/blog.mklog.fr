@@ -5,7 +5,7 @@ Note: This post is an import from an older wordpress post, as a results not mark
 Categories: Javascript
 
 <p>
-Lors d'un précédent article sur <a href="http://blog.mklog.fr/2010/12/express-js/">express</a>, j'ai eu l'occasion d'utiliser <a href="https://github.com/ajaxorg/node-github">node-github</a>, un module Node permettant de dialoguer avec l'API Rest de Github. Il dispose d'une API orienté objet et asynchrone. J'ai pu y découvrir un pattern, une manière de manipuler le prototype qui m'a particulièrement plu.
+Lors d'un précédent article sur <a href="/article/express-framework-web-node/">express</a>, j'ai eu l'occasion d'utiliser <a href="https://github.com/ajaxorg/node-github">node-github</a>, un module Node permettant de dialoguer avec l'API Rest de Github. Il dispose d'une API orienté objet et asynchrone. J'ai pu y découvrir un pattern, une manière de manipuler le prototype qui m'a particulièrement plu.
 </p>
 
 <js-oo-et-manipulation-prototype-via-call-apply/prototype-call.js>

@@ -23,7 +23,7 @@ Malheureusement, dans la multitude de fonctionnalités qu'offre ces moteurs popu
 
 Le changement de plate-forme s'accompagne également d'un petit lifting au niveau du thème qui utilise quelques folies CSS3 et HTML5 (manipulation de l'API History). Ceux d'entre vous tournant sur des versions récentes de Safari, Chrome ou Firefox 4 peuvent avoir noter quelques changement dans la navigation.
 
-Certains n'auront sans doute pas manqué récemment l'annonce de GitHub concernant leur nouveau TreeSlider. Leur travail et inspiration sont brillants, je sais pas vous mais j'adore la nouvelle expérience apporté par cette nouvelle fonctionnalité lorsque l'on navigue parmi les sources d'un repo. Pour les utilisateurs ne disposant pas encore de navigateurs supportant l'API History HTML5, voici une vidéo de présentation que l'on peut retrouver sur le [post original](https://github.com/blog):
+Certains n'auront sans doute pas manqué récemment l'annonce de GitHub concernant leur nouveau TreeSlider. Leur travail et inspiration sont brillants, je sais pas vous mais j'adore la nouvelle expérience apporté par cette nouvelle fonctionnalité lorsque l'on navigue parmi les sources d'un repo. Pour les utilisateurs ne disposant pas encore de navigateurs supportant l'API History HTML5, voici une vidéo de présentation que l'on peut retrouver sur le [post original](https://github.com/blog/760-the-tree-slider):
 
 <div style="width: 480px; margin: 2em auto;">
 <embed src="http://blip.tv/play/AYKSzQUC" type="application/x-shockwave-flash" width="480" height="390" allowscriptaccess="always" allowfullscreen="true"></embed>
