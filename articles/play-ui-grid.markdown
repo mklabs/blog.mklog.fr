@@ -31,7 +31,7 @@ Dans le cadre de cet article, les étapes que l'on devra mettre en place se rés
 
 Aussi, si vous souhaitez suivre ce mini-tutorial et que vous êtes à l'aise avec git, vous pouvez git clone ce repository:
 
-		git clone git@github.com:mklabs/play-ui-grid.git		
+		git clone git://github.com/mklabs/play-ui-grid.git
 		
 Pour les autres, vous pouvez vous référer aux lien de téléchargement direct suivant (fourni par GitHub): [zip](https://github.com/mklabs/play-ui-grid/zipball/master) / [tar](https://github.com/mklabs/play-ui-grid/tarball/master).
 
@@ -168,7 +168,7 @@ Il nous reste une étape à ne pas oublier avec la configuration des routes des 
 
 	GET /localeOrWhateverName.json LocalisedTimeZone.listJson
 	
-Dans la plupart des cas, cela suffirait à répondre à nos besoin. Ceci dit, dans la pratique, les applications ne disposant que d'un modèle/contrôleur ne sont pas légions, et pour chaque objet de notre modèle, une route serait nécessaire. Ceci étant dit, il existe également la méthode suivante, se reposant sur la convention de nommage de vos contrôleurs et permettant une approche un peu plus DRY:
+Dans la plupart des cas, cela suffirait à répondre à nos besoin. Ceci dit, dans la pratique, les applications ne disposant que d'un modèle/contrôleur ne sont pas légion, et pour chaque objet de notre modèle, une route serait nécessaire. Ceci étant dit, il existe également la méthode suivante, se reposant sur la convention de nommage de vos contrôleurs et permettant une approche un peu plus DRY:
 
 	#{crud.types}
 	GET /${type.controllerName}.json ${type.controllerClass.name.substring(12).replace('$','')}.listJson
@@ -300,7 +300,7 @@ Il nous faut maintenant importer les routes du module au sein de l'application, 
 	
 Très bien notre application exemple utilise maintenant ce module crud-grid qui ne fait strictement rien pour l'instant. Au redémarrage de l'appli, vous devriez voir l'import du module dans votre console.
 
-Le but ici, est de fournir un module contenant tout les fichiers nécessaires au fonctionnement de UI Grid. Ce module crud-grid contiendra alors les fichiers de la branche de jQuery UI relative au développement du widget grid (css et js) tout en fournissant une route particulière, ce qui permet à notre application de charger ces fichiers à partir de celle-ci.
+Le but ici, est de fournir un module contenant tous les fichiers nécessaires au fonctionnement de UI Grid. Ce module crud-grid contiendra alors les fichiers de la branche de jQuery UI relative au développement du widget grid (css et js) tout en fournissant une route particulière, ce qui permet à notre application de charger ces fichiers à partir de celle-ci.
 
 Ceci est fait avec la modification du fichier route du module `crud-grid/conf/routes` avec quelque chose comme:
 
@@ -312,7 +312,7 @@ Ensuite, tout comme nous avons dû le faire pour le module crud, cette route dev
     # Grid
     *       /                                       module:crud-grid
   
-Ceci devrait nous permettre, depuis nos vues, de charger les fichiers statiques contenues au sein du module, comme cela peut-être fait dans la vue list.html (notre vue crud custom):
+Ceci devrait nous permettre, depuis nos vues, de charger les fichiers statiques contenus au sein du module, comme cela peut-être fait dans la vue list.html (notre vue crud custom):
 
     #{set 'js'}
       <script src="/grid/js/ui/jquery.ui.core.js"></script>
