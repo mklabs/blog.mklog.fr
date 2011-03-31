@@ -6,10 +6,8 @@ var Connect = require('connect'),
   wheat = require('wheat');
   
 module.exports = Connect.createServer(
-  //Connect.logger(),
   Connect.conditionalGet(),
   Connect.favicon(),
   Connect.cache(),
-  Connect.gzip(),
-  wheat(__dirname, {theme: 'wheat-harmonious-theme'})
+  wheat(__dirname, {theme: 'wheat-tastytest-theme'})
 ).listen(3000);
