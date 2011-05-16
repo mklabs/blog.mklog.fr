@@ -78,8 +78,8 @@ La même chose s'applique aux moteurs de blogs, CMS, application de gestion de d
 
 On peut vraiment penser à de belles choses où une recherche devient un `git grep`, où une comparaison de fichier devient un `git diff`, où la sauvegarde d'un fichier devient un `git commit`, où la publication d'article ou de contenu se fait via un `git push`, où un `git clone` permet de récupérer l'ensemble du contenu d'un site, ...
 
-Avec Git, un nouveau monde s'ouvre à nous où l'historique de révisions, les checksums et les branches ne rendent pas le système de fichiers plus lent: ils le rendent plus rapide. Ils ne rendent pas vos données plus volumineuses, ils les rendent plus petites. Ils ne risquent pas l'intégrité de vos données, ils la garantissent. Enfin, ils ne centralisent pas vos données dans une énorme base de données, ils les distribuent point par point.
+Avec Git, un nouveau monde s'ouvre à nous où l'historique de révisions, les checksums et les branches ne rendent pas le système de fichiers plus lent, ils le rendent plus rapide. Ils ne rendent pas vos données plus volumineuses, ils les rendent plus petites. Ils ne risquent pas l'intégrité de vos données, ils la garantissent. Enfin, ils ne centralisent pas vos données dans une énorme base de données, ils les distribuent point par point.
 
 Pour paraphraser [cet article](http://apenwarr.ca/log/?m=200801#31) (paru il y a de ça trois ans et qui m'a finalement fait écrire celui-ci), tout comme Unix, le projet Git en lui même importe peu, c'est le format, la philosophie, les concepts qui changent tout.
 
-Je suis actuellement concentré sur le développement d'un nouveau moteur de blog, qui deviendra bientôt le moteur du présent site. Et les possibilités immenses offertes par Git, en dehors de la version de source classique, viennent juste de me sauter au visage. Dans toute leur splendeur.
+Je suis actuellement concentré sur le développement d'un nouveau moteur de blog, qui deviendra bientôt le moteur du présent site. Et les possibilités immenses offertes par Git, en dehors de la gestion de source classique, viennent toute juste de me sauter au visage. Dans toute leur splendeur.
