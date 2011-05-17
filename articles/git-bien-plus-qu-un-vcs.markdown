@@ -52,7 +52,7 @@ Le point important est: Git est, à la base, un système de gestion de fichiers 
 
 Git est une plateforme.
 
-## Un champs immense de possibilités
+## Un champ immense de possibilités
 
 Aujourd'hui, il existe plus de 100 commandes `git *`. C'est impressionnant, fait un peu peur également et peut porter à confusion mais...cela siginfie, au risque de me répéter, que Git est une plateforme... Sur lequel on peut concevoir des applications... Toutes sortes d'applications... 
 
