@@ -1,6 +1,7 @@
 Title: Backnode: Connect your Backbone
 Author: Mickael Daniel
 Date: Sun Jul 10 2011 00:04:56 GMT+0200 (CEST)
+Categories: JavaScript, node, backbone
 
 Un post pour vous parler d'une de mes dernières expérimentations. L'idée est de me fournir la possibilité d'utiliser Backbone et son API coté serveur, depuis un environnement node. Il existe [quelques tutos tutos](http://andyet.net/blog/2011/feb/15/re-using-backbonejs-models-on-the-server-with-node/) sur [le sujet](http://amir.unoc.net/how-to-share-backbonejs-models-with-nodejs), permettant notamment de partager les modèles Backbone. Mais je voulais un peu plus (ou différemment), ayant joué tout récemment avec l'API de Backbone et le support de l'history push state (depuis la version 0.5, yay!). J'ai beaucoup aimé la façon dont s'architecture une application avec Backbone, la façon dont sont défini les routes, le modèle object de la lib, le style, les partis pris et la technique. Le tout couplé à underscore donne un code juste super élégant, propre, structuré qui en même temps vous laisse une énorme liberté et ne décide de rien pour vous.
 
@@ -60,12 +61,12 @@ pour pouvoir require la lib (ou simplement se créer un dossier node_module à l
 
 * *JavaScript everywhere* et une API consistante entre le client et le server.
 * Une manière simple d'accéder aux Model, Views, Router de Backbone dans des appli connect ou express.
-* Utiliser l'API pushState tout en restant accessible et copain avec les moteurs de recherche. Les navigateurs supportant l'api pushState ont de belles transitions et une appli single-page de façon transparent ("just feels faster", no #), les autres ne font que demander une réponse au serveur server, tout ce qu'il y de plus classique et obtiennent le même rendu. 
+* Utiliser l'API pushState tout en restant accessible et copain avec les moteurs de recherche. Les navigateurs supportant l'api pushState ont de belles transitions et une appli single-page de façon transparente ("just feels faster", no #), les autres ne font que demander une réponse au serveur, tout ce qu'il y de plus classique et obtiennent le même rendu. 
 * Les requête ajax recoivent exactement le même model que celui fourni aux vues, partagé coté client et serveur. Le serveur sait quelle réponse renvoyé en se basant sur un peu de négociation de contenu hyper simplifié (en se basant sur le header HTTP Accept) 
-* Backbone.Router like API pour gérer les requêtes entrante.
+* Backbone.Router like API pour gérer les requêtes entrantes.
 * Fournir juste assez d'abstraction pour utiliser les fonctionnalités de Backbone, son style et principes dans node.
 	* Pas d'infrastucture realtime ou quoi que ce soit (il existe déjà pas mal de projets très bien sur le sujet, notamment [SocketStream](https://github.com/socketstream/socketstream) ou [Capsule](https://github.com/andyet/Capsule)), le but se restreint à juste gérer une requête entrante et générer une réponse.
-* Template engine agnostic: tout comme backbone, le but est d'être capable d'utiliser n'importe quel moteur de templayte qui prend une chaîne de caractères (avec une éventuelle phase de compilation), des données et retourne une nouvelle chaîne de caractères.
+* Template engine agnostic: tout comme backbone, le but est d'être capable d'utiliser n'importe quel moteur de template qui prend une chaîne de caractères (avec une éventuelle phase de compilation), des données et retourne une nouvelle chaîne de caractères.
 
 ### Ce qu'il reste à faire
 
@@ -73,10 +74,10 @@ pour pouvoir require la lib (ou simplement se créer un dossier node_module à l
 
 ##### et problèmes à résoudre
 
-* Pas de DOM. Les Router, Model et Collection peuvent en faite vivre en dehors du contexte du navigateur de base, pas de dépendances directes sur `document` ou autre chose. Ce n'est pas forcément le cas des vues.
-* La plupart des fichiers de templates sont récupérés de manière synchrone par souci pratique, vu que la plupart du temps (en tout cas ds les exemples mis en place) les vues sont instancier au démarrage du serveur, c'est acceptable (mais async ftw... donc à faire).
-* Backbone.sync implémenté très rapidement pour parler au filesytem, d'autres expérimentations ac des db, nosql ou pas, serait à faire. Pour l'instant, c'est du nonosql.
-* Les vues sont en fait des classes qui dirigent le rendement d'un fichier de template. Backbone fournit un modèle OO très bien fait, et les vues peuvent être étendues. L'idée serait de pouvoir avoir une sorte de vues par composition, avec des vues héritant d'autres et offrant un système d'héritage de templates, même très simple. 
+* Pas de DOM. Les Router, Model et Collection peuvent de base vivre en dehors du contexte du navigateur, pas de dépendances directes sur `document` ou autre chose. Ce n'est pas forcément le cas des vues (ou si l'on fait appel à des métodes manipulant l'history comme `navigate()`)
+* La plupart des fichiers de template sont récupérés de manière synchrone par souci pratique, vu que la plupart du temps (en tout cas ds les exemples mis en place) les vues sont instanciées au démarrage du serveur, c'est acceptable (mais async ftw... donc à faire).
+* Backbone.sync implémenté très rapidement pour parler au filesytem, d'autres expérimentations ac des db, nosql ou pas, seraient à faire. Pour l'instant, c'est du nonosql.
+* Les vues sont en fait des classes qui dirigent le rendu d'un fichier de template. Backbone fournit un modèle OO très bien fait, et les vues peuvent être étendues. L'idée serait de pouvoir avoir une sorte de vues par composition, avec des vues héritant d'autres et offrant un système d'héritage de templates, même très simple. 
 
 ### Utilisation basique
 
@@ -84,232 +85,231 @@ pour pouvoir require la lib (ou simplement se créer un dossier node_module à l
 
 Voici un exemple simple, 169 lignes de code, d'un mini wiki, prenant un dossier remplit de fichier markdown et générant un site web.
 
-```javascript
-
-// ## Backnode example
-
-// This is a quick implementation of a basic example of what a backnode app could look like
-
-// ##### Needs to figure out - 
-// how do we hook up in the request/response lifecycle time? 
-// in connect, express apps, actions gets request, response, next as funcion parameters
-// and would break Backbone API. May we put according object req/res/next (and taking care of updating
-// references for each request, will be overkill, performance-costly? may use EventEmitter for that
-// at the middleware level.)
-
-// we basically needs a way to acces them, one way or another. needs acess to request, response object, 
-// namely for being able to end the response. needs access to next() method as well, important to pass request
-// to following middleware if the response is not ended.
-
-// if the setup of req/res/next is done using class attributes, do we need to put them in Router(at least), Views
-// and Models? Models pretty sure that we shouldn't.
-
-// ##### Error handling
-// cannot just throw. Use of this.next(err);
 
 
-var Backnode = require('../../lib/backnode'),
-Backbone = Backnode.Backbone,
-_ = require('underscore'),
-connect = require('connect'),
-Mustache = require('mustache'),
-fs = require('fs'),
-md = require('github-flavored-markdown').parse,
-Path = require('path');
+    // ## Backnode example
 
-var Page, Router, PageView;
+    // This is a quick implementation of a basic example of what a backnode app could look like
 
-// ### Backbone.Router
+    // ##### Needs to figure out - 
+    // how do we hook up in the request/response lifecycle time? 
+    // in connect, express apps, actions gets request, response, next as funcion parameters
+    // and would break Backbone API. May we put according object req/res/next (and taking care of updating
+    // references for each request, will be overkill, performance-costly? may use EventEmitter for that
+    // at the middleware level.)
 
-Router = Backnode.Router.extend({
-  routes: {
-    '':                'about',  // /about
-    'about':                'about',  // /about
-    'wiki':                 'about',  // /about
-    'wiki/:page':           'post',   // /blog/blog-post
-    'wiki/tag/:tag':        'tag',    // /blog/tag/node
-    'search/:page/p:query': 'search'  // /search/one-page/p7
-  },
+    // we basically needs a way to acces them, one way or another. needs acess to request, response object, 
+    // namely for being able to end the response. needs access to next() method as well, important to pass request
+    // to following middleware if the response is not ended.
 
-  initialize: function() {
-    // constructor/initialize new Router([options])
+    // if the setup of req/res/next is done using class attributes, do we need to put them in Router(at least), Views
+    // and Models? Models pretty sure that we shouldn't.
 
-    // model may be Collections as well
-    this.pages = new Pages();
-    this.view = new PageView({model: this.pages});
-
-  },
-
-  // action, do something, usually generates response and res.end  
-  about: function() {
-    this.view.render();
-    // actions can also pass control over next middleware
-    // `this.next()`
-  },
-
-  search: function(page, query) {
-    this.view.render();
-  },
-
-  post: function(post) {
-    this.view.render(this.pages.getFile(post));
-  }
-});
-
-// ### Page - Backbone.Model
-
-// will have to override sync, when fetching/saving we no longer
-// issues REST request to talk to the server, we already are the server
-
-// Instead, could think of various adapters to handle persistence (mongo
-// redis, couch, in memory, filesystem, ...)
-
-Page = Backnode.Model.extend({
-  toJSON: function() {
-    var page = Backnode.Model.prototype.toJSON.apply(this, arguments),
-
-    progressivePath = [],
-
-    pathSegments = page.path.replace(/\/$/, '').split('/');
-
-    pathSegments = _.map(pathSegments.slice(0, -1), function(seg) {
-       progressivePath.push(seg);
-       var url = "/" + progressivePath.join('/') + '/';
-       return '<a href="' + url + '"> ' + seg + '</a>';
-    }).concat(pathSegments.slice(-1));
-
-    page.content = md(page.content);
-    page.segments = pathSegments.join(' / ');
-    return page;
-  }
-});
+    // ##### Error handling
+    // cannot just throw. Use of this.next(err);
 
 
-Pages = Backnode.Collection.extend({
-  model: Page,
+    var Backnode = require('../../lib/backnode'),
+    Backbone = Backnode.Backbone,
+    _ = require('underscore'),
+    connect = require('connect'),
+    Mustache = require('mustache'),
+    fs = require('fs'),
+    md = require('github-flavored-markdown').parse,
+    Path = require('path');
 
-  toJSON: function() {
-    var json = Backnode.Collection.prototype.toJSON.apply(this, arguments);    
-    return {
-      title: 'Backbone on top of Connect for delicious applications',
-      pages: json
-    };
-  },
+    var Page, Router, PageView;
 
-  getFile: function(file) {
-    return this.filter(function(page) {
-      return page.get('file') === file;
-    })[0];
-  },
+    // ### Backbone.Router
 
-  comparator: function(page) {
-    return page.get('file');
-  },
+    Router = Backnode.Router.extend({
+      routes: {
+        '':                'about',  // /about
+        'about':                'about',  // /about
+        'wiki':                 'about',  // /about
+        'wiki/:page':           'post',   // /blog/blog-post
+        'wiki/tag/:tag':        'tag',    // /blog/tag/node
+        'search/:page/p:query': 'search'  // /search/one-page/p7
+      },
 
-  // when created (at server startup), get the list of all pages from the file system
-  // and init the collection. Only called once, and on server startup, go sync
-  initialize: function() {
-    this.fetch();
-  }
-});
+      initialize: function() {
+        // constructor/initialize new Router([options])
 
-// ### PageView - Backbone.View
+        // model may be Collections as well
+        this.pages = new Pages();
+        this.view = new PageView({model: this.pages});
 
-// Get started with views by creating a custom view class. You'll want to override the render function, 
-// specify your template string.
+      },
 
-PageView = Backnode.View.extend({
+      // action, do something, usually generates response and res.end  
+      about: function() {
+        this.view.render();
+        // actions can also pass control over next middleware
+        // `this.next()`
+      },
 
-  // Cache the template function for a single page.
-  template: function(data) {
-    return Mustache.to_html(this.templateStr, data); 
-  },
+      search: function(page, query) {
+        this.view.render();
+      },
 
-  initialize: function(options) {
-    // usually a filesystem call to get template string content.
-    // If Views are initialized at server startup time, sync calls are fine
+      post: function(post) {
+        this.view.render(this.pages.getFile(post));
+      }
+    });
 
-    // otherwise, could be wise to scans the entire package at startup, compile views and keeps
-    // reference to either compiled function or template string for later use
-    this.templateStr = fs.readFileSync('page.html').toString();
-  },
+    // ### Page - Backbone.Model
 
-  render: function(model) {
-    model = model || this.model;
-    model = model instanceof Backnode.Model ? new Pages(model) : model;
-    this.res.end(this.template(model.toJSON()));
-  }
-});
+    // will have to override sync, when fetching/saving we no longer
+    // issues REST request to talk to the server, we already are the server
+
+    // Instead, could think of various adapters to handle persistence (mongo
+    // redis, couch, in memory, filesystem, ...)
+
+    Page = Backnode.Model.extend({
+      toJSON: function() {
+        var page = Backnode.Model.prototype.toJSON.apply(this, arguments),
+
+        progressivePath = [],
+
+        pathSegments = page.path.replace(/\/$/, '').split('/');
+
+        pathSegments = _.map(pathSegments.slice(0, -1), function(seg) {
+           progressivePath.push(seg);
+           var url = "/" + progressivePath.join('/') + '/';
+           return '<a href="' + url + '"> ' + seg + '</a>';
+        }).concat(pathSegments.slice(-1));
+
+        page.content = md(page.content);
+        page.segments = pathSegments.join(' / ');
+        return page;
+      }
+    });
 
 
-// Override `Backbone.sync` to delegate to the filesystem.
-// TODO: cleanup and delegates each method>case in functions/method
-Backbone.sync = function(method, model, options, error) {
+    Pages = Backnode.Collection.extend({
+      model: Page,
 
-  if(method === "read") {
-    if(model.file) {
-      fs.readFile(Path.join(__dirname, 'test/backbonewiki/', model.file), function(err, content) {
-        if(err) options.error(err);
+      toJSON: function() {
+        var json = Backnode.Collection.prototype.toJSON.apply(this, arguments);    
+        return {
+          title: 'Backbone on top of Connect for delicious applications',
+          pages: json
+        };
+      },
 
-        options.success({
-          content: content 
-        });
-      });
-    } else {
-      fs.readdir(Path.join(__dirname, 'backbone-wiki'), function(err, files) {
-        if (err) throw err;
-        var ln = files.length,
-        ret = [];
-        _.each(files, function(file) {
-          var ext = /\.md|\.mkd|\.markdown/,
-          name = file.replace(/\.md|\.mkd|\.markdown/, '');
+      getFile: function(file) {
+        return this.filter(function(page) {
+          return page.get('file') === file;
+        })[0];
+      },
 
-            // Special case for "app"
-          if (!ext.test(file)) return;
+      comparator: function(page) {
+        return page.get('file');
+      },
 
-          fs.readFile(Path.join(__dirname, 'backbone-wiki', file), function(err, content) {
+      // when created (at server startup), get the list of all pages from the file system
+      // and init the collection. Only called once, and on server startup, go sync
+      initialize: function() {
+        this.fetch();
+      }
+    });
 
-            if(err) console.log(err);
-            ret.push({
-              title: name,
-              file: file,
-              path: './wiki/' + file,
-              content: content.toString()
+    // ### PageView - Backbone.View
+
+    // Get started with views by creating a custom view class. You'll want to override the render function, 
+    // specify your template string.
+
+    PageView = Backnode.View.extend({
+
+      // Cache the template function for a single page.
+      template: function(data) {
+        return Mustache.to_html(this.templateStr, data); 
+      },
+
+      initialize: function(options) {
+        // usually a filesystem call to get template string content.
+        // If Views are initialized at server startup time, sync calls are fine
+
+        // otherwise, could be wise to scans the entire package at startup, compile views and keeps
+        // reference to either compiled function or template string for later use
+        this.templateStr = fs.readFileSync('page.html').toString();
+      },
+
+      render: function(model) {
+        model = model || this.model;
+        model = model instanceof Backnode.Model ? new Pages(model) : model;
+        this.res.end(this.template(model.toJSON()));
+      }
+    });
+
+
+    // Override `Backbone.sync` to delegate to the filesystem.
+    // TODO: cleanup and delegates each method>case in functions/method
+    Backbone.sync = function(method, model, options, error) {
+
+      if(method === "read") {
+        if(model.file) {
+          fs.readFile(Path.join(__dirname, 'test/backbonewiki/', model.file), function(err, content) {
+            if(err) options.error(err);
+
+            options.success({
+              content: content 
             });
-
-            if(ln === 1) {
-              console.log(ret);
-              options.success(ret);
-            }
-
-            ln--;
           });
-        });
-      });
-    }
-  } else if(method === "create") {
+        } else {
+          fs.readdir(Path.join(__dirname, 'backbone-wiki'), function(err, files) {
+            if (err) throw err;
+            var ln = files.length,
+            ret = [];
+            _.each(files, function(file) {
+              var ext = /\.md|\.mkd|\.markdown/,
+              name = file.replace(/\.md|\.mkd|\.markdown/, '');
 
-  } else if(method === "update") {
+                // Special case for "app"
+              if (!ext.test(file)) return;
 
-  } else if(method === "create") {
+              fs.readFile(Path.join(__dirname, 'backbone-wiki', file), function(err, content) {
 
-  }
-};
+                if(err) console.log(err);
+                ret.push({
+                  title: name,
+                  file: file,
+                  path: './wiki/' + file,
+                  content: content.toString()
+                });
+
+                if(ln === 1) {
+                  console.log(ret);
+                  options.success(ret);
+                }
+
+                ln--;
+              });
+            });
+          });
+        }
+      } else if(method === "create") {
+
+      } else if(method === "update") {
+
+      } else if(method === "create") {
+
+      }
+    };
 
 
 
-// a basic connect stack with a backnode middleware
-// it is the server version of a $(function() { new Router(); Backbone.history.start(); })
-connect.createServer()
-  .use(connect.logger(':method :url :status :res[content-length] - :response-time ms'))
-  .use(Backnode(Router))
-  .use(connect.directory(__dirname))
-  .use(connect.static(__dirname))
-  .listen(4000);
+    // a basic connect stack with a backnode middleware
+    // it is the server version of a $(function() { new Router(); Backbone.history.start(); })
+    connect.createServer()
+      .use(connect.logger(':method :url :status :res[content-length] - :response-time ms'))
+      .use(Backnode(Router))
+      .use(connect.directory(__dirname))
+      .use(connect.static(__dirname))
+      .listen(4000);
 
-console.log('Server started, up and running on port 4000');
+    console.log('Server started, up and running on port 4000');
 
-```
 
 
 ### Fonctionnel (ou presque)
