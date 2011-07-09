@@ -1,0 +1,554 @@
+/**
+ * HTML5 ✰ Boilerplate
+ *
+ * style.css contains a reset, font normalization and some base styles.
+ *
+ * Credit is left where credit is due.
+ * Much inspiration was taken from these projects:
+ * - yui.yahooapis.com/2.8.1/build/base/base.css
+ * - camendesign.com/design/
+ * - praegnanz.de/weblog/htmlcssjs-kickstart
+ */
+
+
+/**
+ * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+ * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
+ * html5doctor.com/html-5-reset-stylesheet/
+ */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content: ""; content: none; }
+
+ins { background-color: #ff9; color: #000; text-decoration: none; }
+
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+
+input, select { vertical-align: middle; }
+
+
+/**
+ * Font normalization inspired by YUI Library's fonts.css: developer.yahoo.com/yui/
+ */
+
+body { font:13px/1.231 sans-serif; *font-size:small; } /* Hack retained to preserve specificity */
+select, input, textarea, button { font:99% sans-serif; }
+
+/* Normalize monospace sizing:
+   en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome */
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+
+
+/**
+ * Minimal base styles.
+ */
+
+/* Always force a scrollbar in non-IE */
+html { overflow-y: scroll; }
+
+/* j.mp/webkit-tap-highlight-color */
+a:link { -webkit-tap-highlight-color: #FF5E99; }
+
+/* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: none; }
+
+a, a:active, a:visited { color: #607890; }
+a:hover { color: #036; }
+
+ul, ol { margin-left: 2em; }
+ol { list-style-type: decimal; }
+
+/* Remove margins for navigation lists */
+nav ul, nav li { margin: 0; list-style:none; list-style-image: none; }
+
+small { font-size: 85%; }
+strong, th { font-weight: bold; }
+
+td { vertical-align: top; }
+
+/* Set sub, sup without affecting line-height: gist.github.com/413930 */
+sub, sup { font-size: 75%; line-height: 0; position: relative; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+pre {
+  /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+  white-space: pre; white-space: pre-wrap; word-wrap: break-word;
+  padding: 15px;
+}
+
+.ie6 legend, .ie7 legend { margin-left: -7px; } 
+
+/* Align checkboxes, radios, text inputs with their label by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+input[type="radio"] { vertical-align: text-bottom; }
+input[type="checkbox"] { vertical-align: bottom; }
+.ie7 input[type="checkbox"] { vertical-align: baseline; }
+.ie6 input { vertical-align: text-bottom; }
+
+/* Hand cursor on clickable input elements */
+label, input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer; }
+
+/* 1) Make inputs and buttons play nice in IE: www.viget.com/inspire/styling-the-button-element-in-internet-explorer/
+   2) WebKit browsers add a 2px margin outside the chrome of form elements. 
+      Firefox adds a 1px margin above and below textareas */
+button, input, select, textarea { width: auto; overflow: visible; margin: 0; }
+
+textarea { overflow: auto; } /* www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ */
+
+/* Remove extra padding and inner border in Firefox */
+input::-moz-focus-inner,
+button::-moz-focus-inner { border: 0; padding: 0; }
+
+/* Colors for form validity */
+input:valid, textarea:valid   {  }
+input:invalid, textarea:invalid {
+   border-radius: 1px; -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red; box-shadow: 0px 0px 5px red;
+}
+.no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
+
+/* These selection declarations have to be separate
+   No text-shadow: twitter.com/miketaylr/status/12228805301
+   Also: hot pink! */
+::-moz-selection{ background: #444; color:#fff; text-shadow: none; }
+::selection { background:#444; color:#fff; text-shadow: none; }
+
+/* Bicubic resizing for non-native sized IMG:
+   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.ie7 img { -ms-interpolation-mode: bicubic; }
+
+
+/** Layout **/
+.container{position:relative;width:960px;margin:0 auto;padding:0;}
+.column,.columns{float:left;display:inline;margin-left:10px;margin-right:10px;}
+.row{margin-bottom:20px;}
+/* Nested Column Classes */
+.column.alpha,.columns.alpha{margin-left:0;}
+.column.omega,.columns.omega{margin-right:0;}
+/* Base Grid */
+.container .one.column{width:40px;}
+.container .two.columns{width:100px;}
+.container .three.columns{width:160px;}
+.container .four.columns{width:220px;}
+.container .five.columns{width:280px;}
+.container .six.columns{width:340px;}
+.container .seven.columns{width:400px;}
+.container .eight.columns{width:460px;}
+.container .nine.columns{width:520px;}
+.container .ten.columns{width:580px;}
+.container .eleven.columns{width:640px;}
+.container .twelve.columns{width:700px;}
+.container .thirteen.columns{width:760px;}
+.container .fourteen.columns{width:820px;}
+.container .fifteen.columns{width:880px;}
+.container .sixteen.columns{width:940px;}
+.container .one-third.column{width:300px;}
+.container .two-thirds.column{width:620px;}
+/* Offsets */ 
+.container .offset-by-one{padding-left:60px;}
+.container .offset-by-two{padding-left:120px;}
+.container .offset-by-three{padding-left:180px;}
+.container .offset-by-four{padding-left:240px;}
+.container .offset-by-five{padding-left:300px;}
+.container .offset-by-six{padding-left:360px;}
+.container .offset-by-seven{padding-left:420px;}
+.container .offset-by-eight{padding-left:480px;}
+.container .offset-by-nine{padding-left:540px;}
+.container .offset-by-ten{padding-left:600px;}
+.container .offset-by-eleven{padding-left:660px;}
+.container .offset-by-twelve{padding-left:720px;}
+.container .offset-by-thirteen{padding-left:780px;}
+.container .offset-by-fourteen{padding-left:840px;}
+.container .offset-by-fifteen{padding-left:900px;}
+/* #Tablet (Portrait)
+================================================== */ 
+/* Note:Design for a width of 768px */
+@media only screen and (min-width:768px) and (max-width:959px){.container{width:768px;}
+.container .column,
+.container .columns{margin-left:10px;margin-right:10px;}
+.column.alpha,.columns.alpha{margin-left:0;margin-right:10px;}
+.column.omega,.columns.omega{margin-right:0;margin-left:10px;}
+.container .one.column{width:28px;}
+.container .two.columns{width:76px;}
+.container .three.columns{width:124px;}
+.container .four.columns{width:172px;}
+.container .five.columns{width:220px;}
+.container .six.columns{width:268px;}
+.container .seven.columns{width:316px;}
+.container .eight.columns{width:364px;}
+.container .nine.columns{width:412px;}
+.container .ten.columns{width:460px;}
+.container .eleven.columns{width:508px;}
+.container .twelve.columns{width:556px;}
+.container .thirteen.columns{width:604px;}
+.container .fourteen.columns{width:652px;}
+.container .fifteen.columns{width:700px;}
+.container .sixteen.columns{width:748px;}
+.container .one-third.column{width:236px;}
+.container .two-thirds.column{width:492px;}
+/* Offsets */ 
+.container .offset-by-one{padding-left:48px;}
+.container .offset-by-two{padding-left:96px;}
+.container .offset-by-three{padding-left:144px;}
+.container .offset-by-four{padding-left:192px;}
+.container .offset-by-five{padding-left:288px;}
+.container .offset-by-six{padding-left:336px;}
+.container .offset-by-seven{padding-left:348px;}
+.container .offset-by-eight{padding-left:432px;}
+.container .offset-by-nine{padding-left:480px;}
+.container .offset-by-ten{padding-left:528px;}
+.container .offset-by-eleven{padding-left:576px;}
+.container .offset-by-twelve{padding-left:624px;}
+.container .offset-by-thirteen{padding-left:672px;}
+.container .offset-by-fourteen{padding-left:720px;}
+.container .offset-by-fifteen{padding-left:900px;}
+}
+/* #Mobile (Portrait) 
+================================================== */
+/* Note:Design for a width of 320px */
+@media only screen and (max-width:767px){.container{width:300px;}
+.columns,.column{margin:0;}
+.container .one.column,
+.container .two.columns,
+.container .three.columns,
+.container .four.columns,
+.container .five.columns,
+.container .six.columns,
+.container .seven.columns,
+.container .eight.columns,
+.container .nine.columns,
+.container .ten.columns,
+.container .eleven.columns,
+.container .twelve.columns,
+.container .thirteen.columns,
+.container .fourteen.columns,
+.container .fifteen.columns,
+.container .sixteen.columns,
+.container .one-third.column,
+.container .two-thirds.column{width:300px;}
+/* Offsets */ 
+.container .offset-by-one,
+.container .offset-by-two,
+.container .offset-by-three,
+.container .offset-by-four,
+.container .offset-by-five,
+.container .offset-by-six,
+.container .offset-by-seven,
+.container .offset-by-eight,
+.container .offset-by-nine,
+.container .offset-by-ten,
+.container .offset-by-eleven,
+.container .offset-by-twelve,
+.container .offset-by-thirteen,
+.container .offset-by-fourteen,
+.container .offset-by-fifteen{padding-left:0;}
+}
+/* #Mobile (Landscape)
+================================================== */
+/* Note:Design for a width of 480px */
+@media only screen and (min-width:480px) and (max-width:767px){.container{width:420px;}
+.columns,.column{margin:0;}
+.container .one.column,
+.container .two.columns,
+.container .three.columns,
+.container .four.columns,
+.container .five.columns,
+.container .six.columns,
+.container .seven.columns,
+.container .eight.columns,
+.container .nine.columns,
+.container .ten.columns,
+.container .eleven.columns,
+.container .twelve.columns,
+.container .thirteen.columns,
+.container .fourteen.columns,
+.container .fifteen.columns,
+.container .sixteen.columns,
+.container .one-third.column,
+.container .two-thirds.column{width:420px;}
+}
+
+/**
+ * You might tweak these..
+ */
+
+body, select, input, textarea {
+  color: #444;
+  font-size: 14px;
+}
+
+/* Headers (h1, h2, etc) have no default font-size or margin; define those yourself */
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+
+h1,h2,h3,h4,h5,h6{color:#181818;font-family:"Crimson Text","Times New Roman",Helvetica,Arial,sans-serif;font-weight:normal;}
+h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{font-weight:inherit;}
+h1{font-size:46px;line-height:50px;margin-bottom:14px;}
+h2{font-size:35px;line-height:40px;margin-bottom:10px;}
+h3{font-size:28px;line-height:34px;margin-bottom:8px;}
+h4{font-size:21px;line-height:30px;margin-bottom:4px;}
+h5{font-size:17px;line-height:24px;}
+h6{font-size:14px;line-height:21px;}
+.subheader{color:#777;}
+p{margin:1em 0 1em 2em;line-height:1.5em;}
+p img{margin:0;}
+p.lead{font-size:21px;line-height:27px;color:#777;}
+em{font-style:italic;}
+strong{font-weight:bold;color:#333;}
+small{font-size:80%;}
+blockquote,blockquote p{font-size:17px;line-height:24px;color:#777;font-style:italic;}
+blockquote{margin:0 0 20px;padding:9px 20px 0 19px;border-left:1px solid #ddd;}
+blockquote cite{display:block;font-size:12px;color:#555;}
+blockquote cite:before{content:"\2014 \0020";}
+blockquote cite a,blockquote cite a:visited,blockquote cite a:visited{color:#555;}
+hr{border:solid #ddd;border-width:1px 0 0;clear:both;margin:10px 0 30px;height:0;}
+a{display:inline-block;-moz-transition:all 0.7s ease-out;-o-transition:all 0.7s ease-out;-webkit-transition:all 0.7s ease-out;-ms-transition:all 0.7s ease-out;transition:all 0.7s ease-out;}
+a,a:visited{color:#444;text-decoration:underline;outline:0;}
+a:hover,a:focus{color:#000;}
+p a,p a:visited{line-height:inherit;}
+ul{margin:1em 0 1em 4em;}
+ol{margin:1em 0 1em 4em;}
+ol{list-style:decimal;}
+ol,ul.square,ul.circle,ul.disc{margin-left:30px;}
+ul.square{list-style:square outside;}
+ul.circle{list-style:circle outside;}
+ul.disc{list-style:disc outside;}
+ul ul,ul ol
+ol ol,ol ul{margin:4px 0 5px 30px;font-size:90%;}
+ul ul li,ul ol li
+ol ol li,ol ul li{margin-bottom:6px;}
+li{line-height:18px;margin-bottom:12px;}
+ul.large li{line-height:21px;}
+li p{line-height:21px;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin:0.3em 0 1em 2em;}
+pre{margin:1em 0 1em 3em;font-size:12px;background-color:#eee;border:1px solid #ddd;padding:5px;line-height:1.5em;color:#444;overflow:auto;-moz-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;/* FF3.5+ */
+-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;/* Saf3.0+,Chrome */
+box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;/* Opera 10.5,IE9,Chrome 10+ */
+-moz-border-radius:3px;/* FF1+ */
+-webkit-border-radius:3px;/* Saf3-4,iOS 1+,Android 1.5+ */
+border-radius:3px;/* Opera 10.5,IE9,Saf5,Chrome,FF4 */
+-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;}
+pre::-webkit-scrollbar,.ace_editor .ace_sb::-webkit-scrollbar{height:8px;width:8px;}
+pre::-webkit-scrollbar-track-piece,.ace_editor .ace_sb::-webkit-scrollbar-track-piece{margin-bottom:10px;background-color:#e5e5e5;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;}
+pre::-webkit-scrollbar-thumb:vertical,.ace_editor .ace_sb::-webkit-scrollbar-thumb:vertical{height:25px;background-color:#ccc;-webkit-border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(255,255,255,1);}
+pre::-webkit-scrollbar-thumb:horizontal,.ace_editor .ace_sb::-webkit-scrollbar-thumb:horizontal{width:25px;background-color:#ccc;-webkit-border-radius:4px;}
+pre code{padding:0;font-size:12px;background-color:#eee;border:none;}
+code{font-size:12px;background-color:#f8f8ff;color:#444;padding:0 .2em;border:1px solid #dedede;}
+a code,a:link code,a:visited code{color:#4183c4;}
+table{margin:1em 0;width:100%;}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+table tr .small a{font-size:0.8em;opacity:0;color:#555;}
+table tr.hover .small a{opacity:1;}
+table tr td{padding:0.4em;}
+table tr,table tr a{padding:1em 0;}
+table tr.hover{background-color:#dedede;}
+img{max-width:100%;height:auto;}
+a.button,
+button{background:#eee;background:-moz-linear-gradient(top,rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%);/* FF3.6+ */
+background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(255,255,255,.2)),color-stop(100%,rgba(0,0,0,.2)));/* Chrome,Safari4+ */
+background:-webkit-linear-gradient(top,rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%);/* Chrome10+,Safari5.1+ */
+background:-o-linear-gradient(top,rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%);/* Opera11.10+ */
+background:-ms-linear-gradient(top,rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%);/* IE10+ */
+background:linear-gradient(top,rgba(255,255,255,.2) 0%,rgba(0,0,0,.2) 100%);/* W3C */
+border:1px solid #aaa;border-top:1px solid #ccc;border-left:1px solid #ccc;padding:4px 12px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;color:#444;display:inline-block;font-size:11px;font-weight:bold;text-decoration:none;text-shadow:0 1px rgba(255,255,255,.75);cursor:pointer;margin-bottom:20px;line-height:21px;font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;}
+a.button:hover,
+button:hover{color:#fff;border:1px solid #888;border-top:1px solid #aaa;border-left:1px solid #aaa;text-shadow:none;background-color:#599bdc;background-image:-webkit-gradient(linear,left top,left bottom,from(#599bdc),to(#3072b3));background-image:-webkit-linear-gradient(top,#599bdc,#3072b3);background-image:-moz-linear-gradient(top,#599bdc,#3072b3);background-image:-ms-linear-gradient(top,#599bdc,#3072b3);background-image:-o-linear-gradient(top,#599bdc,#3072b3);background-image:linear-gradient(top,#599bdc,#3072b3);filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#599bdc',EndColorStr='#3072b3');}
+a.button:active,
+button:active{background-color:#3072b3;background-image:-webkit-gradient(linear,left top,left bottom,from(#3072b3),to(#599bdc));background-image:-webkit-linear-gradient(top,#3072b3,#599bdc);background-image:-moz-linear-gradient(top,#3072b3,#599bdc);background-image:-ms-linear-gradient(top,#3072b3,#599bdc);background-image:-o-linear-gradient(top,#3072b3,#599bdc);background-image:linear-gradient(top,#3072b3,#599bdc);filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#3072b3',EndColorStr='#599bdc');border:1px solid #888;border-bottom:1px solid #aaa;border-right:1px solid #aaa;}
+.button.full-width{width:100%;padding-left:0 !important;padding-right:0 !important;text-align:center;}
+/* form */
+div.container{padding-top:60px;}
+form{margin-bottom:20px;}
+fieldset{margin-bottom:20px;}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select{border:1px solid #ccc;padding:6px 4px;outline:none;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;font:13px "HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;color:#777;margin:0;width:210px;max-width:100%;display:block;margin-bottom:20px;background:#fff;}
+select{padding:0;}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus{border:1px solid #aaa;color:#444;-moz-box-shadow:0 0 3px rgba(0,0,0,.2);-webkit-box-shadow:0 0 3px rgba(0,0,0,.2);box-shadow:0 0 3px rgba(0,0,0,.2);}
+textarea{min-height:60px;}
+label{display:block;font-weight:bold;font-size:13px;}
+select{width:220px;}
+input[type="checkbox"]{display:inline;}
+label span{font-weight:normal;font-size:13px;color:#444;}
+/* misc */
+#logo{margin-bottom:30px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-1px;font-weight:bold;text-align:right; font-size: 20px;}
+nav ul.nav{float:right;}
+nav ul.nav li{text-align:right;display:block;margin-bottom:10px;}
+nav ul.nav li a{font-size:14px;color:#555;text-decoration:none;font-weight:bold;padding:3px 8px 4px;position:relative;right:-8px;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;}
+header h1,header h2{font-size:52px;line-height:61px;letter-spacing:-1px;font-weight:normal;}
+h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{text-decoration:none}
+.sidebar form{width:100%;}
+.sidebar form input{margin:10px 0;width:100%;}
+.post,footer{border-top:1px solid #ccc;padding-top:10px;}
+.post:first-child{border-top:none;padding-top:0;}
+.cat-links{text-align:right;}
+.sidebar a{text-decoration:none;}
+
+.entry-meta {font-size: 0.8em;}
+
+
+/* search */
+.nabe-search-results ul{margin-top:10px;}
+.nabe-search-results ul li{padding:8px 0 10px 0;border-bottom:1px solid #dedede;list-style:none;}
+.nabe-search-results ul li:before{content:" ☛";padding-left:2em;color:#E3D7BF;}
+.nabe-search-results a{text-decoration:none;color:#444;padding-left:1em;}
+.nabe-search-results ul li:last-child{border-bottom:0px;}
+.nabe-search-results .years{text-align:center;}
+.nabe-search-results .years a{color:#bbb;}
+.nabe-search-results .years a:hover{color:#000;-moz-transform:scale(1.1);-o-transform:scale(1.1);-webkit-transform:scale(1.1);-ms-transform:scale(1.1);}
+.date{color:#bbb; float: right;}
+
+/** 404 **/
+div.nf{width:30em;}
+body .nf .frown{font-size:50px; padding: 1em; display:inline-block;color:#bbb;-moz-transform:rotate(90deg);-o-transform:rotate(90deg);-webkit-transform:rotate(90deg);-ms-transform:rotate(90deg);transform:rotate(90deg);filter:progid:DXImageTransform.Microsoft.Matrix( 
+M11=6.123031769111886e-17,M12=-1,M21=1,M22=6.123031769111886e-17,sizingMethod='auto expand');zoom:1;}
+body .nf a{color:rgb(36,109,56);text-decoration:none;}
+body .nf a:hover{color:rgb(96,73,141) ;text-shadow:2px 2px 2px rgba(36,109,56,0.5);}
+body .nf form{float:none;}
+body .nf form input{width:60%;-moz-transition:all 0.3s ease-out;-o-transition:all 0.3s ease-out;-webkit-transition:all 0.3s ease-out;-ms-transition:all 0.3s ease-out;transition:all 0.3s ease-out;}
+body .nf form input:focus{width:100%;}
+
+
+
+/* scrollbars */
+::-webkit-scrollbar-track-piece{margin-bottom:10px;background-color:#e5e5e5;border-bottom-left-radius:4px 4px;border-bottom-right-radius:4px 4px;border-top-left-radius:4px 4px;border-top-right-radius:4px 4px;}
+::-webkit-scrollbar-thumb:vertical{height:25px;background-color:#ccc;-webkit-border-radius:4px;-webkit-box-shadow:0 1px 1px rgba(255,255,255,1);}
+::-webkit-scrollbar-thumb:horizontal{width:25px;background-color:#ccc;-webkit-border-radius:4px;}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+	header h1 { font-size: 34px; line-height: 37px; }
+	nav { position: relative; }
+	nav ul { float: none; }
+	nav ul li {float: right; }
+	#logo { text-align: left; float: left; font-size: 34px; line-height: 14px; }
+	nav .button { display: none; }
+}
+
+/* Mobile Landscape */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	nav ul { float: none }
+}
+
+/* Mobile Portrait */
+@media only screen and (max-width: 480px) {
+  .nabe-search-results ul li {padding-bottom: 20px;}
+}
+
+
+/* iPad Portrait/Browser */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	nav { 
+		width: 124px; }
+}
+
+/* Mobile/Browser */
+@media only screen and (max-width: 767px) {}
+
+/* Mobile Landscape/Browser */
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+/* Anything smaller than standard 960 */
+@media only screen and (max-width: 959px) {}
+
+
+/* iPad Portrait Only */
+@media only screen and (min-width: 768px) and (max-width: 991px) and (max-device-width: 1000px) {}
+
+/* Mobile Only */
+@media only screen and (max-width: 767px) and (max-device-width: 1000px) {}
+
+/* Mobile Landscape Only */
+@media only screen and (min-width: 480px) and (max-width: 767px) and (max-device-width: 1000px) {}
+
+/* Anything smaller than standard 960 on a device */
+@media only screen and (max-width: 959px) and (max-device-width: 1000px) {
+	.resize { display: none; }
+}
+
+/**
+ * Non-semantic helper classes: please define your styles before this section.
+ */
+
+/* For image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+
+/* Hide for both screenreaders and browsers:
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display: none; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: by Jon Neal.
+  www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: drupal.org/node/897638 */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* The Magnificent Clearfix: Updated to prevent margin-collapsing on child elements in most situations.
+   nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: ""; display: block; overflow:hidden; }
+.clearfix:after { clear: both; }
+/* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+.clearfix { zoom: 1; }
+
+
+/**
+ * Print styles.
+ *
+ * Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+ */
+@media print {
+  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important;
+  -ms-filter: none !important; } /* Black prints faster: sanbeiji.com/archives/953 */
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3{ page-break-after: avoid; }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>${context.config.title}</title>
+  
+  <meta name="description" content="${context.config.description}’">
+  <meta name="author" content="${context.config.author}">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS: implied media="all" -->
+  <link href='http://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/css/main.css">
+  
+</head>
+<body>
+  
+  <div class="container">
+    <div class="three columns sidebar">
+  		<nav>
+  			<h1 id="logo"><a href="/" title="${context.config.title}" rel="home">${context.config.title}</a></h1>
+  			<ul class="nav">
+          <li><a href="/" title="Home">Home</a></li>
+          <li><a href="/archives" title="Archives">Archives</a></li>
+          <li><a href="/about" title="About">About</a></li>
+          <li><a href="/test" title="Test">Test</a></li>
+  			</ul>
+  			
+        <form name="nabe-search" action="/search/articles/" method="post">
+          <input type="text" name="q" autocomplete="off" placeholder="Search" />
+        </form>
+        
+        {{if context.article}}
+        <dl class="entry-meta">
+          <dt>Date Released:</dt>
+          <dd class="entry_date"><abbr class="published" title="${context.article.date}">${context.article.date}</abbr></dd>
+
+          <dt>Author:</dt>
+          <dd class="author vcard">${context.article.author}</dd>
+
+          {{if context.article.categories}}
+          <dt>Categories:</dt>
+          <dd class="cat-links">
+            {{each(index, category) context.article.categories}}
+              <a href="/tag/${category}">#${category}</a>
+            {{/each}}
+          </dd>
+          {{/if}}
+          
+           {{if context.article.revisions}}
+            <dt>Revisions:</dt>
+            <dd>
+              <ul class="post-revisions">
+              {{each(sha, rev) context.article.revisions}}
+                <li><a href="/${sha}/${context.article.name}" title="${rev.message}">${rev.date}</a></li>
+              {{/each}}
+              </ul>
+            </dd>
+            {{/if}}
+        </dl>
+        {{/if}}
+  		</nav>
+  	</div>
+  	<div class="twelve columns content offset-by-one">
+  	  
+  	  {{html content}}
+  	  
+
+    	<footer>
+        <em><strong>powered by <a href="http://github.com/mklabs/nabe">nabe</a></strong>, default theme</em>
+      </footer>
+
+  	</div>
+  	
+  
+  </div>
+    
+</body>
+</html>

@@ -1,0 +1,19 @@
+<header>
+  <h1>${config.description}</h1>
+</header>
+
+{{each(index, article) articles}}
+  <div class="post">
+    <span class="date">${article.date}</span>
+    <h2 class="entry-title"><a href="/article/${article.name}">${article.title}</a></h2>
+    <div class="entry-content">
+      {{html article.markdown}}      
+    </div>
+    <p class="cat-links">
+      {{each(index, category) article.categories}}
+        <a href="/tag/${category}">#${category}</a>
+      {{/each}}
+    </p>
+  </div>
+{{/each}}
+

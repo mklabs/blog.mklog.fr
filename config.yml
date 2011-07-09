@@ -1,0 +1,32 @@
+#
+### configure nabe
+#
+#
+#### Add your settings here
+#
+# `set [setting:] [value]`
+#
+#
+#     author:     John Doe                                # blog author
+#     title:      a blog about ...                        # site title
+#     date:       yyyy-mm-dd                              # date format for articles
+#     disqus:     ''                                      # disqus id, or ''
+#     ext:        markdown                                # file extension for articles
+#     summary:                                            # length of article summary and delimiter
+#       delim: \n##
+#
+#
+author:       mklabs
+title:        blog.mklog.fr
+format:       f
+culture:      fr
+theme:        default
+disqus:       ''
+ext:          markdown
+summary:
+  delim: '<!--more-->|##'
+github:
+  user: mklabs
+  ext: markdown
+
+

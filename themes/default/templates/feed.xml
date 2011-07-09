@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>blog.mklog.fr</title>
+    <link>http://blog.mklog.fr/</link>
+    <description>A JavaScript, node.js and front-end development blog (mostly et en frenchy)</description>
+	
+	{{each(index, article) articles}}
+	    {{if article.date}}
+		<item>
+		    ${article.title} ${article.date}
+			<title>${article.title} - foo</title>
+			<link>http://blog.mklog.fr/article/${article.name}</link>
+			<description>${article.markdown}</description>
+		</item>
+		{{/if}}
+	{{/each}}
+  </channel>
+</rss>

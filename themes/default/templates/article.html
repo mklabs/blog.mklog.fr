@@ -1,0 +1,33 @@
+<div class="post">
+  <header><h2><a href="/article/${article.name}">${article.title}</a></h2></header>
+  <div class="entry-content">
+    {{html content}}
+  </div>
+  
+  <p class="cat-links">
+    {{each(index, category) article.categories}}
+      <a href="/tag/${category}">#${category}</a>
+    {{/each}}
+  </p>
+  
+  <section class="comments" style="width: 80%;">
+    {{if config.disqus}}
+      <div id="disqus_thread"></div>
+      <script>
+        (function(){
+          this.disqus_shortname = '${config.disqus}';
+          this.disqus_identifier = 'http://example.com/article/${article.name}';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        })();
+      </script>
+      <noscript><a href="http://${config.disqus}.disqus.com/?url=ref">View the discussion thread.</a></noscript>
+    {{/if}}
+  </section>
+</div>
+
+
+
