@@ -2,7 +2,7 @@ Title: Harmony: Sexy background canvas
 Author: Mickael Daniel
 Date: Nov 6 2010 22:21:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript
+Categories: javascript
 
 <img src="/harmony/harmony.jpg" alt="Harmony Awesomeness" class="mk-blog-img" width="290" height="118"/>
 

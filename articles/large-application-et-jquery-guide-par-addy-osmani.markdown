@@ -2,7 +2,7 @@ Title: Création d'application jQuery à grande échelle - Guide par Addy Osmani
 Author: Mickael Daniel
 Date: Dec 29 2010 15:00:00 GMT+0100 (CDT)
 Translation: This article is the french translation of excellent Addy Osmani's post[http://addyosmani.com/blog/large-scale-jquery/](http://addyosmani.com/blog/large-scale-jquery/). Awesome work, thank you Addy for letting me translate this. All credits is due to you.
-Categories: Javascript, jQuery
+Categories: javascript, jquery
 Tags: Code org., Webapp Architecture
 
 **Récemment [Addy Osmani](http://addyosmani.com) à publié un article incroyablement fourni et détaillé sur [les solutions que nous avons à notre disposition pour construire des applis jQuery à grande échelle](http://addyosmani.com/blog/large-scale-jquery/). Superbe travail et offrant à la communauté dans son ensemble une incroyable ressource autour de l'architecture des applications web modernes. Je suis réellement fasciné par ce sujet, principalement du au fait d'être intervenu pendant plus de deux ans sur une application de grande envergure utilisant massivement jQuery (et jQuery UI) coincé avec une toolkit maison malheureusement loin de toutes les bonnes pratiques et designs patterns qui émergent aujourd'hui, avec les conséquences que ça implique sur un projet d'une telle taille. Je pense sérieusement que le post d'Addy représente une des ressources les plus aboutis sur le sujet, avec une liste complète et détaillée des solutions à notre disposition pour simplifier et industrialiser notre pratique du front-end dans le contexte d'application jQuery (et JavaScript en général).**

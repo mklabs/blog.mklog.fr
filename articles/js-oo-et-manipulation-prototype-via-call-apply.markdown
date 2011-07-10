@@ -2,7 +2,7 @@ Title: Javascript: Orienté objet et manipulation du prototype (via call / apply
 Author: Mickael Daniel
 Date: Thu Dec 16 2010 13:01:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript
+Categories: javascript
 
 <p>
 Lors d'un précédent article sur <a href="/article/express-framework-web-node/">express</a>, j'ai eu l'occasion d'utiliser <a href="https://github.com/ajaxorg/node-github">node-github</a>, un module Node permettant de dialoguer avec l'API Rest de Github. Il dispose d'une API orienté objet et asynchrone. J'ai pu y découvrir un pattern, une manière de manipuler le prototype qui m'a particulièrement plu.

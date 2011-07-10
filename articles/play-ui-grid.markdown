@@ -1,7 +1,7 @@
 Title: Play Framework, CRUD et intégration avec jQuery UI Grid
 Author: Mickael Daniel
 Date: Mar 16 2011 08:00:00 GMT+0100 (CDT)
-Categories: Javascript, jQuery
+Categories: javascript, jquery
 Tags: javascript, java, play, jquery, jqueryui, grid
 version: play 1.1, jQuery UI 1.8.2
 

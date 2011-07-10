@@ -2,7 +2,7 @@ Title: Gist de la semaine: 2 things I learned (among 10) from Paul Irish (from t
 Author: Mickael Daniel
 Date: Nov 20 2010 00:53:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript, jQuery
+Categories: javascript, jquery
 
 Dans la série gist de la semaine, j'ai décidé cette semaine de vous faire partager deux patterns que j'ai découvert alors que je regardais le screencast <a href="http://vimeo.com/12529436 ">Paul Irish : 10 Things I Learned from the jQuery Source</a>, permettant d'oublier setInterval et eval.  Je vous conseille fortement d'y jeter un oeil si vous vous intéressez au JS et à jQuery en particulier. De plus, ses screencasts sont plutôt marrants, pleins d'easter egg et de subtilités(loopsiloopsiloo!). Et si vous ne le faîtes pas encore, je vous conseille également très fortement de suivre le podcast <a href="http://yayquery.com/">yayQuery</a> (version Audio/Vidéo au choix!).
 

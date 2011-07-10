@@ -2,7 +2,7 @@ Title: JS Attitude: Session Lyonnaise!
 Author: Mickael Daniel
 Date: Nov 5 2010 21:59:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript
+Categories: javascript
 
 
 Un petit billet pour parler d'un sujet qui me tient à coeur, d'une initiative qui, de mon point de vue, répond à un cruel besoin en France: Des formations JS de qualité en France!

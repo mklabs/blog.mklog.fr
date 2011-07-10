@@ -2,7 +2,7 @@ Title: Node.js: Présentation, installation et prise en main
 Author: Mickael Daniel
 Date: Nov 16 2010 23:46:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript, node.js
+Categories: javascript, node
 
 <img class="mk-blog-img" src="/node/node1.png"></img>
 

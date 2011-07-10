@@ -1,7 +1,7 @@
 Title: JS et Architecture, quelques pistes et conseils...
 Author: Mickael Daniel
 Date: Feb 05 2011 14:00:00 GMT+0100 (CDT)
-Categories: Javascript
+Categories: javascript
 
 Lorsque que l'on travaille sur un site ou une application web de taille conséquente, vous pouvez vite vous retrouver avec une quantité non négligeable de Javascript. Situation dans laquelle il devient nécessaire de penser en terme d'organisation de code, design patterns et architecture.
 

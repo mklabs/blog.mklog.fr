@@ -1,7 +1,7 @@
 Title: Backnode: Connect your Backbone
 Author: Mickael Daniel
 Date: Sun Jul 10 2011 00:04:56 GMT+0200 (CEST)
-Categories: JavaScript, node, backbone
+Categories: javascript, node, backbone
 
 Un post pour vous parler d'une de mes dernières expérimentations. L'idée est de me fournir la possibilité d'utiliser Backbone et son API coté serveur, depuis un environnement node. Il existe [quelques tutos tutos](http://andyet.net/blog/2011/feb/15/re-using-backbonejs-models-on-the-server-with-node/) sur [le sujet](http://amir.unoc.net/how-to-share-backbonejs-models-with-nodejs), permettant notamment de partager les modèles Backbone. Mais je voulais un peu plus (ou différemment), ayant joué tout récemment avec l'API de Backbone et le support de l'history push state (depuis la version 0.5, yay!). J'ai beaucoup aimé la façon dont s'architecture une application avec Backbone, la façon dont sont défini les routes, le modèle object de la lib, le style, les partis pris et la technique. Le tout couplé à underscore donne un code juste super élégant, propre, structuré qui en même temps vous laisse une énorme liberté et ne décide de rien pour vous.
 

@@ -2,7 +2,7 @@ Title: Introduction à node.js
 Author: Mickael Daniel
 Date: Nov 13 2010 21:55:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript, node.js
+Categories: javascript, node
 
 <img class="mk-blog-img" src="/node/nodejs-attitude.jpg"></img>
 

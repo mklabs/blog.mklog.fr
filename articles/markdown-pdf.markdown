@@ -1,8 +1,8 @@
 Title: pdf.js et génération markdown vers pdf
 Author: Mickael Daniel
 Date: Apr 09 2011 18:00:00 GMT+0100 (CDT)
-Categories: JavaScript, node
-Tags: JavaScript, Markdown, node, pdf
+Categories: javascript, node
+Tags: javascript, markdown, node, pdf
 
 Certains sont certainement déjà au courant de l'existence de l'excellent outil de génération pdf écrit purement en JavaScript par James Hall: [jsPDF](http://snapshotmedia.co.uk/blog/jspdf) ([source](https://github.com/MrRio/jsPDF)).
 
