@@ -3,13 +3,22 @@ Author: Mickael Daniel
 Date: Sun Jul 10 2011 00:04:56 GMT+0200 (CEST)
 Categories: javascript, node, backbone
 
-Un post pour vous parler d'une de mes dernières expérimentations. L'idée est de me fournir la possibilité d'utiliser Backbone et son API coté serveur, depuis un environnement node. Il existe [quelques tutos tutos](http://andyet.net/blog/2011/feb/15/re-using-backbonejs-models-on-the-server-with-node/) sur [le sujet](http://amir.unoc.net/how-to-share-backbonejs-models-with-nodejs), permettant notamment de partager les modèles Backbone. Mais je voulais un peu plus (ou différemment), ayant joué tout récemment avec l'API de Backbone et le support de l'history push state (depuis la version 0.5, yay!). J'ai beaucoup aimé la façon dont s'architecture une application avec Backbone, la façon dont sont défini les routes, le modèle object de la lib, le style, les partis pris et la technique. Le tout couplé à underscore donne un code juste super élégant, propre, structuré qui en même temps vous laisse une énorme liberté et ne décide de rien pour vous.
+Un post pour vous parler d'une de mes dernières expérimentations. L'idée est de me fournir la possibilité d'utiliser [Backbone](http://documentcloud.github.com/backbone/) et son API coté serveur, depuis un environnement node. Il existe [quelques tutos](http://andyet.net/blog/2011/feb/15/re-using-backbonejs-models-on-the-server-with-node/) sur [le sujet](http://amir.unoc.net/how-to-share-backbonejs-models-with-nodejs), permettant notamment de partager les modèles Backbone. Mais je voulais un peu plus (ou différemment), ayant joué tout récemment avec l'API de Backbone et le support de l'history push state (depuis la version 0.5, yay!). J'ai beaucoup aimé la façon dont s'architecture une application avec Backbone, la façon dont sont [définies les routes](http://documentcloud.github.com/backbone/#Router), le modèle object de la lib, le style, les partis pris et la technique. Le tout couplé à underscore donne un code juste super élégant, propre, structuré qui en même temps vous laisse une énorme liberté et ne décide de rien pour vous.
 
 J'ai eu alors très envie d'utiliser la même chose coté serveur. Bien sûr, beaucoup de code de Backbone est relatif à de la manipulation DOM mais se restreint principalement au vue, et support de l'History. Ca m'a alors travaillé et ait commencé à jouer avec Backbone, dans un environnement node. La lib est suffisamment bien pensé pour être packagé et pensé pour être utilisé des deux cotés, mais il manque un petit quelque chose pour accrocher l'API de Backbone, et plus particulièrement Backbone.Router, avec le paradigme request/response d'un serveur web.
 
 En partant sur l'idée d'un middleware connect (et du coup compatible express), voici ce que ça donne.
 
-_TLDR; ? [Rendez vous](#tldr) au dernier paragraphe :)_
+
+<div class="actions button-container" style="margin-left: 4em;">
+  <div class="button-group">
+        <a href="//github.com/mklabs/backnode" class="button primary">source</a>
+        <a href="//github.com/mklabs/backnode/wiki/Wiki-Example" class="button">exemple</a>
+        <a href="/backnode" class="button">readme</a>
+    </div>
+</div>
+
+_TLDR; ? [Rendez vous](/article/connect-your-backbone/#tldr) au dernier paragraphe :)_
 
 ## intro
 
@@ -321,6 +330,6 @@ Voici un exemple simple, 169 lignes de code, d'un mini wiki, prenant un dossier 
 		
 <h2 id="tldr">Conclusion</h2>
 
-Jusque là, cela s'est prouvé très très plaisant de construire une application web en utilisant ce genre de procédé. L'exemple du repo utilise un use case de wiki très simple, utilisant le filesytem et les modèles Backbone pour gérer les fichiers et leur contenu, les vues Backbone pour définir les template utilisé, le tout orchestré par des Router Backbone, utilisant une API très proche de ce que l'on serait amené à coder coté client (l'idée serait d'utiliser juste des vues différentes, ou coder pour s'adapter en fonction de l'env. Adapter?).
+Jusque là, cela s'est prouvé très très plaisant de construire une application web en utilisant ce genre de procédé. L'exemple du repo utilise un cas d'utilisation de wiki très simple, utilisant le filesytem et les modèles Backbone pour gérer les fichiers et leur contenu, les vues Backbone pour définir les template utilisé, le tout orchestré par des Router Backbone, utilisant une API très proche de ce que l'on serait amené à coder coté client (l'idée serait d'utiliser juste des vues différentes, ou coder pour s'adapter en fonction de l'env. Adapter?).
 
-_Note: Un merci tout particulier à Mr @jsattitude, cette journée était superbe, les composants utilisés juste super bons, le tout dans une bonne ambiance._
+_Note: Un merci tout particulier à Mr [@jsattitude](http://twitter.com/#!/jsattitude), cette journée était superbe, les composants utilisés juste super bons, le tout dans une bonne ambiance._
