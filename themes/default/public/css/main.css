@@ -418,8 +418,6 @@ h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{text-decoration:none}
 
 
 /* search */
-
-.nabe-search {border: 1px solid red; float: right;}
 .nabe-search-results ul{margin-top:10px;}
 .nabe-search-results ul li{padding:8px 0 10px 0;border-bottom:1px solid #dedede;list-style:none;}
 .nabe-search-results ul li:before{content:" ☛";padding-left:2em;color:#E3D7BF;}
@@ -517,6 +515,7 @@ li.L9 { background: #eee }
 @media only screen and (max-width: 480px) {
   .post header h2 {font-size: 30px; line-height: 1.5em;}
   .nabe-search-results ul li {padding-bottom: 20px;}
+  .nabe-search-results ul {margin: 0;}
 }
 
 
