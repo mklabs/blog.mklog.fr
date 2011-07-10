@@ -9,7 +9,7 @@ J'ai eu alors très envie d'utiliser la même chose coté serveur. Bien sûr, be
 
 En partant sur l'idée d'un middleware connect (et du coup compatible express), voici ce que ça donne.
 
-_TLDR; ? Rendez vous au dernier paragraphe :)_
+_TLDR; ? [Rendez vous](#tldr) au dernier paragraphe :)_
 
 ## intro
 
@@ -319,7 +319,7 @@ Voici un exemple simple, 169 lignes de code, d'un mini wiki, prenant un dossier 
 	* les instances de router passés à la couche middleware instance reçoivent les objets request, response et la fonction next (en tant que req, res, next). Mis à jour sur chaque requête entrante.
 		* ex pour terminer la réponse depuis un Router: this.res.end('Backbone  ♥ Node  ♥');
 		
-## Conclusion
+<h2 id="tldr">Conclusion</h2>
 
 Jusque là, cela s'est prouvé très très plaisant de construire une application web en utilisant ce genre de procédé. L'exemple du repo utilise un use case de wiki très simple, utilisant le filesytem et les modèles Backbone pour gérer les fichiers et leur contenu, les vues Backbone pour définir les template utilisé, le tout orchestré par des Router Backbone, utilisant une API très proche de ce que l'on serait amené à coder coté client (l'idée serait d'utiliser juste des vues différentes, ou coder pour s'adapter en fonction de l'env. Adapter?).
 
