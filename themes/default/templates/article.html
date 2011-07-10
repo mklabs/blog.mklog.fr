@@ -4,19 +4,13 @@
     {{html content}}
   </div>
   
-  <p class="cat-links">
-    {{each(index, category) article.categories}}
-      <a href="/tag/${category}">#${category}</a>
-    {{/each}}
-  </p>
-  
-  <section class="comments" style="width: 80%;">
+  <section class="comments" style="width: 95%; margin: auto;">
     {{if config.disqus}}
       <div id="disqus_thread"></div>
       <script>
         (function(){
           this.disqus_shortname = '${config.disqus}';
-          this.disqus_identifier = 'http://example.com/article/${article.name}';
+          this.disqus_identifier = 'http://blog.mklog.fr/article/${article.name}';
           (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
