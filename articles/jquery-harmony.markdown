@@ -2,7 +2,7 @@ Title: jQuery Harmony
 Author: Mickael Daniel
 Date: Nov 11 2010 18:25:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript, jQuery
+Categories: javascript, jquery
 
 jQuery Harmony
 <img class="mk-blog-img" src="/jquery/jquery_logo.gif" height="108" width="170" />Si vous avez lu mon précédent post sur <a href="http://blog.mklog.fr/2010/11/06/harmony-sexy-background-canvas/">Harmony et sa déclinaison background</a>, vous savez à quel point j'ai adoré  le <a href="http://mrdoob.com/">travail de Mr. Doob</a>. Que ce soit au niveau de l'idée ou de la mise en oeuvre, <a href="http://mrdoob.com/projects/harmony/">Harmony</a> est vraiment magique.

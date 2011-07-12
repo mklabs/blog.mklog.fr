@@ -1,7 +1,7 @@
 Title: jQuery, héritage et organisation de code
 Author: Mickael Daniel
 Date: Feb 06 2011 15:00:00 GMT+0100 (CDT)
-Categories: Javascript, jQuery
+Categories: javascript, jquery
 
 Alex Sexton (membre de la team jQuery, co-host YayQuery, créateur de la librairie YepNope, etc.) a écrit un article excellent il y a quelques temps de cela sur l'[utilisation de patterns d'héritage](http://alexsexton.com/?p=51) pour organiser une application Javascript utilisant jQuery et adoptant une approche "bridge" particulièrement élégante et s'inspirant énormément de la Widget Factory de jQuery UI (Scott Gonzalez).
 

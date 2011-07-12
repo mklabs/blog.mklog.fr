@@ -2,4 +2,5 @@ cache
 .project
 nohup.out
 _*
+build
 

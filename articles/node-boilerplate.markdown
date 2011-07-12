@@ -2,7 +2,7 @@ Title: Node Boilerplate: ou comment mettre en place une appli node.js en moins d
 Author: Mickael Daniel
 Date: Nov 23 2010 22:18:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript, node.js
+Categories: javascript, node
 
 <img class="mk-blog-img" src="/node-boilerplate/node-boilerplate-featured.jpg" />Troisième article consacré à cette série, nous allons aujourd'hui nous pencher sur <a href="https://github.com/robrighter/node-boilerplate">Node Boilerplate</a> et à la mise en en place du squelette de notre appli Node.
 

@@ -1,7 +1,7 @@
 Title: RequireJS ➤ mo-du-la-ri-té !
 Author: Mickael Daniel
 Date: Mar 06 2011 14:00:00 GMT+0100 (CDT)
-Categories: Javascript
+Categories: javascript
 version: requirejs-0.23.0
 
 Il existe des dizaines de "script loader" aujourd'hui, avec différents degrés de complexité / fonctionnalité, nous permettant de charger nos fichiers javascript dynamiquement. Beaucoup d'entre eux font parties de framework spécifique, comme les loaders dans Dojo, YUI ou encore JavascriptMVC (Steal). 

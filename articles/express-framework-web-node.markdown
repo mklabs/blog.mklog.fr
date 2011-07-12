@@ -2,7 +2,7 @@ Title: Express: Le framework web Node qu'il fait bon utiliser
 Author: Mickael Daniel
 Date: Dec 5 2010 15:27:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript, node.js
+Categories: javascript, node
 
 <img class="mk-blog-img" src="/express/express-screen.png" />
 

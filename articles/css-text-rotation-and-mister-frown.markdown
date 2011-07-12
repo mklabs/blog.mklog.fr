@@ -2,7 +2,7 @@ Title: Gist de la semaine: CSS text rotation and Mr. Frown
 Author: Mickael Daniel
 Date: Nov 13 2010 19:12:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript, CSS3
+Categories: javascript, css3
 
 Avec ce billet, j'initie une petite série intitulée Gist de la semaine (qui risque fortement de ne pas se faire toute les semaines <span class="rt-90">:)</span>)
 

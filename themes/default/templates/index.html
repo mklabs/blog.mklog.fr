@@ -3,17 +3,25 @@
 </header>
 
 {{each(index, article) articles}}
+  
+    
+  <div class="actions button-container" style="float: right;">
+    <div class="button-group minor-group">
+      {{each(index, category) article.categories}}
+        <a href="/tag/${category}" class="button">#${category}</a>
+      {{/each}}
+    </div>
+  </div>
+  
   <div class="post">
-    <span class="date">${article.date}</span>
     <h2 class="entry-title"><a href="/article/${article.name}">${article.title}</a></h2>
+
     <div class="entry-content">
       {{html article.markdown}}      
     </div>
-    <p class="cat-links">
-      {{each(index, category) article.categories}}
-        <a href="/tag/${category}">#${category}</a>
-      {{/each}}
-    </p>
+    
+    <span class="date">${article.date}</span>
+    
   </div>
 {{/each}}
 

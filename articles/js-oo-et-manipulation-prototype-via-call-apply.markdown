@@ -2,13 +2,21 @@ Title: Javascript: Orienté objet et manipulation du prototype (via call / apply
 Author: Mickael Daniel
 Date: Thu Dec 16 2010 13:01:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript
+Categories: javascript
 
 <p>
 Lors d'un précédent article sur <a href="/article/express-framework-web-node/">express</a>, j'ai eu l'occasion d'utiliser <a href="https://github.com/ajaxorg/node-github">node-github</a>, un module Node permettant de dialoguer avec l'API Rest de Github. Il dispose d'une API orienté objet et asynchrone. J'ai pu y découvrir un pattern, une manière de manipuler le prototype qui m'a particulièrement plu.
 </p>
 
-<js-oo-et-manipulation-prototype-via-call-apply/prototype-call.js>
+    var Citizen = function Citizen(name){
+      this.name = name;		
+    };
+
+    (function(){
+        this.getName = function getName(){
+            return this.name;
+        };
+    }).call(Citizen.prototype);
 
 <p>
 Utilisation d'une fonction anonyme auto-exécutée (self-executed function). Mais l'invocation qui est habituellement faîtes par l'utilisation de () juste aprés la définition de la fonction fait place ici à l'utilisation de la méthode call, permettant de placer le contexte de la fonction anonyme et de forcer la valeur de <em>this</em> au prototype que l'on veut manipuler.
@@ -34,14 +42,10 @@ Utilisation des méthodes call/apply pour manipuler le prototype.
 
 </ul>
 
-<h2>
-Orienté objet
-</h2>
-
-<hr />
+## Orienté objet
 
 <p>
-Je fais très attention quand je parle de Javascript orienté objet. Fondamentalement, le Javascript est un langage orienté objet, ce qui peut surprendre les développeurs qui n'ont pas touché au langage ou l'ont fait brièvement pour ensuite le rejeter. Tout en Javascript est objet ou en est dérivé. Seulement cinq primitives ne sont pas des objets:
+J'essaie de faire attention quand je parle de Javascript orienté objet. Fondamentalement, le Javascript est un langage orienté objet, mais ne dispose pas de Classe, ce qui peut nous surprendre nous les devs éduqué à coup de `Class Animal`. Tout en Javascript est objet ou en est dérivé. Seulement cinq primitives ne sont pas des objets:
 </p>
 
 <ul>

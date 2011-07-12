@@ -2,7 +2,7 @@ Title: JS Attitude: Session Lyonnaise!
 Author: Mickael Daniel
 Date: Nov 5 2010 21:59:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript
+Categories: javascript
 
 
 Un petit billet pour parler d'un sujet qui me tient à coeur, d'une initiative qui, de mon point de vue, répond à un cruel besoin en France: Des formations JS de qualité en France!
@@ -11,7 +11,7 @@ Un seule adresse: <a href="http://js-attitude.fr/">http://js-attitude.fr/</a>
 
 Aujourd'hui en 2010, le Javascript n'est plus qu'un simple langage jouet (et il ne l'a jamais été), même si vous ne le savez peut-être pas encore. Ces formations, ateliers pour être plus précis, se déroulent sur une journée. Vous repartirez avec la certitude d'avoir appris quelque chose (si ce n'est pas ré-apprendre) sans que ça vous coûte nécessairement un rein (Du genre 2200Euros de formation sur X Jour...).
 
-<h2>Un cruel besoin</h2>
+## Un réel besoin
 Je ne m'étendrais pas plus et vous invite à faire un tour sur le blog <a href="http://js-attitude.fr">js-attitude</a> pour découvrir, en détail, les modalités d'inscription, contenu et déroulement de la formation.
 
 

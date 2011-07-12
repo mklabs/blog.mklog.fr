@@ -2,7 +2,7 @@ Title: Rebecca Murphey’s gist: ou comment se prouver qu’on ne connaît pas l
 Author: Mickael Daniel
 Date: Nov 01 2010 15:51:00 GMT-0500 (CDT)
 Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: Javascript
+Categories: javascript
 
 <img class="mk-blog-img" src="/rebecca-murphey-gist/oops_20101101.jpg" alt="" width="151" height="170" /> Je suis tombé récemment sur ce <a href="http://blog.rebeccamurphey.com/in-search-of-javascript-developers-a-gist">post</a> de Rebecca Murphay, il s'agit principalement d'un exercice javascript ou l'on vous demande de reprendre des snippets de code et de les améliorer.
 

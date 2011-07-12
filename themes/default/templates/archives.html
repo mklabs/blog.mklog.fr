@@ -1,11 +1,13 @@
 <div class="page nabe-search-results">
   <header><h2>Archives</h2></header>
   
-  <p class="years">
-    {{each(i, year) years}}
-      <a href="/archives/${year}">${year}</a>
-    {{/each}}
-  </p>
+  <div class="actions button-container" style="text-align: center;">
+    <div class="button-group minor-group">
+      {{each(i, year) years}}
+        <a href="/archives/${year}" class="button pill">${year}</a>
+      {{/each}}
+    </div>
+  </div>
   
   <ul>
   {{each(index, article) articles}}

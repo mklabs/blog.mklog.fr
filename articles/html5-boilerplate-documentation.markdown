@@ -1,7 +1,7 @@
 Title: HTML5 Boilerplate Documentation... en mode Boilerplate !
 Author: Mickael Daniel
 Date: Feb 15 2011 00:00:01 GMT+0100 (CDT)
-Categories: Javascript, HTML5
+Categories: javascript, html5
 
 Ce billet (rapide) me permettra de parler de ma dernière petite expérience. Et elle concerne Boilerplate et sa documentation.
 
