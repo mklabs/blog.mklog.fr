@@ -7,7 +7,7 @@
 	
 	{{each(index, article) articles}}
 		<item>
-			<title>${article.title} - foo</title>
+			<title>${article.title}</title>
 			<link>http://blog.mklog.fr/article/${article.name}</link>
 			<description>${article.markdown}</description>
 		</item>
