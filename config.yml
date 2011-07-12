@@ -17,7 +17,7 @@
 #       delim: \n##
 #
 #
-port: 27051
+port: 12844
 author:       mklabs
 title:        blog.mklog.fr
 format:       f
