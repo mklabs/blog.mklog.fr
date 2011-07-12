@@ -9,7 +9,8 @@
       <div id="disqus_thread"></div>
       <script>
         (function(){
-          var disqus_identifier = 'http://blog.mklog.fr/article/${article.name}';
+          this.disqus_shortname = '${config.disqus}';
+          this.disqus_identifier = 'http://blog.mklog.fr/article/${article.name}';
            setTimeout(function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = 'http://${config.disqus}.disqus.com/embed.js';
