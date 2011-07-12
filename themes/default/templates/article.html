@@ -11,11 +11,11 @@
         (function(){
           this.disqus_shortname = '${config.disqus}';
           this.disqus_identifier = 'http://blog.mklog.fr/article/${article.name}';
-          (function() {
+           setTimeout(function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'http://${config.disqus}.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-          })();
+           }, 10);
         })();
       </script>
       <noscript><a href="http://${config.disqus}.disqus.com/?url=ref">View the discussion thread.</a></noscript>

@@ -368,7 +368,7 @@ table tr,table tr a{padding:1em 0;}
 table tr.hover{background-color:#dedede;}
 img{max-width:100%;height:auto;}
 img.mk-blog-img {float: left; margin: 1em; border: solid 3px #ccc;}
-img.mk-blog-img-center, .entry-content img {margin: 1em auto; border: solid 3px #ccc;}
+img.mk-blog-img-center, .entry-content img {margin: 0 1em 0 0; border: solid 3px #ccc;}
 
 /* buttons */
 /* ------------------------------------------
@@ -606,7 +606,8 @@ h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{text-decoration:none}
 .nabe-search-results .years{text-align:center;}
 .nabe-search-results .years a{color:#bbb;}
 .nabe-search-results .years a:hover{color:#000;-moz-transform:scale(1.1);-o-transform:scale(1.1);-webkit-transform:scale(1.1);-ms-transform:scale(1.1);}
-.date{color:#bbb; display: block; text-align: right;}
+.date, .right, .entry-comment-count{color:#bbb; display: block; text-align: right;}
+.entry-comment-count a {text-decoration:none; font-size: 0.8em;}
 
 /** 404 **/
 div.nf{width:30em;}
