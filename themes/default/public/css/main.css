@@ -367,8 +367,8 @@ table tr td{padding:0.4em;}
 table tr,table tr a{padding:1em 0;}
 table tr.hover{background-color:#dedede;}
 img{max-width:100%;height:auto;}
-.mk-blog-img {float: left; margin: 1em; border: solid 3px #ccc;}
-.mk-blog-img-center {margin: 1em auto; border: solid 3px #ccc;}
+img.mk-blog-img {float: left; margin: 1em; border: solid 3px #ccc;}
+img.mk-blog-img-center, .entry-content img {margin: 1em auto; border: solid 3px #ccc;}
 
 /* buttons */
 /* ------------------------------------------
