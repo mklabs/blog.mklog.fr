@@ -81,7 +81,7 @@ Ce script permet de lancer la commande `npm test`, et `exit 1` dans le cas ou np
     
 Si la commande `npm test` s'est déroulé avec succès (aucun test fail), le commit sera possible, si ce n'est pas le cas git ou hg ne le permettra pas vous obligeant à corriger les tests avant de vous laisser commiter. Voyez le comme un moyen simple et pratique de vous assurer que tout ce qui est commité dans le repo (potentiellement pushé par la suite) ne casse pas la build.
 
-`npm install npm` pour installer le package localement, `npm install -g jshint` pour installer le package en global et vous permettre de lancer `npm` depuis la console.
+`npm install npm` pour installer le package localement et permettre au script de l'utiliser programmatiquement. Pour une première installation, se référer au [readme du projet](http://npmjs.org/doc/README.html#Simple-Install-Unix-only-sorry). On peut également y trouver des instructions concernant l'installation de npm sur windows, mais veuillez noter que ces scripts n'ont pas été testés sous windows. Cedi dit, j'imagine qu'avec [msysgit](http://code.google.com/p/msysgit/), on devrait pouvoir s'en sortir (peut-être le sujet d'un prochain post, ou mise à jour de celui-ci).
 
 ## Exemple: jshint
 
