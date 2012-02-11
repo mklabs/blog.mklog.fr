@@ -4,7 +4,7 @@ Date: Tue Jul 12 2011 08:07:46 GMT+0200 (CEST)
 Categories: javascript, node
 Tags: javascript, node, connect, blog
 
-Il existe déjà de nombreux moteurs de blogs pour node, le plus connu étant certainement [Wheat](//gitbub.com/creationix/wheat), et j'ai décidé d'en ecrire un autre, "yet another one", et m'en excuse...
+Il existe déjà de nombreux moteurs de blogs pour node, le plus connu étant certainement [Wheat](//github.com/creationix/wheat), et j'ai décidé d'en ecrire un autre, "yet another one", et m'en excuse...
 
 Cela a été aussi l'occasion de migrer vers cette solution, fait maison. Qui dit nouveau moteur, dit nouveau design, et j'ai décidé de rester avec le thèmes par défaut du projet. Adapté de [skeletton](http://www.getskeleton.com/) avec quelques modifs, les boutons sont implémentés grâce à [CSS3 GitHub Buttons ](http://nicolasgallagher.com/lab/css3-github-buttons/)([src](https://github.com/necolas/css3-github-buttons)). Le tout donne quelque chose qui se dégrade plutôt bien, et dont la lecture sur appareil mobile (pas testé tablette) est correcte. Il suffit "resizer" (du verbe du premier groupe) le navigateur pour en avoir un rapide aperçu.
 
