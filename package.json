@@ -3,8 +3,8 @@
   "name": "blog.mklog.fr",
   "description": "miniblog",
   "version": "0.0.0",
-  "homepage": "http://mklabs.github.com/blog.mklog.fr/",
-  "home": "http://mklabs.github.com/blog.mklog.fr/",
+  "homepage": "http://mklabs.github.com/blog.mklog.fr",
+  "home": "http://mklabs.github.com/blog.mklog.fr",
   "repository": {
     "type": "git",
     "url": "git://github.com/mklabs/blog.mklog.fr.git"
