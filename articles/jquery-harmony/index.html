@@ -1,0 +1,93 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Nabe tests</title>
+  <meta name="description" content="Generation tests for nabe-vnext">
+  <meta name="viewport" content="width=device-width">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+</head>
+<body data-controller="post" class="post jquery-harmony">
+  <header>
+    <div class="container">
+      <h1><a href="/">nabe</a></h1>
+      <h2>jQuery Harmony</h2>
+      <span class="date date-hidden" data-format="MMMM DD, YYYY">Nov 11 2010 18:25:00 GMT-0500 (CDT)</span>
+      <span class="date date-hidden right" data-format="">Nov 11 2010 18:25:00 GMT-0500 (CDT)</span>
+    </div>
+  </header>
+  <div role="main" class="container markdown">
+    <!--config
+{
+  "Title": "jQuery Harmony",
+  "Author": "Mickael Daniel",
+  "Date": "Nov 11 2010 18:25:00 GMT-0500 (CDT)",
+  "Note": "This post is an import from an older wordpress post, as a results not markdown formated",
+  "Categories": "javascript, jquery"
+}
+config-->
+
+<p>jQuery Harmony</p>
+
+<p><img class="mk-blog-img" src="../../../../assets/img//jquery/jquery_logo.gif" height="108" width="170" />Si vous avez lu mon précédent post sur <a href="http://blog.mklog.fr/2010/11/06/harmony-sexy-background-canvas/">Harmony et sa déclinaison background</a>, vous savez à quel point j'ai adoré  le <a href="http://mrdoob.com/">travail de Mr. Doob</a>. Que ce soit au niveau de l'idée ou de la mise en oeuvre, <a href="http://mrdoob.com/projects/harmony/">Harmony</a> est vraiment magique.</p>
+
+<p>Vous avez peut-être également remarqué que j'ai pas pu m'empêcher de l'intégrer dans la zone d'entête du site, complètement inspiré par le thème du blog de <a href="http://paulirish.com/">Paul Irish</a>.</p>
+
+<p>En l'intégrant ici, j'ai tout de suite eu envie d'en faire un plugin jQuery me permettant facilement d'initialiser harmony sur n'importe quel élement de ma page, autant de fois que je le veux. Ce serait également sympa de pouvoir choisir un brush et une couleur différente sur chacune des instances d'Harmony.</p>
+
+<!--more-->
+
+<p>A partir de là, j'ai commencé à bosser là dessus et me plonger dans le code d'harmony, déjà un peu commencé avec la première intégration au niveau du bandeau.</p>
+
+<p>Aprés de nombreux commits, j'ai finit par avoir une première version stable. Dans un premier temps, pas d'options ou de configuration, je me suis concentré à faire en sorte que harmony puisse être utilisé, sur une collection jQuery. Brièvement, la principale difficulté fut de modifier un peu le code pour le cloisoner un peu, et permettre aux variables de garder leur état indépendamment du nombre d'élement harmony. Autrement, seul le dernier canvas était fonctionnel.</p>
+
+<p>Bref, une fois la première étape franchie, j'étais parti!</p>
+
+<p>Voici le résultat:</p>
+
+<div class="mk-blog-demo mk-blog-demo-harmony" data-color="#BABB40"></div>
+
+<p>Plutôt sympa hein? ;)</p>
+
+<p>Et une version avec couleur aléatoire (la même que l'entête):</p>
+
+<div class="mk-blog-demo mk-blog-demo-harmony"></div>
+
+<p>J'ajouterais peut-être cette option dans une future révision, et faire en sorte que le calcul se fasse sur chaque instance.</p>
+
+<p>Voici le bout de code qui m'initialise maintenant les différents élements "harmonisés" du site. </p>
+
+<script src="https://gist.github.com/672845.js"> </script>
+
+<p>Pour une démo un peu plus complète: <a href="http://mklabs.github.com/jquery-plugs/jquery-harmony/">mklabs.github.com/jquery-harmony/</a>.</p>
+
+<p>Si vous êtes intéressé par le code, et accessoirement un peu de doc: <a href="http://github.com/mklabs/jquery-plugs/tree/master/jquery-harmony/">github.com/mklabs/jquery-harmony/</a></p>
+
+<p>Le plugin est encore clairement perfectible, j'ai fait ça pour le fun. C'est définitivement un gagdet surtout qu'il est dépouillé de toutes les fonctionnalités de base d'Harmony (clear, save as image, etc.) mais c'était vraiment un bon prétexte pour coder un truc sympa.</p>
+
+<h2>Last but not least</h2>
+
+<p>Mais ce qu'il y a de plus beau dans tout ça, c'est qu'étant donné que ce travail est entièrement basé sur la déclinaison background de Mr. Paul Irish, je me suis risqué à envoyer ma première <a href="https://github.com/paulirish/harmony/pull/1">pull request</a>.</p>
+
+<p>Et... BOOOM! It's <a href="https://github.com/paulirish/harmony">in</a> ;) Que ce soit la validation de la requête, ou le commentaire de Paul qui lui soit associée, je peux à peine vous décrire ce que j'ai ressenti sur le moment (en me levant, aprés 2h30 de sommeil à tout casser). Juste Woooow.</p>
+
+<p>C'est là, la grande force de Github!</p>
+  </div>
+  <footer>
+    <div class="container"></div>
+  </footer>
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script src="../../assets/js/libs/es5-shim.min.js"></script>
+  <script src="../../assets/js/libs/moment.min.js"></script>
+  <script src="../../assets/js/libs/hijs.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

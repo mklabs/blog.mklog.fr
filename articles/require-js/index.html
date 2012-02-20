@@ -1,0 +1,848 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Nabe tests</title>
+  <meta name="description" content="Generation tests for nabe-vnext">
+  <meta name="viewport" content="width=device-width">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+</head>
+<body data-controller="post" class="post require-js">
+  <header>
+    <div class="container">
+      <h1><a href="/">nabe</a></h1>
+      <h2>RequireJS ➤ mo-du-la-ri-té !</h2>
+      <span class="date date-hidden" data-format="MMMM DD, YYYY">Mar 06 2011 14:00:00 GMT+0100 (CDT)</span>
+      <span class="date date-hidden right" data-format="">Mar 06 2011 14:00:00 GMT+0100 (CDT)</span>
+    </div>
+  </header>
+  <div role="main" class="container markdown">
+    <!--config
+{
+  "Title": "RequireJS ➤ mo-du-la-ri-té !",
+  "Author": "Mickael Daniel",
+  "Date": "Mar 06 2011 14:00:00 GMT+0100 (CDT)",
+  "Categories": "javascript",
+  "version": "requirejs-0.23.0"
+}
+config-->
+
+<p>Il existe des dizaines de "script loader" aujourd'hui, avec différents degrés de complexité / fonctionnalité, nous permettant de charger nos fichiers javascript dynamiquement. Beaucoup d'entre eux font parties de framework spécifique, comme les loaders dans Dojo, YUI ou encore JavascriptMVC (Steal). </p>
+
+<p>Il existe également deux très bonnes alternatives à  la fois solides, très bien testées, indépendantes de tout toolkit et capable de résoudre des problèmes de chargement de ressource complexes: LABjs (Loading and Blocking JavaScript) et RequireJS.</p>
+
+<p>Cet article se concentrera sur RequireJS, solution de script loading et gestion de dépendances créée par <a href="http://tagneto.blogspot.com/">James Burke</a>, qui est basé sur le système de gestion de dépendances de l'excellente librairie Dojo et de la spécification CommonJS, plus particulièrement sur l'<a href="http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition">API Asynchronous Module Definition</a> (plus d'infos <a href="http://tagneto.blogspot.com/2010/12/standards-and-proposals-for-javascript.html">ici</a> ou <a href="http://www.sitepen.com/blog/2010/11/04/requirejsamd-module-forms/">là</a>).</p>
+
+<p>J'essaierais de vous fournir une rapide vue d'ensemble de cette outil, suivie d'une petite démonstration de ce à quoi peut ressembler le développement aidé par requirejs, en espérant vous inciter à le considérer dans vos projets.</p>
+
+<h2>RequireJS</h2>
+
+<p>Quand un projet atteint une certaine taille, la gestion des scripts peut devenir compliqué. Vous avez besoin d'être sûr de d'inclure vos sources dans le bon ordre, et vous avez besoin de sérieusement commencer à  penser à concaténer vos différents fichiers pour déploiement, de manière à  ce qu'une seule, ou un nombre très limité de requêtes HTTP soit faîtes pour charger les scripts. Vous aurez peut être aussi le souhait de charger du code à la volée, après chargement initial de la page.</p>
+
+<p>RequireJS est fortement basé sur Dojo et CommonJS, il vous encourage donc à  traiter des scripts comme des modules. Comment un script diffère d'un module? Normalement, un script est juste un fichier javascript qui peut ajouter des variables au namespace global, il peut également impliquer des dépendances diverses et variées. Les modules essayent de limiter leur impact sur le global namespace et tentent d'être plus explicite par rapport à  la spécification de leur dépendances immédiates. </p>
+
+<p>Tandis que RequireJS se concentre à offrir d'excellents outils pour écrire du javascript modulaire, il supporte aussi le chargement de script plus classique. RequireJS fournit également un outil d'optimisation qui vous permet de combiner et grouper vos sources en collections plus petites de scripts minifiés. La fonction de tracking des dépendances permet de délivrer des 'bundles' hautement optimisés pour environnement de production, en effectuant une analyse de votre code et permettant très facilement de combiner vos scripts sans avoir à changer ni code, ni markup.    </p>
+
+<p>Cet exemple présente le format classique pour chargement de scripts avec RequireJS.</p>
+
+<pre><code>&lt;script src="scripts/require.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+
+    require(["some/module", "script1.js", "script2.js"], function(someModule) {
+
+      // Cette fonction sera éxecutée quand toutes les dépendances spécifiées seront
+
+      // chargées et disponibles. Cette fonction peut étre éxecutée avant que la page
+
+      // ne soit chargée (ce n'est pas un document.ready!)
+
+      // Le callback en lui-même est optionnel.
+
+    });
+
+&lt;/script&gt;
+</code></pre>
+
+<p>Notez la fonction de callback. L'injection de scripts à  la volée comporte un petit effet kiss cool: la page sera "débloquée" de manière à  ce qu'elle puisse continuer le chargement de ses ressources en parallèle du chargement des scripts, mais ceci implique également la distinction du chargement des scripts de l'événement load de la page. </p>
+
+<p>Si vous êtes habitué à attacher des comportement et initialiser votre code durant l'événement DOM-ready en assumant que tous vos scripts sont chargés et disponibles (comme c'est le cas avec des tags <code>script</code>), ceci n'est plus vrai. Vous devez utiliser le mécanisme de callback de requireJS pour s'assurer du chargement des scripts avant l'exécution de codes supplémentaires.</p>
+
+<p>RequireJS dispose d'un système de plugins qui vous permet d'ajouter de nouveaux types de chargement ou de types de dépendances. Il existe des plugins natifs concernant le chargement de ressources i18n, de fichiers textes, traiter des services JSONP en tant que dépendances, et forcer l'ordre d'exécution des dépendances. Les plugins et leur utilisation sont spécifiés par l'utilisation d'un point d'exclamation.</p>
+
+<p><strong>Exemple d'utilisation avec le plugin order:</strong>         </p>
+
+<pre><code>require(["order!script1.js", "order!script2-a.js", "order!script3.js"], function() {
+
+  // Cette fonction est exécutée une fois que tous les scripts ont été chargés et executés.
+
+  // Etant donné que le plugin order a été utilisé, chaque scripts a été chargé séquentiellement.
+
+  script1();
+
+  script2();
+
+  script3();
+
+});
+</code></pre>
+
+<p>Par défaut, les dépendances que l'on require ne seront pas exécutées dans un ordre précis, ainsi, elles ne doivent pas être dépendantes les unes des autres.</p>
+
+<p><strong>Exemple d'utilisation avec le plugin text et utilisation conjointe avec jquery-tmpl:</strong>         </p>
+
+<pre><code>require(['text!views/templates/index.html'], function(indexTmpl) {
+
+  // les templates sont chargés par requireJS et rendus disponibles en arguments de fonction.
+
+  $.tmpl(indexTmpl, data)
+
+    .appendTo($('.requirejs-text-loading-rocks-with-templating'));
+
+});
+</code></pre>
+
+<p>Est devenu mon approche favorite pour travailler avec les templates js (peu importe le moteur utilisé, Mustache, jquery-tmpl, underscore, etc.). RequireJS permet de s'abstraire de cette notion et de ne pas avoir à contenir ses templates au sein de son markup HTML (même ignoré par le browser) tout comme le besoin de contenir du markup HTML au sein des sources JS. Je préfère avoir mes fichiers de templates indépendant les uns des autres et contenu dans leur propre fichier. Ce plugin text est idéal dans ce cas d'utilisation car il permet:</p>
+
+<ul>
+<li><p>de récupérer ces fichiers templates comme dépendances de modules</p></li>
+<li><p>de s'abstraire complètement du besoin de contenir du markup html dans les sources JS tout comme le besoin de récupérer les fichiers templates via appels xhr (Ajax)</p></li>
+<li><p>de les injecter automatiquement pour environnement de prod dans les bundles générés par le build d'optimisation de RequireJS.</p></li>
+</ul>
+
+<p>Du tout bon.</p>
+
+<p><strong>Exemple d'utilisation avec le plugin i18n, directement tiré de la <a href="http://requirejs.org/docs/api.html#i18n">documentation officielle</a>:</strong>         </p>
+
+<pre><code>require(["i18n!my/nls/colors"], function(colors) {
+
+  console.log("The name for red in this locale is: " + colors.red);
+
+});
+</code></pre>
+
+<p>RequireJS impose une certaine convention sur la localisation de vos bundles. Le plugin i18n assume la présence d'un répertoire "nls" dans lequel l'ensemble des bundles i18n seront stockés, chacun dans son répertoire "local" (exemple pour un bundle i18n fr: nls/fr-fr/colors.js). Il nous restera alors à créer le fichier i18n de base ainsi que les fichiers de traductions nous intéressant:</p>
+
+<pre><code>//Contenu de nls/colors.js
+
+define({
+
+  "root": {
+
+    "red": "red",
+
+    "blue": "blue",
+
+    "green": "green"
+
+  },
+
+  "fr-fr": true
+
+});
+
+
+
+// Contenu de nls/fr-fr/colors.js
+
+define({
+
+  "red": "rouge",
+
+  "blue": "bleu",
+
+  "green": "vert"
+
+});
+</code></pre>
+
+<p><strong>Exemple d'utilisation d'un service JSONP (ici twitter trends/current) en tant que dépendances, directement tiré de la <a href="http://requirejs.org/docs/api.html#jsonp">documentation officielle</a>:</strong></p>
+
+<pre><code>require(["<a href='http://search.twitter.com/trends/current.json?callback=define'>http://search.twitter.com/trends/current.json?callback=define</a>"], function (trends) {
+
+  // L'objet trends sera la réponse de l'api directement consommable
+
+  // au sein de notre callback
+
+  console.log(trends);
+
+});
+</code></pre>
+
+<p>Attention, seuls les retours JSONP de type json object sont supportés. Toute réponse comportant un array, une string ou un number ne fonctionnera pas. En effet, l'idée ici est de spécifier la fonction define (sur laquelle nous nous pencherons par la suite) en tant que paramètre callback à l'appel JSONP. Donc ici, <code>callback=define</code> indique à l'API appelée d'entourer la réponse JSON avec la fonction define de RequireJS. Brillant! Mais attention, la documentation souligne les limitations, problèmes et cas d'utilisation de cette technique.</p>
+
+<h3>Les modules RequireJS</h3>
+
+<p>RequireJS encourage l'utilisation de modules. Les modules dans RequireJS sont définis via l'utilisation de la fonction <code>define()</code>, où la liste des dépendances et fonction de callback sont fournies. La fonction de callback est appelée une fois que toute les dépendances sont résolues et prêtes à être consommées. Si les dépendances utilisent aussi define et se plient à la convention RequireJS, alors vous pourrez en récupérer une référence (paramètre) dans la fonction de callback. Il s'agit tout simplement d'une approche ultra modulaire et permettant de complètement annihiler le besoin de variables globales (qui sont à éviter à tout prix).</p>
+
+<p>Il ne devrait y avoir qu'une seule définition de module par fichier. L'outil d'optimisation peut, dans un contexte de prod, combiner différents modules en bundles optimisés.  </p>
+
+<pre><code>define(["service/modularityftw"], function (service) {
+
+
+
+    // Cette fonction est appellée une fois que la dépendance service est chargée et définie. 
+
+    // L'argument de fonction, service, sera notre référence au module service.
+
+
+
+
+
+    // La valeur retournée par cette fonction représentera la définition de notre module ici présent.
+
+
+
+    return {
+
+
+
+        service: Object.create(service),
+
+
+
+        o: function () {
+
+            this.service.whenever();
+
+        },
+
+
+
+        m: function () {
+
+            this.service.whatever();
+
+        },
+
+
+
+        g: function () {
+
+            this.service.goOoOoOoOOOo();
+
+        }
+
+    }
+
+});
+</code></pre>
+
+<p>Notez la dépendance qui n'inclue pas de suffixe ".js". On pourrait aussi utiliser le préfixe .js, cela a une incidence sur le chemin utilisé par RequireJS pour résoudre la dépendance. Nous y reviendrons rapidement dans la seconde partie de cet article.</p>
+
+<p>Les modules RequireJS peuvent éviter le besoin d'exporter des variables dans le namespace global, et vu que toutes les dépendances sont référencés via des string, cela rend possible d'avoir de multiples version d'un module sur une même page.</p>
+
+<p>En utilisant les modules, notre tout premier exemple pourrait ressembler à:</p>
+
+<pre><code>require(["some/module", "script1", "script2"], function(someModule, script1, script2) {
+
+    // Cette fonction sera éxecutée quand toutes les dépendances spécifiées seront
+
+    // chargées et disponible. Cette fonction peut étre éxecutée avant que la page
+
+     // ne soit chargée (ce n'est pas un document.ready!)
+
+
+
+     // Le callback en lui-même est optionnel.
+
+});
+</code></pre>
+
+<p><em>Contenu de some/module.js</em></p>
+
+<pre><code>define(function () {
+
+
+
+      // définition du module ici
+
+
+
+      // var module = ...;
+
+
+
+      // on retourne l'api publique rendue disponible au reste de l'appli
+
+      return module;
+
+  });
+</code></pre>
+
+<p><em>Contenu de script1.js</em></p>
+
+<pre><code>define(["script1-a"], function (script1a) {
+
+
+
+  return {};
+
+});
+</code></pre>
+
+<p>Ce module peut parfaitement spécifier une liste de dépendances directes, rappelez vous que les les deps avec require (et sans plugin order!) ne sont pas chargées dans un ordre précis. Si un script dépend d'un autre, alors il devra nécessairement le faire savoir par la définition de ses dépendances lors de sa définition.</p>
+
+<p><em>Contenu de script2.js</em></p>
+
+<pre><code>define(["script2-a", "script2-b"], function (script2a, script2b) {
+
+
+
+
+
+  return {};
+
+
+
+});
+</code></pre>
+
+<h3>RequireJS Optimization Tool</h3>
+
+<p><a href="http://requirejs.org/docs/optimization.html">L'outil d'optimisation fourni par RequireJS</a> rend facile la tâche de concaténation, minification de vos scripts en "bundles" optimisés, offrant ainsi l'accès aux meilleures performances tout en permettant à vos sources JS de rester modulaire. Il combine les scripts relatifs ensemble et les minifie en utilisant UglifyJS (Node mode par défaut) ou Closure Compiler (en utilisant Java). Il peut également prendre soin de l'optimisation de vos fichiers CSS référencés par la directive <code>@import</code> tout en prenant soin d'enlever les commentaires.</p>
+
+<p>Le build d'optimisation intègre un outil de tracking de dépendances très bien fait qui analyse le source de vos scripts pour déterminer l'ordre de celles-ci et délivrer un bundle hautement optimisé et ne nécessitant aucun changement au niveau de vos sources. Modularité et performance, RequireJS offre le meilleur des deux mondes.</p>
+
+<p>Etant donnée que cet outil est un outil en ligne de commande, son utilisation est des plus faciles et est conçue pour être intégré à vos processus de build ou déploiement (voir ce <a href="https://gist.github.com/825117">gist</a> de Miller Medeiros qui nous montre comment l'intégrer avec Ant). </p>
+
+<h2>RequireJS et jQuery</h2>
+
+<p>Dans <a href="http://blog.mklog.fr/article/jquery-heritage-et-organisation-de-code">cet article précédent</a>, je vous ai parlé de la brillante approche DOM to Object Bridge de Mr. Sexton couplée à la forme d'héritage de votre choix. Dans la deuxième partie de ce billet, nous essaierons d'étendre l'application de cette approche en l'utilisant conjointement avec RequireJS.</p>
+
+<p>Nous nous pencherons sur son utilisation effective, dans le contexte d'une application jQuery, et essaierons de voir comment RequireJS peut être couplé avec l'approche DOM to Object Bridge et la forme d'héritage de votre choix.</p>
+
+<h3>Utilisation de RequireJS avec jQuery</h3>
+
+<p>Le plus facile reste de <a href="http://requirejs.org/docs/download.html">récupérer un build de jQuery qui inclue RequireJS</a>. Ce build exclue les parties de RequireJS qui peuvent dupliquer certaines des fonctionnalités jQuery.</p>
+
+<p>Ensuite, utiliser RequireJS est plutôt simple: juste à inclure require-jquery, ensuite faire un require sur votre fichier application (le bootstrap). L'exemple suivant assume que jQuery, et tous les autres scripts sont dans le répertoire script/</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+    &lt;head&gt;
+
+        &lt;title&gt;jQuery+RequireJS&lt;/title&gt;
+
+    &lt;/head&gt;
+
+    &lt;body&gt;
+
+        &lt;h1&gt;jQuery+RequireJS&lt;/h1&gt;
+
+        &lt;script src="scripts/require-jquery.js"&gt;&lt;/script&gt;
+
+        &lt;script&gt;require(["scripts/app.js"]);&lt;/script&gt;
+
+    &lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<p>L'appel à <code>require["scripts/app"]</code> indique à RequireJS de charger le fichier scripts/app.js.</p>
+
+<p>Vous avez également la possibilité encore plus clean de traiter jQuery comme un module à part entière.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+
+    &lt;head&gt;
+
+        &lt;title&gt;jQuery AMD+RequireJS&lt;/title&gt;
+
+    &lt;/head&gt;
+
+    &lt;body&gt;
+
+        &lt;h1&gt;jQuery AMD+RequireJS&lt;/h1&gt;
+
+        &lt;script src="scripts/require.js"&gt;&lt;/script&gt;
+
+        &lt;script&gt;require(["scripts/app"]);&lt;/script&gt;
+
+    &lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+
+<p>avec scripts/app.js ressemblant à</p>
+
+<pre><code>require(['lib/jquery'], function($) {
+
+    // Dans cette déclinaison, le fichier jQuery ne s'expose pas au niveau du namespace global
+
+    // mais se définit en tant que module RequireJS / AMD.
+
+
+
+     $(function(){
+
+        // dom-ready
+
+     });
+
+
+
+});
+</code></pre>
+
+<p>Attention, dans cette version, il faudra que jQuery se définisse en tant que module asynchrone, ce qui n'est pas le cas par défaut. D'où le besoin de modifier les sources de jQuery pour l'entourer dans un appel <code>define</code> et prendre le soin de retourner jQuery à la fonction de callback de <code>define</code>. (une petite adaptation de <code>return (window.jQuery = window.$ = jQuery);</code> en levant l'exposition à l'objet window). Une autre petite déclinaison impliquerait l'ajout de cette ligne <code>define([], function () { return jQuery; } );</code> juste avant l'export de jQuery au niveau de l'objet global. Se référer à <a href="https://github.com/jquery/jquery/commit/6ffa730721a8ebcd128f3dc202706e46d9cfe249">ce commit</a> pour de plus amples informations.</p>
+
+<p>Concrètement, qu'est ce que app.js? Un autre appel à require pour charger tout les scripts dont on peut avoir besoin et tout travail d'initialisation que l'on peut vouloir effectuer pour une page. Tandis que vous pouvez utiliser la fonction require au sein d'un tag script en inline dans une page HMTL, il est fortement conseillé de prendre avantage du chargement asynchrone apporté par RequireJS en plaçant ce bout de script dans son fichier dédié. Cela permet aussi une meilleure optimisation grâce à l'outil de build fourni par RequireJS.</p>
+
+<pre><code>&lt;script data-main="script/app" src="script/require-jquery.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>indiquera à RequireJS d'effectuer cette appel automatiquement pour nous. L'attribut data-main indique alors le fichier à charger.</p>
+
+<p>Voici un exemple un peu plus concret de fichier de type application bootstrap, tiré de <a href="https://github.com/mklabs/html5boilerplate-site/tree/gh-pages/src/docs/js">cette mini application</a> permettant d'intégrer un wiki github à une page web.</p>
+
+<pre><code>/**
+
+*
+
+* Main app file, this one is responsible of the load of any used modules so as to their initialization
+
+* against dom elements.
+
+*
+
+* Keep in mind that you can get a quick access to the internal stored object with container.data('modulename')
+
+*
+
+*/
+
+(function($) {
+
+    require(
+
+    // Load in modules  
+
+    ['app/modules/wiki', 'app/modules/messaging', 'app/modules/history', 'app/modules/highlight'],
+
+    function(wiki, messaging, history, highlight) {
+
+
+
+       // bridge method, a way to make your application code available to the jQuery API
+
+       $.bridge('wikiConvertor', wiki);
+
+       $.bridge('messaging', messaging);
+
+       $.bridge('history', history);
+
+       $.bridge('highlight', highlight);
+
+
+
+        $(function() {
+
+          var container = $('#container');
+
+          container
+
+              // hashchange bindind &amp; back button support stuff
+
+              .history()
+
+              // Our main module
+
+              .wikiConvertor({
+
+                  wikiPath: container.data('wiki') || '',
+
+                  main: '.wikiconvertor-content'
+
+              })
+
+              // Add messaging support, user feedback and so on
+
+              .messaging()
+
+              // Allow the hightlight of code snippets using SyntaxHighligter
+
+              .highlight();
+
+        });
+
+    });
+
+})(this.jQuery);
+</code></pre>
+
+<p>Voici donc le script chargé au départ de la petite appli "wikiConvertor". Le chargement des quatre modules de l'application y est fait, que l'ont peut retrouver en tant qu'arguments dans notre fonction de callback. Ces dépendances sont utilisées au niveau de la fonction <a href="https://gist.github.com/853849">$.bridge</a> permettant de lier notre code applicatif aux éléments DOM en passant par l'API jQuery.</p>
+
+<p>Un module est différent d'un fichier script traditionnel dans le sens où il se contraint à définir un objet correctement "scopé" qui ne pollue pas le namespace global. Il peut explicitement spécifier un ensemble de dépendances et récupérer un point de contrôle sur celles-ci sans avoir à se reposer sur des objets globals. Le lien se fait via l'utilisation d'argument de fonction pour récupérer une référence à ces dépendances. Les modules dans RequireJS sont une extension du <a href="http://www.yuiblog.com/blog/2007/06/12/module-pattern/">Module Pattern</a>, avec l'avantage notable de ne pas avoir à se reposer sur la portée globale pour référencer nos modules (même si l'on adopte la bonne pratique de contraindre notre code applicatif à un seul namespace global, il s'agit d'un point important).</p>
+
+<p>Concrètement, un module chargé ainsi devra suivre la structure suivante:</p>
+
+<pre><code>define(['base'], function(base) {
+
+
+
+  var module = {
+
+    init: function(options, elem) {
+
+      // travail d'initialisation. appellée lors de la création du module
+
+      // events binding, dom manipulation, etc.
+
+      // this.options, this.element et d'autres props sont disponibles grâce à base
+
+    },
+
+
+
+    doStuff: function(){
+
+      // var ...
+
+    }
+
+  };
+
+
+
+  // simple multiple inheritence
+
+  return $.extend({}, base, Object.create(module));
+
+});
+</code></pre>
+
+<p>avec base.js définissant un objet que doivent hériter l'ensemble des autres modules "bridgable" de l'appli. Cela permet d'éviter tout travail d'initialisation répétitif concernant options et élément.</p>
+
+<pre><code>define(function() {
+
+  return Object.create({
+
+      setup: function(options, elem, name) {
+
+          this.options = $.extend({}, this.options, options);
+
+          this.element = $(elem);
+
+          this.dom = elem;
+
+          this.name = name;
+
+
+
+          // Also add a css class as a CSS Hook
+
+          this.element.addClass(name.toLowerCase());
+
+      }
+
+  });
+
+});
+</code></pre>
+
+<p>Jusque ici, ni la méthode init, ni la méthode setup n'a été appelée. Cette étape est gérée par $.bridge qui offre un helper sous la forme d'un mini plugin jQuery permettant d'accéder à notre API et modèle d'héritage. L'appel à $.bridge en lui-même ne sert qu'à étendre le prototype de jQuery en ajoutant la méthode correspondante. Les méthodes setup (dans base) et init(dans les sous-modules) sont alors appelées lors de l'utilisation effective de cette méthode:</p>
+
+<pre><code>$.bridge('messaging', messaging);
+
+$(function() {
+
+  // init/setup appellée lors de l'initialisation du module messaging pour 
+
+  // tout les élements.mod-message
+
+  var msgs = $('.mod-message').messaging({
+
+    optional: 'options'
+
+  }),
+
+
+
+  // ici c correspond à l'instance jQuery représentant les élements .mod-message
+
+  // on peut accéder à l'api du module à partir du dom via $.data/$.fn.data
+
+  module = msgs.eq(0).data('messaging');
+
+
+
+  // log propriétés/méthods pour le module du premier élement de la collection jQuery
+
+  console.log(module);
+
+
+
+});
+</code></pre>
+
+<p>Lors de de l'instruction <code>$('.mod-message').messaging({options: 'optional'});</code>, le bridge s'occupera de créer une nouvelle instance du module messaging pour chaque élément de la collection jQuery vous assurant encapsulation et modularité.</p>
+
+<h2>RequireJS: Utilisation avancée (ou s'en rapprochant)</h2>
+
+<p>Dans cette troisième et dernière partie, nous essaierons de faire le tour des différentes manières que nous avons à notre disposition pour créer un module et d'identifier les différents patterns que l'on peut mettre en oeuvre.</p>
+
+<h3>Hash Object: Simple objet de paires clé-valeurs</h3>
+
+<pre><code>    define({
+
+        path: '../',
+
+        suffix: '.markdown'
+
+    });
+</code></pre>
+
+<p>Ce module ainsi défini, ne dispose d'aucune dépendances, et n'est qu'une collection de paires clé-valeurs. Il nous suffit de passer un objet à la fonction define.    Marche très bien pour tout objet config par exemple, global à l'application. Cette méthode est également utilisée lorsque requireJS est utilisé pour traiter un service JSONP en tant que dépendances (réponse JSONP passé à la fonction define). C'est aussi la syntaxe à utiliser si le module que l'on veut définir ne dispose que d'une API publique (toutes les propriétés/méthodes sont alors publiques).</p>
+
+<h3>Pattern Object</h3>
+
+<p>Ce pattern retourne un objet, et la fonction de définition peut contenir d'autres variables qui ne seront pas visible en dehors du scope de la fonction.</p>
+
+<p>La syntaxe rappelle beaucoup le module pattern. Ici, ce code ne spécifie aucune dépendances et contient une fonction d'initialisation du module. Il peut retourner un objet (mais n'y est pas forcé) contenant une API publique et disposant d'un accès privé au scope de la fonction parente. C'est ce retour de fonction qui s'enregistre auprès de RequireJS comme un module disponible pour les autres parties de l'applications.</p>
+
+<pre><code>    // simple
+
+    define(function () {
+
+    // Init ici et privates variable ici
+
+      // var private = ...
+
+        return {
+
+              // public api
+
+            color: "black",
+
+            size: "unisize"
+
+        }
+
+    });
+
+
+
+
+
+    // assumant l'utilisation de jQuery, nous pouvons utiliser $.proxy pour encore plus de contrôle
+
+    define(function () {
+
+
+
+        // On peut utiliser ce scope à notre avantage pour spécifier un ensemble de variables privés à notre module
+
+          // Ne sera pas accesible du reste de l'application...
+
+          var privateObj = {
+
+            prop: true,
+
+            omg: function(just, got, to, a, new, level) {
+
+                  console.log('cause variable are so hype this days');
+
+            },
+
+
+
+            yay: function() {
+
+                  console.log('thxbye', this.prop);
+
+            }
+
+          };
+
+
+
+        // ... a moins que l'on décide de le faire
+
+        // retourne une API publique
+
+        return {
+
+            yay: $.proxy(privateObj.yay, privateObj)
+
+        }
+
+    });
+</code></pre>
+
+<p><a href="http://api.jquery.com/jQuery.proxy/">$.proxy</a> est une méthode introduite depuis la version 1.4 permettant de faciliter le binding (ou context: le sens du mot clé this) d'une méthode. C'est vraiment très puissant dans le contexte d'application jQuery car elle permet vraiment de limiter le besoin de fonction anonyme et utilisation d'apply/call. Il devient très facile de penser ses gestionnaires d'événements ou autres (xhr, animate, etc.) de manière plus orienté objet, et s'inscrivant dans la logique de notre application. Bref, très bon et à utiliser le plus possible.</p>
+
+<p>Voici le même pattern mis en oeuvre avec une listes de dépendances: </p>
+
+<pre><code>    define(['service', 'config'], function (service, config) {
+
+        // Les dépendances du présent module sont disponible en tant qu'argument de fonctions.
+
+        va private = "Hey I'm private stuff";           
+
+
+
+        return {
+
+            foo: "bar",
+
+            yep: "nope",
+
+            execute: function(options) {
+
+                service.getStuff(options || config);
+
+            }
+
+        }
+
+    });
+</code></pre>
+
+<h3>Pattern Factory</h3>
+
+<p>L'idée est de retourner une fonction, qui, quand appelée, retourne une instance d'un objet étant définit à l'intérieur du module RequireJS. Le code suivant, tiré de la <a href="http://www.slideshare.net/rmurphey/functionality-basedorg">présentation ffco</a> de Rebecca Murphey, retourne une factory pour créer des instances de Person. L'approche utilisée suit l'école prototype (<code>Object.create</code>) avec l'utilisation conjointe de <code>$.extend</code>.</p>
+
+<pre><code>require.def(function() {
+
+  var Person = {
+
+    intro : 'My name is ',
+
+    outro : '. You killed my father. Prepare to die.',
+
+    speak : function() {
+
+      console.log(
+
+        this.intro, 
+
+        this.firstName, 
+
+        this.lastName,
+
+        this.outro
+
+      );
+
+    }
+
+  };
+
+  return function(config) {
+
+    return $.extend(Object.create(Person), {
+
+      firstName : config.firstName,
+
+      lastName : config.lastName
+
+    });
+
+  };
+
+});
+</code></pre>
+
+<p>Voici une déclinaison de ce pattern factory avec l'approche classical et l'utilisation de <a href="http://ejohn.org/blog/simple-javascript-inheritance/">simple inheritence de Resig</a>:</p>
+
+<pre><code>require.def(function() {
+
+
+
+  var Person = Class.extend({
+
+    intro : 'My name is ',
+
+    outro: '. You killed my father. Prepare to die.'
+
+    init: function(fistName, lastName){
+
+      this.firstName = fistName;
+
+      this.lastName = lastName;
+
+    },
+
+    speak: function() {
+
+      console.log(
+
+        this.intro,
+
+        this.firstName,
+
+        this.lastName,
+
+        this.outro
+
+      );
+
+    }
+
+  });
+
+  return function(config) {
+
+    return new Person(config.firstName, config.lastName);
+
+  };
+
+});
+</code></pre>
+
+<h3>Chargement conditionnel des ressources</h3>
+
+<p>Tiré du slide <a href="http://jquerysbestfriends.com/#slide20">jquerysbestfriends.com</a> d'Alex Sexton.</p>
+
+<pre><code>define('factory', (Object.create) ? [] : ['fill/objCreate'], function() {
+
+  var myCoolObject = {
+
+    func1: function() {},
+
+    func2: function() {}
+
+  };
+
+  // return a function that returns an obj
+
+  return function(){
+
+    return Object.create(myCoolObject);
+
+  };
+
+});
+</code></pre>
+
+<p>Ou un petit yepnope appliqué à RequireJS... Juste brillant! Combinez le avec l'utilisation de modernizr et vous avez quelque chose vous permettant de charger finement vos <a href="http://remysharp.com/2010/10/08/what-is-a-polyfill/">polyfills</a> en utilisant RequireJS (ou utilisez juste <a href="http://yepnopejs.com/">yepnope</a> dont la version 1.0 vient tout juste de sortir!). Modernizr n'ajoute pas les fonctionnalités manquantes aux navigateurs: à la place, il détecte la disponibilité de ces fonctionnalités et nous offre le moyen d'atteindre un niveau de contrôle très fin indépendamment des capacités du navigateurs. Ceci dit, si vous êtes intéressé, vous aurez peut-être tout intérêt à jeter un oeil ici: <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills">HTML5 Cross browser Polyfills</a></p>
+
+<h2>Encore</h2>
+
+<p>J'espère que vous avez apprécier cet aperçu rapide à RequireJS et êtes prêt à le considérer pour vos applications. C'est vraiment par la pratique que vous pourrez vous rendre compte à quel point cet outil est puissant, tant au niveau de l'amélioration des performances, que, et surtout, du niveau de granularité et de modularité qu'il peut apporter dans votre processus de développement.</p>
+
+<p>Dans cet article, je ne me suis penché que sur l'utilisation de RequireJS dans l'environnement du navigateur, mais il a été conçu pour pouvoir être utilisé également dans d'autres environnement javascript comme Rhino ou <a href="http://requirejs.org/docs/node.html">Node</a>. Cela ouvre de très belles perspectives et l'on peut déjà voir quelques expériences très prometteuses comme <a href="http://zetafleet.com/blog/unified-codebases-with-dojo-node-and-requirejs-the-holy-grail-of-dry">Unified codebases with Dojo, Node, and RequireJS: the holy grail of DRY code</a>.</p>
+  </div>
+  <footer>
+    <div class="container"></div>
+  </footer>
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script src="../../assets/js/libs/es5-shim.min.js"></script>
+  <script src="../../assets/js/libs/moment.min.js"></script>
+  <script src="../../assets/js/libs/hijs.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

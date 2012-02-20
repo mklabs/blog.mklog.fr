@@ -1,0 +1,105 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Nabe tests</title>
+  <meta name="description" content="Generation tests for nabe-vnext">
+  <meta name="viewport" content="width=device-width">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/markdown.css">
+</head>
+<body data-controller="post" class="post things-learned-from-paul-irish">
+  <header>
+    <div class="container">
+      <h1><a href="/">nabe</a></h1>
+      <h2>Gist de la semaine: 2 things I learned (among 10) from Paul Irish (from the jQuery source)</h2>
+      <span class="date date-hidden" data-format="MMMM DD, YYYY">Nov 20 2010 00:53:00 GMT-0500 (CDT)</span>
+      <span class="date date-hidden right" data-format="">Nov 20 2010 00:53:00 GMT-0500 (CDT)</span>
+    </div>
+  </header>
+  <div role="main" class="container markdown">
+    <!--config
+Title: "Gist de la semaine: 2 things I learned (among 10) from Paul Irish (from the jQuery source)"
+Author: Mickael Daniel
+Date: Nov 20 2010 00:53:00 GMT-0500 (CDT)
+Note: This post is an import from an older wordpress post, as a results not markdown formated
+Categories: javascript, jquery
+config-->
+
+<p>Dans la série gist de la semaine, j'ai décidé cette semaine de vous faire partager deux patterns que j'ai découvert alors que je regardais le screencast <a href="http://vimeo.com/12529436 ">Paul Irish : 10 Things I Learned from the jQuery Source</a>, permettant d'oublier setInterval et eval.  Je vous conseille fortement d'y jeter un oeil si vous vous intéressez au JS et à jQuery en particulier. De plus, ses screencasts sont plutôt marrants, pleins d'easter egg et de subtilités(loopsiloopsiloo!). Et si vous ne le faîtes pas encore, je vous conseille également très fortement de suivre le podcast <a href="http://yayquery.com/">yayQuery</a> (version Audio/Vidéo au choix!).</p>
+
+<!--more-->
+
+<h2>Asynchronous recursion</h2>
+
+<p>Récursion asyncrhone de par chez nous. Vous avez peut-être déja entendu parler de setInterval, et du fait qu'il est déprécié et souvent considéré comme une mauvaise pratique, pouvant apporter des comportements innatendus. Voilà pourquoi:</p>
+
+<script src="https://gist.github.com/707336.js"> </script>
+
+<p>Ce code va basiquement appeller doStuff toutes les 100ms, sans aucune considération pour l'appel à doStuff qui peut prendre finalement plus de 100ms. On peut se retrouver avec des situations délicates, si ce n'est pas chaotiques. En tout cas, ce n'est certainement pas une situation dans laquelle on souhaite se retrouver. </p>
+
+<p>On peut cependant faire beaucoup mieux (et ceci en regardant yayQuery):</p>
+
+<script src="https://gist.github.com/707366.js"> </script>
+
+<p>Ce code fait a peu prés la même chose, à la différence près que setTimeout attend que doStuff ait bel est bien fini son boulot avant d'enregistrer un callback à exécuter dans 100ms. On garde donc ce délai de 100ms qu'on appliquait avec setInterval.</p>
+
+<p>Un petit mot sur arguments.callee qui référence la fonction parent (la closure autour self-executed, clotûre auto executé de par chez nous... (function(){})();), le hic étant qu'arguments.callee est devenu déprécié dans ES5. Le seul moyen de contourner ceci est d'utiliser une fonction nommée (le nom est au choix!) au niveau de notre closure.</p>
+
+<script src="https://gist.github.com/707370.js"> </script>
+
+<p>Yay! (Ou vous pouvez aussi utiliser la version de Paul Irish loopsiloopsiloo qui est un super nom de fonction!) Ce petit pattern de récusion est vraiment sympa et très élégant. Il s'applique aussi parfaitement bien au contexte XHR où l'on remplace l'utilisation de setTimeout par l'helper ajax de votre choix (et de votre librairie préférée):</p>
+
+<script src="https://gist.github.com/707371.js"> </script>
+
+<p>Permettant par exemple d'implémenter un simple long-polling ou d'effectuer le chargement asyncrhone d'un arbre récursivement.</p>
+
+<p>Propre, simple, efficace, puissant, que demander de plus? Ah si, suivez <a href="http://yayquery.com/">yayQuery</a>.</p>
+
+<h2>Parlons eval...</h2>
+
+<p>Et d'une alternative plutôt sexy qu'on peut retrouver dans la méthode <a href="http://api.jquery.com/jQuery.parseJSON/">parseJSON</a> introduit dans la version 1.4.1, que vous pouvez retrouver <a href="https://github.com/jquery/jquery/blob/master/src/core.js#L545">ici</a>.</p>
+
+<script src="https://gist.github.com/707417.js"> </script>
+
+<p>L'équivalent de:</p>
+
+<script src="https://gist.github.com/707420.js"> </script>
+
+<p>Mais que se passe t-il? (Façon <a href="http://www.youtube.com/watch?v=5KVw8lIosWI">Les Inconnus</a>)</p>
+
+<p>SI l'on se risque à tenter dans notre console javascript le statement (new Function("return x = 10")), vous devriez voir: </p>
+
+<p><img class="mk-blog-img" src="../../../../assets/img//things-learned-from-paul-irish/anonymous.png" /></p>
+
+<div class="clear"></div>
+
+<p>Ce code ici n'est pas très propre et n'est que prétexte à expliquer ce qu'il se passe. Assigner 10 à la variable globale x est à éviter <span>;)</span></p>
+
+<p>L'utilisation du constructor Function vous permet de créer une fonction anonyme (qui n'est pas nommé) à partir d'une string. Appliqué à un retour JSON, cela donnerait: </p>
+
+<p>[object Object] alt="BadAss not evals" /></p>
+
+<div class="clear"></div>
+
+<p>Wooow, je viens juste d'apprendre comment me passer d'eval... Bien que la meilleure façon reste de ne pas en avoir besoin <span rt-90>;)</span></p>
+
+<p>Au fait, vous ai-je déjà dit de vous abonner au podcast <a href="http://yayquery.com/">yayQuery</a>?</p>
+  </div>
+  <footer>
+    <div class="container"></div>
+  </footer>
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script src="../../assets/js/libs/es5-shim.min.js"></script>
+  <script src="../../assets/js/libs/moment.min.js"></script>
+  <script src="../../assets/js/libs/hijs.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>
