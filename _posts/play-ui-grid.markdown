@@ -1,11 +1,22 @@
-Title: Play Framework, CRUD et intégration avec jQuery UI Grid
+<!--config
+Title: "Play Framework, CRUD et intégration avec jQuery UI Grid"
 Author: Mickael Daniel
 Date: Mar 16 2011 08:00:00 GMT+0100 (CDT)
 Categories: play, javascript, jquery
 Tags: javascript, java, play, jquery, jqueryui, grid
 version: play 1.1, jQuery UI 1.8.2
+config-->
 
-Un article pour vous parler d'une de mes dernières expériences, et elle concerne [PlayFramework](http://www.playframework.org/) et le futur widget grid de [jQuery UI](http://jqueryui.com/). Il y a de ça plus d'un mois maintenant, [la team jQuery UI a annoncé](http://blog.jqueryui.com/2011/02/unleash-the-grid/) qu'ils avaient commencé à sérieusement et officiellement travailler sur le widget Grid de la librairie. Le développement prend place au sein de la branche grid du repo github, le répertoire nous intéressant le plus étant [grid-datamodel](https://github.com/jquery/jquery-ui/tree/grid/grid-datamodel).
+Un article pour vous parler d'une de mes dernières expériences, et elle
+concerne [PlayFramework](http://www.playframework.org/) et le futur
+widget grid de [jQuery UI](http://jqueryui.com/). Il y a de ça plus d'un
+mois maintenant, [la team jQuery UI a
+annoncé](http://blog.jqueryui.com/2011/02/unleash-the-grid/) qu'ils
+avaient commencé à sérieusement et officiellement travailler sur le
+widget Grid de la librairie. Le développement prend place au sein de la
+branche grid du repo github, le répertoire nous intéressant le plus
+étant
+[grid-datamodel](https://github.com/jquery/jquery-ui/tree/grid/grid-datamodel).
 
 Dans cet article, nous nous intéresserons à l'implémentation grid-datamodel et son intégration dans le module CRUD de Play. Nous nous concentrerons à configurer le widget UI Grid et adapter légèrement le crud généré par Play pour permettre l'utilisation du widget en mode xhr (Ajax). Cette expérience est grandement inspirée par ces deux excellents articles de [Lunatech Research](//www.lunatech-research.com/editorials/tags/play) parlant de l'intégration du plugin datatable avec Play:
 

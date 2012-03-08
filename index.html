@@ -1,0 +1,14 @@
+---
+layout: home
+---
+
+<div class="home">
+  <ul>
+  {{#each site.posts}}
+    <li>
+      <span>{{date}}</span>
+      <a href="{{url}}">{{title}}</a>
+    </li>
+  {{/each}}
+  </ul>
+</div>

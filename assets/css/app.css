@@ -1,0 +1,118 @@
+/** CSS app overrides **/
+
+body code {
+  color: #444;
+}
+
+body a { color: #227CE8; }
+body a:visited { color: #5D9FEE; }
+body a:hover { color: #06e; }
+body a:focus { outline: thin dotted; }
+
+header h1 { font-size: 1.8em; }
+header h1 a,
+header h1 a:visited { text-decoration: none; color: #444; }
+
+/** misc and helpers **/
+.right { float: right }
+
+.markdown { line-height: 1.5em; }
+
+/** code **/
+body.post .markdown pre {
+  margin: 30px 0;
+  padding: 30px;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 10px #ddd;
+  -moz-box-shadow: inset 0 0 10px #ddd;
+  box-shadow: inset 0 0 10px #ddd;
+  overflow-x: auto;
+}
+
+code .comment { color: #AAA }
+code .init { color: #2F6FAD }
+code .string { color: #5890AD }
+code .keyword { color: #8A6343 }
+code .number { color: #2F6FAD }
+code .class, code .special { color: #034; }
+
+
+
+/** date **/
+.date {
+  -webkit-transition: color 2s ease-out;
+     -moz-transition: color 2s ease-out;
+      -ms-transition: color 2s ease-out;
+       -o-transition: color 2s ease-out;
+          transition: color 2s ease-out;
+}
+
+.date-hidden {
+  color: #fff !important;
+}
+
+/** home **/
+.home{
+  margin-top: 10px;
+  font-family: "Helvetica", sans-serif;
+}
+.home ul{
+  margin: 0;
+  padding: 0;
+}
+.home li{
+  font-size: 13px;
+  list-style: none;
+  padding: 5px 3px;
+  margin: 0;
+  color: #777;
+  border-bottom: 1px solid #eee;
+}
+.home li span{
+  float: right;
+}
+.home a{
+  text-decoration: none;
+}
+.home a:hover{
+  text-decoration: underline;
+}
+
+/* post **/
+.post header h2 {
+  color: #333;
+  font-weight: 400;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: .15em;
+}
+
+.post .date {
+  margin-bottom: 17px;
+  padding-left: 0px;
+  font-size: 17px;
+  color: #777;
+}
+
+.post .markdown ul {
+  list-style: none;
+}
+
+/** whatev **/
+.post .whatev {
+  margin: 25px 0;
+  padding: 10px 0;
+  font-family: Helvetica, sans-serif;
+  font-style: italic;
+}
+
+.post .whatev h3 {
+  font-size: 22px;
+}
+
+.post .twitter-share {
+  text-align: right;
+  margin: 4em 0 -4em 0;
+}

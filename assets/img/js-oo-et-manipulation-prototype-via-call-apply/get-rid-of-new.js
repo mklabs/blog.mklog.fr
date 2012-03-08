@@ -2,6 +2,7 @@ var global = (function(){
   return this;
 })()
 
+// OMG
 var Citizen = function Citizen(firstname, lastname){
 
   if (this === global) {

@@ -6,7 +6,7 @@
 }
 config-->
 
-<img class="mk-blog-img" src="/wheat/wheat-field.jpg" alt="Wheat!" title="Wheat!">
+<img class="mk-blog-img" src="{{site.baseurl}}assets/img/wheat/wheat-field.jpg" alt="Wheat!" title="Wheat!">
 
 Le titre résume parfaitement cet article, j'ai finalement basculé mon blog depuis Wordpress pour utiliser [Wheat](https://github.com/creationix/wheat), un moteur de blog écrit par Tim Caswell basé sur [node.js](http://nodejs.org/) et utilisant brillamment [Git](https://github.com/creationix/node-git) et son système de fichier comme support. Wheat est d'ailleurs utilisé sur le site [howtonode.org](http://howtonode.org/), que les amateurs de node.js ne manqueront pas de connaître. 
 

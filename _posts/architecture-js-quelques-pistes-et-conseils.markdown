@@ -381,7 +381,7 @@ Quelques concepts vraiment brillant dans cette présentation. A voir et revoir.
 
 
 
-<img class="mk-blog-img-center" src="/js-et-architecture/scallable-js-arch.jpg" alt="Base Libary / Application Code / Sandbox / Modules" title="Base Libary / Application Code / Sandbox / Modules">
+<img class="mk-blog-img-center" src="{{site.baseurl}}assets/img/js-et-architecture/scallable-js-arch.jpg" alt="Base Libary / Application Code / Sandbox / Modules" title="Base Libary / Application Code / Sandbox / Modules">
 
 
 

@@ -1,0 +1,36 @@
+---
+layout: layout
+---
+
+<div class="post">
+
+  <header>
+    <div class="container">
+      <h1><a href="{{site.baseurl}}">{{site.title}}</a></h1>
+      <h2>{{page.title}}</h2>
+      <span class="date">{{page.date}}</span>
+      <span class="date date-hidden right" data-format="from">{{page.time}}</span>
+    </div>
+  </header>
+
+  <div role="main" class="markdown container">
+    {{{ content }}}
+
+      <p class="twitter-share">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </p>
+    <div class="whatev">
+      <h3>Commentaire?</h3>
+
+
+      <p>Une remarque, un retour ou à peu près n'importe quoi relatif à
+      cette article ? Ca se passe désormais <a
+        href="https://github.com/mklabs/blog.mklog.fr/issues/new">ici</a>,
+      les commentaires passent maintenant par GitHub et sont gérés via bug
+      tracker ☺</p>
+
+    </div>
+  </div>
+
+</div>

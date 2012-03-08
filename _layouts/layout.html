@@ -1,0 +1,34 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>blog.mklog.fr .::. {{ page.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="viewport" content="width=device-width">
+  <meta name="generator" content="nabe 0.2.0" />
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <!-- <link rel="alternate" type="application/rss+xml" title="blog.mklog.fr feed" href="http://blog.mklog.fr/feed/"> -->
+  <link rel="stylesheet" href="{{site.baseurl}}assets/css/style.css">
+</head>
+<body class="{{page.slug}}">
+  {{{ content }}}
+
+  <footer>
+    <div class="container"></div>
+  </footer>
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{{site.baseurl}}assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <script src="{{site.baseurl}}assets/js/libs/es5-shim.min.js"></script>
+  <script src="{{site.baseurl}}assets/js/libs/moment.min.js"></script>
+  <script src="{{site.baseurl}}assets/js/libs/hijs.js"></script>
+  <script src="{{site.baseurl}}assets/js/app.js"></script>
+</body>
+</html>
