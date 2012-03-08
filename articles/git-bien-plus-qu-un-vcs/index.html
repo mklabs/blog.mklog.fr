@@ -1,0 +1,162 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>blog.mklog.fr .::. Git, bien plus qu&#x27;un VCS</title>
+  <meta name="description" content="@mklabs blog">
+  <meta name="viewport" content="width=device-width">
+  <meta name="generator" content="nabe 0.2.0" />
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <!-- <link rel="alternate" type="application/rss+xml" title="blog.mklog.fr feed" href="http://blog.mklog.fr/feed/"> -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="git-bien-plus-qu-un-vcs">
+  
+
+<div class="post">
+
+  <header>
+    <div class="container">
+      <h1><a href="/">blog.mklog.fr</a></h1>
+      <h2>Git, bien plus qu&#x27;un VCS</h2>
+      <span class="date">16 mai 2011</span>
+      <span class="date date-hidden right" data-format="from">1305568186000</span>
+    </div>
+  </header>
+
+  <div role="main" class="markdown container">
+    <p>Dans ce post, je ne vous parlerais pas de <a href="http://git-scm.com/">Git</a> du point de vue VCS (version control system), je vais essayer de vous faire toucher du doigt une partie des possibilités offertes par Git.</p>
+
+<p>Ce qui rend Git si génial ne vient en fait pas vraiment de ce que l'on entend communément (enfin si, c'est aussi génial pour ça):</p>
+
+<ul>
+<li><p>Git est rapide.</p></li>
+<li><p>Git est distribué.</p></li>
+<li><p>Git dispose d'un système de branche locale hyper efficace.</p></li>
+<li><p>Git fait partie de cette nouvelle génération de VCS qui ne vous pousse pas à la pause café à chaque commit. (true story!)</p></li>
+<li><p>et des millions d'autres raisons</p></li>
+</ul>
+
+<p>Toutes ces choses ne sont en fait que la partie immergée de l'iceberg et nous font qu'entre-apercevoir les millions de possibilités offertes par cette plateforme.</p>
+
+<p>Car, Oui, Git est bien plus qu'un VCS, Git est une plateforme.</p>
+
+<h2>Git, un système de fichiers</h2>
+
+<p>Git représente une nouvelle et différente manière de manipuler et gérer vos données. Je l'utilise depuis deux ans maintenant de manière personnelle, et je n'ai aperçu cette possibilité et adopter cette vision que très récemment.</p>
+
+<p>Ce qui importe réellement, c'est que Git apporte avec lui une autre manière de penser. Je ne parle pas de la manière dont vous gérez le versionning de votre code, mais de n'importe quelle donnée...</p>
+
+<p>Git, à la base, n'était pas un VCS, comme <a href="http://bit.ly/4UN1j">l'explique Linus Torvald</a></p>
+
+<blockquote>
+  <p>Anyway, the reason I can do it quickly is that my scripts will not be an SCM, they'll be a very specific "log Linus' state" kind of thing. That will make the linear patch merge a lot more time-efficient, and thus possible.</p>
+</blockquote>
+
+<p>Toujours selon la même source <a href="http://bit.ly/4UN1j">wikipédia</a>, quelques uns des principes de départ de Git sont:</p>
+
+<blockquote>
+  <ol>
+  <li>Take CVS as an example of what not to do; if in doubt, make the exact opposite decision.</li>
+  </ol>
+</blockquote>
+
+<ol>
+<li><p>Support a distributed, BitKeeper-like workflow.</p></li>
+<li><p>Very strong safeguards against corruption, either accidental or malicious</p></li>
+<li><p>Very high performance</p></li>
+</ol>
+
+<p>La conception de git a été inspiré par <a href="http://www.bitkeeper.com/">BitKeeper</a> et <a href="http://www.monotone.ca/main.php">Monotone</a>. Il a été conçu au départ comme un système bas-niveau de gestion de version. On peut voir la conception de Git comme le résultat de l'expérience de Torvald avec Linux pour maintenir un gros projet largement distribué, mais aussi de son expérience toujours concernant le même projet avec le système de fichiers et ses performances.</p>
+
+<p>Git n'était pas, au départ, à proprement parler un logiciel de gestion de versions. <a href="http://marc.info/?l=linux-kernel&amp;m=111293537202443">Linus Torvald expliquait que</a>: </p>
+
+<blockquote>
+  <p>It's not an SCM, it's a distribution and archival mechanism. I bet you could make a reasonable SCM on top of it, though. Another way of looking at it is to say that it's really a content-addressable filesystem, used to track directory trees.</p>
+</blockquote>
+
+<p>On peut considérer Git comme un système de fichiers sous stéroïde. </p>
+
+<blockquote>
+  <p>In many ways you can just see git as a filesystem - it's content-addressable, and it has a notion of versioning, but I really really designed it coming at the problem from the viewpoint of a <em>filesystem</em> person (hey, kernels is what I do), and I actually have absolutely <em>zero</em> interest in creating a traditional SCM system.</p>
+</blockquote>
+
+<p><em><a href="http://marc.info/?l=linux-kernel&amp;m=111314792424707">source</a></em></p>
+
+<p>Git a été conçu en résolvant le problème du point de vue d'un spécialiste de systèmes de fichiers. Il a aujourd'hui évolué pour intégrer toutes les fonctionnalités d'un gestionnaire de version.</p>
+
+<p>Le point important est: Git est, à la base, un système de gestion de fichiers hyper performant, originellement conçu comme un système de contrôle de version ultra bas niveau sur lequel on peut concevoir.. d'autre choses.</p>
+
+<p>Git est une plateforme.</p>
+
+<h2>Un champ immense de possibilités</h2>
+
+<p>Aujourd'hui, il existe plus de 100 commandes <code>git *</code>. C'est impressionnant, fait un peu peur également et peut porter à confusion mais...cela siginfie, au risque de me répéter, que Git est une plateforme... Sur lequel on peut concevoir des applications... Toutes sortes d'applications... </p>
+
+<p>Git est un nouvel outil. Et avoir un nouvel outil signifie que l'on peut créer de nouvelles choses, que l'on ne pouvait pas forcément faire avant (ou différemment... pardon difficilement).</p>
+
+<p>Git est une nouvelle sorte de système de fichiers, et il est plus rapide que n'importe quel système de fichiers.</p>
+
+<p>Git stocke l'historique complet des révisions des fichiers d'une arborescence, et il le fait avec une compression impressionnante.</p>
+
+<p>Git dispose de millions d'autres qualités en passant par la sécurité et l'intégrité des données.</p>
+
+<p>Ce sur quoi j'aimerais insister, c'est que Git n'est pas contraint à versionner des sources. On peut tout à fait versionner un ensemble de fichiers, quels qu'il soient, et accéder simplement à un outil surpuissant pour gérer tout et n'importe quoi. On peut penser (comme j'ai pu l'entendre dans l'épisode <a href="http://lescastcodeurs.com/2010/05/les-cast-codeurs-podcast-episode-23-interview%C2%A0dvcs-et-git-jai-vu-la-lumiere-avec%C2%A0david-gageot-dalgodeal/">Git j'ai vu la lumière épisode 23 des castcodeurs</a>) à totalement gérer les plugins de son IDE comme Eclipse (si tant est que l'on utilise Eclipse). Les plugins Eclipse ne sont que des jar et zip structurés d'une certaine manière. Rien ne nous empêche de versionner notre conf Eclipse (et ainsi avoir la possibilité de gérer des branches, faire un revert d'un environnement corrompu, etc.).</p>
+
+<p>Partant de ce postulat, on peut penser à des tas d'applications...</p>
+
+<p>De nombreux projets ont conçus des systèmes de merge et diff sophistiqué pour wikis par exemple. En utilisant Git, les repository seraient à la fois petit (très petit), et l'on peut penser à faire une copie complète et locale d'un wiki.</p>
+
+<p>La même chose s'applique aux moteurs de blogs, CMS, application de gestion de documentaire et j'en passe. Le blog que vous êtes en train de lire est en fait lui même propulsé et supporté par Git (<a href="https://github.com/creationix/wheat">Wheat</a>).</p>
+
+<p><a href="https://github.com/github/gollum">Gollum</a>, le moteur derrière les wikis GitHub, repose essentiellement sur Git (via <a href="https://github.com/mojombo/grit">Grit</a>) et <a href="https://github.com/blog/699-making-github-more-open-git-backed-wikis">un bel</a> <a href="https://github.com/blog/774-git-powered-wikis-improved">exemple</a> de ce que l'on peut faire avec un tel outil.</p>
+
+<p><a href="http://cloudhead.io/toto">toto</a> est un autre bel exemple de Git appliqué à un moteur de blog. Simple et efficace.</p>
+
+<p>On peut vraiment penser à de belles choses où une recherche devient un <code>git grep</code>, où une comparaison de fichier devient un <code>git diff</code>, où la sauvegarde d'un fichier devient un <code>git commit</code>, où la publication d'article ou de contenu se fait via un <code>git push</code>, où un <code>git clone</code> permet de récupérer l'ensemble du contenu d'un site, ...</p>
+
+<p>Avec Git, un nouveau monde s'ouvre à nous où l'historique de révisions, les checksums et les branches ne rendent pas le système de fichiers plus lent, ils le rendent plus rapide. Ils ne rendent pas vos données plus volumineuses, ils les rendent plus petites. Ils ne risquent pas l'intégrité de vos données, ils la garantissent. Enfin, ils ne centralisent pas vos données dans une énorme base de données, ils les distribuent point par point.</p>
+
+<p>Pour paraphraser <a href="http://apenwarr.ca/log/?m=200801#31">cet article</a> (paru il y a de ça trois ans et qui m'a finalement fait écrire celui-ci), tout comme Unix, le projet Git en lui même importe peu, c'est le format, la philosophie, les concepts qui changent tout.</p>
+
+<p>Je suis actuellement concentré sur le développement d'un nouveau moteur de blog, qui deviendra bientôt le moteur du présent site. Et les possibilités immenses offertes par Git, en dehors de la gestion de source classique, viennent toute juste de me sauter au visage. Dans toute leur splendeur.</p>
+
+      <p class="twitter-share">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </p>
+    <div class="whatev">
+      <h3>Commentaire?</h3>
+
+
+      <p>Une remarque, un retour ou à peu près n'importe quoi relatif à
+      cette article ? Ca se passe désormais <a
+        href="https://github.com/mklabs/blog.mklog.fr/issues/new">ici</a>,
+      les commentaires passent maintenant par GitHub et sont gérés via bug
+      tracker ☺</p>
+
+    </div>
+  </div>
+
+</div>
+
+
+  <footer>
+    <div class="container"></div>
+  </footer>
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <script src="/assets/js/libs/es5-shim.min.js"></script>
+  <script src="/assets/js/libs/moment.min.js"></script>
+  <script src="/assets/js/libs/hijs.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

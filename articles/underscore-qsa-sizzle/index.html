@@ -1,0 +1,203 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>blog.mklog.fr .::. underscore + qsa + sizzle</title>
+  <meta name="description" content="@mklabs blog">
+  <meta name="viewport" content="width=device-width">
+  <meta name="generator" content="nabe 0.2.0" />
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <!-- <link rel="alternate" type="application/rss+xml" title="blog.mklog.fr feed" href="http://blog.mklog.fr/feed/"> -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="underscore-qsa-sizzle">
+  
+
+<div class="post">
+
+  <header>
+    <div class="container">
+      <h1><a href="/">blog.mklog.fr</a></h1>
+      <h2>underscore + qsa + sizzle</h2>
+      <span class="date">24 juil. 2011</span>
+      <span class="date date-hidden right" data-format="from">1311515222000</span>
+    </div>
+  </header>
+
+  <div role="main" class="markdown container">
+    <p><strong>Juste une expérience.</strong></p>
+
+<blockquote>
+  <p>Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux.</p>
+</blockquote>
+
+<p>Et si nous pouvions utiliser cette fantastique librairie qu'est <a href="http://documentcloud.github.com/underscore/">underscore</a> avec des éléments DOM? </p>
+
+<p>L'idée de base est de <code>_.mixin</code> un petit helper <a href="https://developer.mozilla.org/En/DOM/Document.querySelectorAll">querySelectorAll</a> pour retourner un tableau de nœuds dom correspondant.</p>
+
+<p>Quelques trucs bien fun deviennent possible comme...</p>
+
+<h5>tri en fonction du nb d'enfant</h5>
+
+<pre><code>_('div').qsa().sortBy(function(el) {
+
+  return this.children.length;
+
+});
+</code></pre>
+
+<h5>tri en fonction de la longueur de l'innerHTML</h5>
+
+<pre><code>_('*').qsa().sortBy(function(el) {
+
+  return -el.innerHTML.length;
+
+});
+
+
+
+_('*').qsa().sortBy(function(el) {
+
+  return el.innerHTML.length;
+
+});
+</code></pre>
+
+<h5>max/min en fonction de l'innerHTML</h5>
+
+<pre><code>_('*').qsa().max(function(el) {
+
+  return el.innerHTML.length;
+
+});
+
+// &gt; &lt;html lang=​"en-us" dir=​"ltr" class=​"js"&gt;​…​&lt;/html&gt;​
+
+_('*').qsa().min(function(el) {
+
+  return el.innerHTML.length;
+
+});
+
+// &gt; &lt;meta charset=​"utf-8"&gt;
+</code></pre>
+
+<h5>pluck</h5>
+
+<pre><code>_('*').qsa().pluck('nodeName');
+
+// &gt; ["HTML", "HEAD", "META", "META", "TITLE", "META", "STYLE", "BODY", "SCRIPT", "SCRIPT", "SCRIPT"]
+</code></pre>
+
+<h5>each, map, reduce, first, last, etc.</h5>
+
+<p>En fait, à peu près chacune des méthodes [array et collection d'underscore] (<a href='http://documentcloud.github.com/underscore/'>http://documentcloud.github.com/underscore/</a>) seraient possible (besoins de tests). </p>
+
+<blockquote>
+  <p>Collection: each, map, reduce, reduceRight, detect, select, reject, all, any, include, invoke, pluck, max, min, sortBy, groupBy, sortedIndex, toArray, size</p>
+  
+  <p>Array: first, rest, last, compact, flatten, without, union, intersection, difference, uniq, zip, indexOf, lastIndexOf, range</p>
+</blockquote>
+
+<h3>_.mixin({qsa: function(){}})</h3>
+
+<p>a peu près 23 lignes, rien de sensationnel. utilisation de <code>_.mixin</code> pour créer la méthode <code>_.qsa</code>, <code>délégation à querySelectorAll</code> si disponible, sinon utilisation de <a href="http://sizzlejs.com/">Sizzle</a>. renvoie un tableau de noeud correspondant au sélecteur.</p>
+
+<p>On peut également utiliser un autre moteur, et déléguer a jQuery par exemple (ou prototype, ou mootools, etc. todo: serait intéressant à tester.) en passant la lib correctement en 3e paramètre. querySelectorAll, Sizzle (qui est le moteur interne de jQuery) et jQuery partage la même signature.</p>
+
+<pre><code>(function(_, document, $, exports) {
+
+  var qsable = !!document.querySelectorAll,
+
+  qsa = function $(sel, context) {
+
+    // depending on qsapibility, delegates to Sizzle if we need to, otherwise use qsa
+
+    // we may also hook up with a $ lib like jQuery
+
+    return qsable ? context.querySelectorAll(sel) : (Sizzle(sel, context) || $);
+
+  };
+
+
+
+  _.mixin({
+
+    qsa: function(sel, context) {     
+
+      // query from given context, document if none specified
+
+      context = context || document;
+
+      // if sel is #sel, delegates to getElementById, querySelectorAll otherwise
+
+      return _(Array.prototype.slice.call(sel.charAt(0) === '#' ? 
+
+        [document.getElementById(sel.replace('#', ''))] : 
+
+        qsa(sel, context)
+
+      ));
+
+    }
+
+  });
+
+})(this._, this.document, this.jQuery, this);
+</code></pre>
+
+<h5>Wait!</h5>
+
+<p>ça me rappelle une super lib, appelé <a href="http://benalman.com/projects/javascript-library-boilerplate/#qsa">qsa</a>.</p>
+
+<blockquote>
+  <p>QSA is a 0.3k blazing fast query selector engine allowing you to select elements with CSS1, CSS2 &amp; CSS3 selectors (including attribute selectors), in EVERY browser that supports the querySelectorAll API. And according to our “benchmarks,” QSA outperforms EVERY other JavaScript selector engine in terms of both speed and size.</p>
+</blockquote>
+
+<p>;) à <a href="https://github.com/cowboy/javascript-library-boilerplate">javascript-library-boilerplate</a></p>
+
+<blockquote>
+  <p>Fork the repo. Change the name and $ function. And rename the .js files. And change all references to QSA or qsa to your new name. And edit the unit tests. And document everything. Or just use jQuery.</p>
+</blockquote>
+
+<p><em>Quoi qu'il en soit, c'était plutôt intéressant d'associer underscore + sizzle. assez marrant pour essayer quelques trucs avec cette underquewery expérience et justifier un post.</em></p>
+
+      <p class="twitter-share">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </p>
+    <div class="whatev">
+      <h3>Commentaire?</h3>
+
+
+      <p>Une remarque, un retour ou à peu près n'importe quoi relatif à
+      cette article ? Ca se passe désormais <a
+        href="https://github.com/mklabs/blog.mklog.fr/issues/new">ici</a>,
+      les commentaires passent maintenant par GitHub et sont gérés via bug
+      tracker ☺</p>
+
+    </div>
+  </div>
+
+</div>
+
+
+  <footer>
+    <div class="container"></div>
+  </footer>
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <script src="/assets/js/libs/es5-shim.min.js"></script>
+  <script src="/assets/js/libs/moment.min.js"></script>
+  <script src="/assets/js/libs/hijs.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>
