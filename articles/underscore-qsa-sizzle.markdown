@@ -1,8 +1,12 @@
-Title: underscore + qsa + sizzle
-Author: Mickael Daniel
-Date: Sun Jul 24 2011 15:47:02 GMT+0200 (CEST)
-Categories: javascript
-Tags: underscore, javascript
+<!--config
+{
+  "Title": "underscore + qsa + sizzle",
+  "Author": "Mickael Daniel",
+  "Date": "Sun Jul 24 2011 15:47:02 GMT+0200 (CDT)",
+  "Categories": "javascript",
+  "Tags": "underscore, javascript"
+}
+config-->
 
 **Juste une expérience.**
 
@@ -15,22 +19,33 @@ L'idée de base est de `_.mixin` un petit helper [querySelectorAll](https://deve
 Quelques trucs bien fun deviennent possible comme...
 
 
+
 ##### tri en fonction du nb d'enfant
 
 
+
     _('div').qsa().sortBy(function(el) {
+
       return this.children.length;
+
     });
 
 ##### tri en fonction de la longueur de l'innerHTML
 
 
+
     _('*').qsa().sortBy(function(el) {
+
       return -el.innerHTML.length;
+
     });
+
     
+
     _('*').qsa().sortBy(function(el) {
+
       return el.innerHTML.length;
+
     });
 
  
@@ -38,22 +53,33 @@ Quelques trucs bien fun deviennent possible comme...
 ##### max/min en fonction de l'innerHTML
 
 
+
     _('*').qsa().max(function(el) {
+
       return el.innerHTML.length;
+
     });
+
     // > <html lang=​"en-us" dir=​"ltr" class=​"js">​…​</html>​
 
     _('*').qsa().min(function(el) {
+
       return el.innerHTML.length;
+
     });
+
     // > <meta charset=​"utf-8">
+
 
 
 ##### pluck
 
 
+
     _('*').qsa().pluck('nodeName');
+
     // > ["HTML", "HEAD", "META", "META", "TITLE", "META", "STYLE", "BODY", "SCRIPT", "SCRIPT", "SCRIPT"]
+
 
 
 ##### each, map, reduce, first, last, etc.
@@ -73,28 +99,45 @@ On peut également utiliser un autre moteur, et déléguer a jQuery par exemple 
     (function(_, document, $, exports) {
 
       var qsable = !!document.querySelectorAll,
+
       qsa = function $(sel, context) {
+
         // depending on qsapibility, delegates to Sizzle if we need to, otherwise use qsa
+
         // we may also hook up with a $ lib like jQuery
+
         return qsable ? context.querySelectorAll(sel) : (Sizzle(sel, context) || $);
+
       };
 
 
+
       _.mixin({
+
         qsa: function(sel, context) {     
+
           // query from given context, document if none specified
+
           context = context || document;
 
           // if sel is #sel, delegates to getElementById, querySelectorAll otherwise
+
           return _(Array.prototype.slice.call(sel.charAt(0) === '#' ? 
+
             [document.getElementById(sel.replace('#', ''))] : 
+
             qsa(sel, context)
+
           ));
+
         }
+
       });
 
     })(this._, this.document, this.jQuery, this);
+
     
+
 
 
 ##### Wait! 

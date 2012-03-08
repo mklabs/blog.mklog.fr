@@ -1,10 +1,15 @@
-Title: jQuery Harmony
-Author: Mickael Daniel
-Date: Nov 11 2010 18:25:00 GMT-0500 (CDT)
-Note: This post is an import from an older wordpress post, as a results not markdown formated
-Categories: javascript, jquery
+<!--config
+{
+  "Title": "jQuery Harmony",
+  "Author": "Mickael Daniel",
+  "Date": "Nov 11 2010 18:25:00 GMT-0500 (CDT)",
+  "Note": "This post is an import from an older wordpress post, as a results not markdown formated",
+  "Categories": "javascript, jquery"
+}
+config-->
 
 jQuery Harmony
+
 <img class="mk-blog-img" src="/jquery/jquery_logo.gif" height="108" width="170" />Si vous avez lu mon précédent post sur <a href="http://blog.mklog.fr/2010/11/06/harmony-sexy-background-canvas/">Harmony et sa déclinaison background</a>, vous savez à quel point j'ai adoré  le <a href="http://mrdoob.com/">travail de Mr. Doob</a>. Que ce soit au niveau de l'idée ou de la mise en oeuvre, <a href="http://mrdoob.com/projects/harmony/">Harmony</a> est vraiment magique.
 
 Vous avez peut-être également remarqué que j'ai pas pu m'empêcher de l'intégrer dans la zone d'entête du site, complètement inspiré par le thème du blog de <a href="http://paulirish.com/">Paul Irish</a>.
@@ -26,11 +31,13 @@ Voici le résultat:
 Plutôt sympa hein? ;)
 
 Et une version avec couleur aléatoire (la même que l'entête):
+
 <div class="mk-blog-demo mk-blog-demo-harmony"></div>
 
 J'ajouterais peut-être cette option dans une future révision, et faire en sorte que le calcul se fasse sur chaque instance.
 
 Voici le bout de code qui m'initialise maintenant les différents élements "harmonisés" du site. 
+
 <script src="https://gist.github.com/672845.js"> </script>
 
 Pour une démo un peu plus complète: <a href="http://mklabs.github.com/jquery-plugs/jquery-harmony/">mklabs.github.com/jquery-harmony/</a>.
@@ -40,8 +47,10 @@ Si vous êtes intéressé par le code, et accessoirement un peu de doc: <a href=
 Le plugin est encore clairement perfectible, j'ai fait ça pour le fun. C'est définitivement un gagdet surtout qu'il est dépouillé de toutes les fonctionnalités de base d'Harmony (clear, save as image, etc.) mais c'était vraiment un bon prétexte pour coder un truc sympa.
 
 <h2>Last but not least</h2>
+
 Mais ce qu'il y a de plus beau dans tout ça, c'est qu'étant donné que ce travail est entièrement basé sur la déclinaison background de Mr. Paul Irish, je me suis risqué à envoyer ma première <a href="https://github.com/paulirish/harmony/pull/1">pull request</a>.
 
 Et... BOOOM! It's <a href="https://github.com/paulirish/harmony">in</a> ;) Que ce soit la validation de la requête, ou le commentaire de Paul qui lui soit associée, je peux à peine vous décrire ce que j'ai ressenti sur le moment (en me levant, aprés 2h30 de sommeil à tout casser). Juste Woooow.
 
 C'est là, la grande force de Github!
+

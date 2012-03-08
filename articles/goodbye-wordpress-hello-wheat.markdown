@@ -1,8 +1,13 @@
-Title: Goodbye Wordpress, Hello Wheat! Une solution basée sur node.js et Git
-Author: Mickael Daniel
-Date: Dec 28 2010 20:00:00 GMT+0100 (CDT)
+<!--config
+{
+  "Title": "Goodbye Wordpress, Hello Wheat! Une solution basée sur node.js et Git",
+  "Author": "Mickael Daniel",
+  "Date": "Dec 28 2010 20:00:00 GMT+0100 (CDT)"
+}
+config-->
 
 <img class="mk-blog-img" src="/wheat/wheat-field.jpg" alt="Wheat!" title="Wheat!">
+
 Le titre résume parfaitement cet article, j'ai finalement basculé mon blog depuis Wordpress pour utiliser [Wheat](https://github.com/creationix/wheat), un moteur de blog écrit par Tim Caswell basé sur [node.js](http://nodejs.org/) et utilisant brillamment [Git](https://github.com/creationix/node-git) et son système de fichier comme support. Wheat est d'ailleurs utilisé sur le site [howtonode.org](http://howtonode.org/), que les amateurs de node.js ne manqueront pas de connaître. 
 
 Ceci signifie: Plus de mise à jour de sécurité, plus d'aller-retour en base pour afficher quoi que ce soit enfin: je peux versionner mes articles grâce à la toute puissance de Git! Chaque révision d'un article est un commit.
@@ -24,7 +29,9 @@ Le changement de plate-forme s'accompagne également d'un petit lifting au nivea
 Certains n'auront sans doute pas manqué récemment l'annonce de GitHub concernant leur nouveau TreeSlider. Leur travail et inspiration sont brillants, je sais pas vous mais j'adore la nouvelle expérience apporté par cette nouvelle fonctionnalité lorsque l'on navigue parmi les sources d'un repo. Pour les utilisateurs ne disposant pas encore de navigateurs supportant l'API History HTML5, voici une vidéo de présentation que l'on peut retrouver sur le [post original](https://github.com/blog/760-the-tree-slider):
 
 <div style="width: 480px; margin: 2em auto;">
+
 <embed src="http://blip.tv/play/AYKSzQUC" type="application/x-shockwave-flash" width="480" height="390" allowscriptaccess="always" allowfullscreen="true"></embed>
+
 </div>
 
 Si je parle de GitHub et de leur TreeSlider, c'est principalement parce que ce thème et l'utilisation qu'il fait des [transitions CSS3](http://developer.apple.com/library/safari/#documentation/InternetWeb/Conceptual/SafariVisualEffectsProgGuide/Transitions/Transitions.html) et de l'[API Hitory](https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history) (pushState et replaceState) sont directement inspiré de leur implémentation. Je trouve l'idée à la fois brillante et élégante (n'en déplaise aux râleurs - cf. commentaire sur le post original - qui trouve le moyen d'être ennuyé par l'effet de transition).
@@ -42,22 +49,35 @@ Rapidement, le click sur les liens sont interceptés, un appel à history.pushSt
 Toutes les pages qui sont demandé au serveur suivent le markup suivant:
 
     <div class="frames">
+
       <div class="frame frame-center" data-path="this/is/the/url/requested">
+
         ... page content ...
+
       </div>
+
     </div>
+
     
+
 Si une ressource précédement demandé est présente dans l'arbre DOM ($('.frame[data-path=path]') existe), le widget effectue directement la transition.
 
 Le style CSS alors utilisé pour rendre l'effet possible est le suivant:
 
     #main{overflow:hidden;}
+
     #main .frames{width:10000px;}
+
     #main .frames .frame{-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;float:left;}
+
     #main .frames .frame-left{margin-left:-2000px;margin-right:200px;}
+
     #main .frames .frame-center{margin-left:0;}
+
     #main .frames .frame-loading{height:100%;}
+
     
+
 Ah oui, et bien sûr, le thème suit la structure d'[html5 boilerplate](http://github.com/mklabs/wheat).
 
 ## Le processus de migration

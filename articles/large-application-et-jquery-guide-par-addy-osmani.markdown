@@ -1,9 +1,13 @@
-Title: Création d'application jQuery à grande échelle - Guide par Addy Osmani
-Author: Mickael Daniel
-Date: Dec 29 2010 15:00:00 GMT+0100 (CDT)
-Translation: This article is the french translation of excellent Addy Osmani's post[http://addyosmani.com/blog/large-scale-jquery/](http://addyosmani.com/blog/large-scale-jquery/). Awesome work, thank you Addy for letting me translate this. All credits is due to you.
-Categories: javascript, jquery
-Tags: Code org., Webapp Architecture
+<!--config
+{
+  "Title": "Création d'application jQuery à grande échelle - Guide par Addy Osmani",
+  "Author": "Mickael Daniel",
+  "Date": "Dec 29 2010 15:00:00 GMT+0100 (CDT)",
+  "Translation": "This article is the french translation of excellent Addy Osmani's post[http://addyosmani.com/blog/large-scale-jquery/](http://addyosmani.com/blog/large-scale-jquery/). Awesome work, thank you Addy for letting me translate this. All credits is due to you.",
+  "Categories": "javascript, jquery",
+  "Tags": "Code org., Webapp Architecture"
+}
+config-->
 
 **Récemment [Addy Osmani](http://addyosmani.com) à publié un article incroyablement fourni et détaillé sur [les solutions que nous avons à notre disposition pour construire des applis jQuery à grande échelle](http://addyosmani.com/blog/large-scale-jquery/). Superbe travail et offrant à la communauté dans son ensemble une incroyable ressource autour de l'architecture des applications web modernes. Je suis réellement fasciné par ce sujet, principalement du au fait d'être intervenu pendant plus de deux ans sur une application de grande envergure utilisant massivement jQuery (et jQuery UI) coincé avec une toolkit maison malheureusement loin de toutes les bonnes pratiques et designs patterns qui émergent aujourd'hui, avec les conséquences que ça implique sur un projet d'une telle taille. Je pense sérieusement que le post d'Addy représente une des ressources les plus aboutis sur le sujet, avec une liste complète et détaillée des solutions à notre disposition pour simplifier et industrialiser notre pratique du front-end dans le contexte d'application jQuery (et JavaScript en général).**
 
@@ -28,6 +32,7 @@ Les deux scripts loaders les plus plébiscités sur le marché en ce moment sont
 Si vous souhaitez en lire plus sur le choix d'utilisation de Require ou LabJS pour votre projet, jetez un oeil à [ce post](http://msdn.microsoft.com/en-us/scriptjunkie/ff943568). Dans le but de vous faire gagnez un peu de temps, j'ai aussi inclus quelques autre options pour la gestion des dépendances si ces deux solutions ne correspondent pas tout à fait vos besoins.
 
 * RequireJS – J'en recommande l'utilisation si vous prévoyez de garder votre code modulaire. Les modules tentent de limiter leur impact sur le namespace global et d'être plus explicite à propos de leur dépendances immédiates. RequireJS offre également un outil d'optimisation qui vous permet de combiner et grouper vos scripts en une collection plus concises de scripts minifiés qui se chargent rapidement. 
+
 [http://requirejs.org/docs/jquery.html](http://requirejs.org/docs/jquery.html)
 
 * LabJS – Il marche le mieux quand vos scripts ont besoin d'être chargés efficacement dans un ordre particulier et que vous êtes à la recherche d'une solution plus légère que RequireJS ou n'êtes pas intéressé dans son approche modulaire de la gestion des dépendances. [http://www.labjs.com](http://www.labjs.com) (et tentez YepNope JS, un excellent script loader conditionnel qui utilise LabJS en interne d'Alex Sexton - [http://www.yepnopejs.com](http://www.yepnopejs.com)).
@@ -37,6 +42,7 @@ Si vous souhaitez en lire plus sur le choix d'utilisation de Require ou LabJS po
 * JSL Script Loader – Encore une autre alternative décente qui supporte le lazy loading, chargement ordonné, prévention de code dupliqué et caching. Peut-être pas aussi bien testé que LabJS ou Require [http://www.andresvidal.com/jsl](http://www.andresvidal.com/jsl)
 
 * Bootstrap - une option moins garni en fonctionnalités que les autres mais fait son boulot. Meilleure option si vous êtes à la recherche d'une solution minimale sans fioritures [https://bitbucket.org/scott_koon/bootstrap](https://bitbucket.org/scott_koon/bootstrap)
+
  
 
 ## MVC & Organisation pour les applications jQuery à grande échelle
@@ -80,13 +86,17 @@ JMVC peut vraiment être considérer pour deux choses - à la fois un ensemble d
 Premièrement, la partie MVC de JavaScriptMVC représente:
 
 * Model – Une manière de packager et d'organiser les requêtes Ajax et l'appel aux services.
+
 * Controller – Un générateur de widget jQuery.
+
 * View – Template coté client.
 
 Ensuite, en terme d'outils de développement intégrés qu'offre le projet, vous obtenez également la liste d'outils ci-dessous. Bien que ceux-ci soient difficilement considérés comme essentiels, l'intégration propre de telles fonctionnalités signifie que vous n'avez pas à concevoir votre propre toolkit pour les gérer:
 
 * Gestion de dépendances, builds de productions (avec Less et CoffeeScript)
+
 * Tests unitaires et fonctionnels automatisés
+
 * Documentation
 
 Quelques uns ont soutenus que JMVC était ‘overkill’ comme solution. Je ne serais d'accord avec ceci que si l'application que vous concevez utilise seulement une part minimale de Javascript, ou qu'il soit assez compact pour ne pas tirer grand bénéfice de l'utilisation d'une telle boîte à outil.
@@ -98,53 +108,81 @@ Dans le but d'être complet, j'ai inclus nombre d'autres options pour ajouter MV
 #### Options
 
 ##### JavaScriptMVC (Recommendé)
+
 Solution MVC mature qui inclut tests, gestion des dépendances, outils de builds, templates coté client. Parfait pour les applications larges où une solution tout-en-un pour organiser et concevoir du code est requis. Récemment utilisé par Grooveshark dans leur ré-écriture d'application. 
 
 * Video Preview: [http://cdn.javascriptmvc.com/videos/2_0/2_0_demo.htm](http://cdn.javascriptmvc.com/videos/2_0/2_0_demo.htm)
+
 * Démos et téléchargement: [http://www.javascriptmvc.com/#&who=getcode](http://www.javascriptmvc.com/#&who=getcode) [https://github.com/jupiterjs/srchr](https://github.com/jupiterjs/srchr)
+
   
+
 ##### Backbone 
+
 Excellent pour une solution MVC où vous sélectionnez les composants additionnels que vous sentez fonctionner le mieux pour votre projet. Backbone offre le ‘backbone’ (squelette) dont vous avez besoin pour organiser votre code en utilisant le pattern MVC (mais gardez à l'esprit que le C dans MVC représente Collections et pas Controllers).
 
 * [http://documentcloud.github.com/backbone/](http://documentcloud.github.com/backbone/)
+
 * [http://ryandotsmith.heroku.com/2010/10/a-backbone-js-demo-app-sinatra-backend.html](http://ryandotsmith.heroku.com/2010/10/a-backbone-js-demo-app-sinatra-backend.html)
+
 * [http://documentcloud.github.com/backbone/docs/todos.html](http://documentcloud.github.com/backbone/docs/todos.html)
+
 * [http://bennolan.com/2010/11/24/backbone-jquery-demo.html](http://bennolan.com/2010/11/24/backbone-jquery-demo.html)
 
 
+
 ##### SproutCore
+
 Alors qu'il s'éxecute dans le navigateur, SproutCore étend MVC pour inclure une interface serveur, un affichage qui ‘peint’ votre interface pour contrôler l'état de votre application. Yehuda Katz qui est profondément impliqué dans le projet est également en train de travailler à ajouter la modularité à SC et cette option devrait également être disponible bientôt. Recommandé pour des applications qui souhaite avoir une ‘richesse’ comparable aux applis desktop. Considéré overkill pour des applications de plus petite envergure. Utilisé par Apple parmi d'autres.
 
 * Video preview: [http://vimeo.com/16774060](http://vimeo.com/16774060)
+
 * Demos and download:
+
   * [http://wiki.sproutcore.com/w/page/12412938/Hello-World-Tutorial](http://wiki.sproutcore.com/w/page/12412938/Hello-World-Tutorial)
+
   * [http://www.sproutcore.com/get-started/](http://www.sproutcore.com/get-started/)
 
 
+
 ##### Knockout JS
+
 Utilise MVVM (qui est considéré comme MVC avec un syntaxe déclarative). C'est principalement une réponse pour ceux qui utilise Javascript pour les interface utilisateurs mais propose également un gestionnaire de dépendances, système de templating et fonctionne bien avec jQuery. Peut nécessiter une courbe d'apprentissage pour comprendre l'utilisation massive du data-binding.
+
   
+
 * [http://knockoutjs.com/documentation/introduction.htm](http://knockoutjs.com/documentation/introduction.htm)
+
 * [http://knockoutjs.com/examples/](https://github.com/paulca/eyeballs.js)
 
 
+
 ##### Eyeballs JS
+
 Un framework MVC par Paul Campbell qui est connu pour son implication dans le monde Ruby. Eyeballs fonctionne avec de nombreuses librairies mais offre une couche de fonctionnalités pour organiser votre code. Il vise à être à la fois agnostique et modulaire. Eyebals dispose d'une certaine aura si vous êtes un développeur Ruby et je recommanderais son utilisation si vous utilisez principalement Ruby pour concevoir votre code coté serveur
+
   
+
   * [https://github.com/paulca/eyeballs.js](https://github.com/paulca/eyeballs.js)
+
   
 
 ##### Sammy JS
+
 Sammy.js est un plugin jQuery léger qui vous permet de facilement définir des applications basé sur les ‘routes’. Quand le C dans MVC représente Controller, certains considérerait Sammy.js comme le meilleur framework controller disponible en ce moment mais il ne fournit pas exactement la partie Model et vue. Sammy vaut tout de même le détour dans la conception d'application JS single page qui demandent un niveau d'organisation.
 
 * [https://github.com/quirkey/sammy](https://github.com/quirkey/sammy)
 
 
+
 **Ressources additionnelles concernant les patterns pour applications jQuery à grande échelle:**
 
 * [Simple Inheritence](http://ejohn.org/blog/simple-javascript-inheritance/) de John Resig
+
 * [Using Inheritence Patterns To Organize Large jQuery Apps](http://alexsexton.com/?p=51) avec Alex Sexton
+
 * [The Object Literal pattern](http://ajaxian.com/archives/show-love-to-the-object-literal) recommandé par Rebecca Murphey
+
 
 
 ## Templating
@@ -168,6 +206,7 @@ Les liens suivants sont les options populaires pour du templating en Javascript.
 * PURE [http://beebole.com/pure/index.html](http://beebole.com/pure/index.html)
 
 * Nano [https://github.com/trix/nano](https://github.com/trix/nano)
+
  
 
 ## Communication entre les Modules
@@ -183,6 +222,7 @@ Bien qu'il s'agisse peut-être de quelque chose que vous essayez de résoudre en
 * [An Introduction To jQuery Custom Events](http://jupiterjs.com/news/a-simple-powerful-lightweight-class-for-jquery)
 
 * [jsSignals – Custom Events/Messaging for jQuery](http://millermedeiros.github.com/js-signals/)
+
  
 
 ## Processus de Build et Concaténation de Script
@@ -204,6 +244,7 @@ Maintenant, jetons un oeil aux options et outils concernant la concaténation:
 * Smasher - Smasher est une application PHP5 basé sur un outil interne utilisé par Yahoo! Search. Il combine de multiples fichiers Javascript, les prétraite, et minifie leur contenu. [http://github.com/jlecomte/smasher](http://github.com/jlecomte/smasher)
 
 * Jake (utilisé avec Cappuccino): [http://cappuccino.org/discuss/2010/04/28/introducing-jake-a-build-tool-for-javascript/](http://cappuccino.org/discuss/2010/04/28/introducing-jake-a-build-tool-for-javascript/)
+
  
 
 ## Minification de Script
@@ -229,6 +270,7 @@ Souvenz vous que la minification fait idéalement partie d'un script de concaté
 * Dojo Toolkit’s ShrinkSafe [http://www.dojotoolkit.org/](http://www.dojotoolkit.org/)
 
 * JSMin – The JavaScript minifier [http://www.crockford.com/javascript/jsmin.html](http://www.crockford.com/javascript/jsmin.html)
+
  
 
 ## Tests
@@ -242,6 +284,7 @@ Les tests unitaires sont quelques chose que je suggère comme un must mais dans 
 ### Tests unitaire pour votre code JavaScript/jQuery en utilisant QUnit
 
 Un build process solide avec support des tests unitaires devrait être utilisé pour tester et livrer toute application jQuery sérieuse. Le test fonctionnel manuel est super depuis une perspective interface utilisateur, mais les test unitaires vous permettront de tester votre code pour découvrir si tout son fonctionnement interne se comporte comme prévu. Ci-dessous un bon tutorial sur comment débuter avec [QUnit](http://docs.jquery.com/Qunit) - un outil de test unitaire populaire pour le framework jQuery qui est très simple à utiliser. Vous pouvez alternativement vouloir tester [JSUnit](http://www.jsunit.net/) ou [FireUnit](http://fireunit.org/) mais QUnit reste de loin le plus utilisé des trois et mon outil de tests unitaire préféré.
+
 http://net.tutsplus.com/tutorials/javascript-ajax/how-to-test-your-javascript-code-with-qunit/
 
 ### Tests unitaire avec FuncUnit de JavascriptMVC
@@ -297,10 +340,16 @@ Quelque soit la direction que vous vous prendrez vec la création d'application 
 ## Pour aller plus loin
 
 * [On jQuery and large applications with  Rebecca Murphey](http://blog.rebeccamurphey.com/on-jquery-large-applications)
+
 * [On ‘Rolling Your Own’ Large jQuery Apps with Alex Sexton](http://alexsexton.com/?p=106)
+
 * [jQuery UI Developer’s Guide (for those wishing to use $.widget etc)](http://jqueryui.com/docs/Developer_Guide)
+
 * [Nicholas Zakas – Scalable JavaScript Application Architecture](http://developer.yahoo.com/yui/theater/video.php?v=zakas-architecture)
+
 * [Tech Behind The New GrooveShark (Good Article On Large Scale jQuery App Dev)](http://blog.jerodsanto.net/2010/12/the-tech-behind-the-new-grooveshark/)
+
 * [Cody Lindley’s excellent list of client-side development links for app development](http://blog.codylindley.com/links)
+
 * JavaScript Documentation Tools: [JSDoc](http://jsdoc.sourceforge.net/), [YUI Doc](http://developer.yahoo.com/yui/yuidoc/) or [PDoc](http://pdoc.org/)
 

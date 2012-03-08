@@ -1,15 +1,23 @@
-Title: Git, bien plus qu'un VCS
-Author: Mickael Daniel
-Date: Mon May 16 2011 19:49:46 GMT+0200 (CEST)
+<!--config
+{
+  "Title": "Git, bien plus qu'un VCS",
+  "Author": "Mickael Daniel",
+  "Date": "Mon May 16 2011 19:49:46 GMT+0200 (CDT)"
+}
+config-->
 
 Dans ce post, je ne vous parlerais pas de [Git](http://git-scm.com/) du point de vue VCS (version control system), je vais essayer de vous faire toucher du doigt une partie des possibilités offertes par Git.
 
 Ce qui rend Git si génial ne vient en fait pas vraiment de ce que l'on entend communément (enfin si, c'est aussi génial pour ça):
 
 * Git est rapide.
+
 * Git est distribué.
+
 * Git dispose d'un système de branche locale hyper efficace.
+
 * Git fait partie de cette nouvelle génération de VCS qui ne vous pousse pas à la pause café à chaque commit. (true story!)
+
 * et des millions d'autres raisons
 
 Toutes ces choses ne sont en fait que la partie immergée de l'iceberg et nous font qu'entre-apercevoir les millions de possibilités offertes par cette plateforme.
@@ -29,9 +37,13 @@ Git, à la base, n'était pas un VCS, comme [l'explique Linus Torvald](http://bi
 Toujours selon la même source [wikipédia](http://bit.ly/4UN1j), quelques uns des principes de départ de Git sont:
 
 > 1. Take CVS as an example of what not to do; if in doubt, make the exact opposite decision.
+
 2. Support a distributed, BitKeeper-like workflow.
+
 3. Very strong safeguards against corruption, either accidental or malicious
+
 4. Very high performance
+
 
 
 La conception de git a été inspiré par [BitKeeper](http://www.bitkeeper.com/) et [Monotone](http://www.monotone.ca/main.php). Il a été conçu au départ comme un système bas-niveau de gestion de version. On peut voir la conception de Git comme le résultat de l'expérience de Torvald avec Linux pour maintenir un gros projet largement distribué, mais aussi de son expérience toujours concernant le même projet avec le système de fichiers et ses performances.
@@ -41,7 +53,9 @@ Git n'était pas, au départ, à proprement parler un logiciel de gestion de ver
 > It's not an SCM, it's a distribution and archival mechanism. I bet you could make a reasonable SCM on top of it, though. Another way of looking at it is to say that it's really a content-addressable filesystem, used to track directory trees.
 
 On peut considérer Git comme un système de fichiers sous stéroïde. 
+
   
+
 > In many ways you can just see git as a filesystem - it's content-addressable, and it has a notion of versioning, but I really really designed it coming at the problem from the viewpoint of a _filesystem_ person (hey, kernels is what I do), and I actually have absolutely _zero_ interest in creating a traditional SCM system.
 
 _[source](http://marc.info/?l=linux-kernel&m=111314792424707)_

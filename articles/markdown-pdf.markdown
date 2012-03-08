@@ -1,8 +1,13 @@
-Title: pdf.js et génération markdown vers pdf
-Author: Mickael Daniel
-Date: Apr 09 2011 18:00:00 GMT+0100 (CDT)
-Categories: javascript, node
-Tags: javascript, markdown, node, pdf
+<!--config
+{
+  "Title": "pdf.js et génération markdown vers pdf",
+  "Author": "Mickael Daniel",
+  "Date": "Apr 09 2011 18:00:00 GMT+0100 (CDT)",
+  "Categories": "javascript, node",
+  "Tags": "javascript, markdown, node, pdf",
+  "layout": "main"
+}
+config-->
 
 Certains sont certainement déjà au courant de l'existence de l'excellent outil de génération pdf écrit purement en JavaScript par James Hall: [jsPDF](http://snapshotmedia.co.uk/blog/jspdf) ([source](https://github.com/MrRio/jsPDF)).
 
@@ -17,12 +22,19 @@ pdf.js est un module node basé essentiellement sur jsPDF. Ce post et les exempl
 L'API est essentiellement composée de:
 
 * `addImage: function (imageData, format, x, y, w, h) {}`
+
 * `addPage: function () {}`
+
 * `drawLine: function (x1, y1, x2, y2, weight, style) {}`
+
 * `drawRect: function (x, y, w, h, style) {}`
+
 * `output: function (type, options) {}`
+
 * `setFontSize: function (size) {}`
+
 * `setProperties: function (properties) {}`
+
 * `text: function (x, y, text) {}`
 
 Vous pouvez jouer avec sur la [démo](http://www.maraksquires.com/pdf.js/) fournie par pdf.js.
@@ -38,6 +50,7 @@ Et, c'est là que ce post revêt un peu plus d'intérêt (parce que bon, suffit 
 Deux problèmes majeurs lors de l'utilisation de jsPDF (après tout une API relativement bas niveau) avec des documents plus évolués:
 
 * Une ligne trop longue (typique d'un paragraphe markdown) pour le format de la page apparaîtra sur une seule ligne, sortant du document. Aucune notion de retour à la ligne automatique.
+
 * Même problème lors des fins de page. jsPDF ne détecte pas automatiquement le dépassement, et un appel à addPage doit être fait explicitement.
 
 Marak a d'ailleur ouvert un ticket résumant bien ce point: [https://github.com/marak/pdf.js/issues#issue/1](https://github.com/marak/pdf.js/issues#issue/1)
@@ -51,6 +64,7 @@ Mon besoin de départ était de pouvoir générer une sortie PDF en n'utilisant 
 L'idée fut donc de:
 
 * Générer du markup html à partir d'un texte markdown (showdown utilisé)
+
 * à partir d'un noeud dom, parser son contenu en utilisant firstChild et nextSibling, et pour chaque tag supporté, appeler les bonnes méthodes de l'api de pdf.js en fonction du tag.
 
 La variété des tags supportés est vraiment limitée: h1, h2, h3, h4, h5, h6, a, p, blockquote, ul, li, code. Il s'agit pour l'instant plus d'un POC (proof of concept) que d'une réelle librairie. Mais je suis plutôt content du résultat et trouvait que cela méritait un petit post. On peut penser à des choses intéressante, comme concevoir des extensions de navigateurs, l'utiliser coté serveur via node.js, ou encore penser à une génération automatique de quelque chose se rapprochant d'un ebook à partir d'une liste de fichiers markdown (qu'on peut d'ailleurs utilisé avec les services github). Bref, vous me voyez venir... En tout cas, ça va me rendre de sacrés services. Pour l'instant, la fonctionnalité est basique mais, avec un peu plus de boulot, on peut penser à un poil plus de configuration sur le rendu et la mise en page utilisé, tout comme arriver à un meilleur support de l'ensemble des tags générés par Markdown. J'aimerais également supprimé la dépendance à jQuery ($.fn.text principalement.)

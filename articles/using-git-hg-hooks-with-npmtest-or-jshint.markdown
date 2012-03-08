@@ -1,7 +1,11 @@
-Title: Utilisation des hooks git/hg pour tester, valider et linter votre code
-Author: Mickael Daniel
-Date: Wed Nov 16 2011 17:39:15 GMT+0100 (CET)
-Categories: git, hg, hooks, jshint, test
+<!--config
+{
+  "Title": "Utilisation des hooks git/hg pour tester, valider et linter votre code",
+  "Author": "Mickael Daniel",
+  "Date": "Wed Nov 16 2011 17:39:15 GMT+0100 (CET)",
+  "Categories": "git, hg, hooks, jshint, test"
+}
+config-->
 
 ... ou comment s'assurer le titre de `clean pusher™`.
 
@@ -34,12 +38,17 @@ Les scripts étant placés dans `.git` ou `.hg` (non versionné), ils peuvent ê
 Ils existent deux principaux types de hooks: client-side and server-side. Dans cet article, je me concentrerais essentiellement sur les client-side hooks (et plus particulièrement le `pre-commit`). Ce sont des scripts exécutés sur le poste du développeur, la plupart du temps suite à des opérations qui impliquent de nouveaux commits ou modification de commits existants.
 
 * [pre-commit](http://schacon.github.com/git/githooks.html#_pre_commit): exécuté avant un commit (probablement celui que j'utilise le plus).
+
 * [prepare-commit-msg](http://schacon.github.com/git/githooks.html#_prepare_commit_msg): vous permet d'éditer le message par défaut avant que l'éditeur soit lancé.
+
 * [commit-msg](http://schacon.github.com/git/githooks.html#_commit_msg): dernier étape dans laquelle on peut interrompre un commit.
+
 * [commit-msg](http://schacon.github.com/git/githooks.html#_prepare_commit_msg): dernier étape dans laquelle on peut interrompre un commit.
+
 * [post-commit](http://schacon.github.com/git/githooks.html#_post_commit): invoqué après l'exécution d'un commit, généralement utilisé pour notification.
 
 Les autres client-side hooks ne sont pas exécutés par la commande `git commit`, mais leur nom est plutôt explicite. Se référencer aux mans (`git help hooks`) [pour plus d'infos](http://schacon.github.com/git/githooks.html).
+
 
 
 Concernant Mercurial, [voici une liste des différents hooks disponibles](http://hgbook.red-bean.com/read/handling-repository-events-with-hooks.html#id401916), `precommit` étant celui qui nous intéresse ici.
@@ -53,86 +62,159 @@ Ce script permet de lancer la commande `npm test`, et `exit 1` dans le cas ou np
     #!/usr/bin/env node
 
     var npm = nrequire('npm');
+
     if (npm) return npm.load(function(e, n) {
+
       this.commands.test(function(e) {
+
         process.exit(e ? 1 : 0);
+
       });
+
     });
+
     
+
     
+
     // npm not installed locally, spawn process instead.
+
     // basically the same, but less pretty.
+
     var spawn = require('child_process').spawn,
+
       ch = spawn('npm', ['test']);
+
     
+
     ch.stdout.pipe(process.stdout, {end: false});
+
     ch.stderr.pipe(process.stderr);
+
     ch.on('exit', function (code) {
+
       process.exit(code ? 1 : 0);
+
     });
+
     
+
     
+
     function nrequire(m) {
+
       var n;
+
       try { n = require(m); }
+
       catch(e) { console.log('please, install ' + m + ' locally to be able to use it programmatically. will spawn process instead. \n'); }
+
       return n;
+
     }
+
     
+
 Si la commande `npm test` s'est déroulé avec succès (aucun test fail), le commit sera possible, si ce n'est pas le cas git ou hg ne le permettra pas vous obligeant à corriger les tests avant de vous laisser commiter. Voyez le comme un moyen simple et pratique de vous assurer que tout ce qui est commité dans le repo (potentiellement pushé par la suite) ne casse pas la build.
 
-`npm install npm` pour installer le package localement et permettre au script de l'utiliser programmatiquement. Pour une première installation, se référer au [readme du projet](http://npmjs.org/doc/README.html#Simple-Install-Unix-only-sorry). On peut également y trouver des instructions concernant l'installation de npm sur windows, mais veuillez noter que ces scripts n'ont pas été testés sous windows. Cela dit, j'imagine qu'avec [msysgit](http://code.google.com/p/msysgit/), on devrait pouvoir s'en sortir (peut-être le sujet d'un prochain post, ou mise à jour de celui-ci).
+`npm install npm` pour installer le package localement, `npm install -g jshint` pour installer le package en global et vous permettre de lancer `npm` depuis la console.
 
 ## Exemple: jshint
 
 Ce script permet de lancer [jshint](http://jshint.com/) automatiquement sur tout fichier en état "modifié" du repository. Très pratique puisqu'il ne vous empêchera pas de commits dû à des erreurs lints sur d'autres fichiers du repo, des fichiers que l'on a potentiellement jamais touché (ceci serait probablement plus le boulot du build d'intégration continue).
 
     #!/usr/bin/env node
+
     
+
     // todo: try to require jshint here, instead of spawning process, then fallback to spawning process.
+
     var jshint = nrequire('jshint');
+
     if (jshint) return process.exit(0);
+
     
+
     // jshint not installed locally, spawn process instead.
+
     // basically the same, but less pretty.
+
     var exec = require('child_process').exec;
+
     
+
     // Get the list of changed files in working dir. command depends on __dirname
+
     // where a path with `.git/` triggers the git command. otherwise hg.
+
     // git: git status -s
+
     // hg: hg status
+
     
+
     var cmd = /\.git\//.test(__dirname) ? 'git status -s' : 'hg status'
+
     
+
     exec(cmd, function(err, stdout) {
+
       if(err) return error(err);
+
     
+
       var changed = (stdout.match(/^\s?M\s(.+)/gim) || []).map(function(file) {
+
         return file.trim().replace(/^M\s?/, '');
+
       });
+
     
+
       if(!changed.length) return process.exit(0);
+
     
+
       console.log('Running jshint on', changed.length, 'files');
+
     
+
       exec('jshint ' + changed.join(' '), function(err, stdout) {
+
         if(err) return error(stdout);
+
         console.log(stdout);
+
         process.exit(0);
+
       });
+
     });
+
     
+
     function nrequire(m) {
+
       var n;
+
       try { n = require(m); }
+
       catch(e) { console.log('please, install ' + m + ' locally to be able to use it programmatically. will spawn process instead. \n'); }
+
       return n;
+
     }
+
     
+
     function error(err) {
+
       if(!(err instanceof Error)) err = new Error(err);
+
       console.error(err.message || err.stack);
+
       process.exit(1);
+
     }
 
 Le script tente d'abord d'effectuer un `git status -s` (`-s` pour short format) ou un `hg status` en fonction du chemin du hook (en testant `__dirname`).
@@ -156,15 +238,21 @@ Il suffit ensuite de lancer un `git commit` pour le voir en action. Dans le cas 
 Voici un petit script que j'utilise pour mettre automatiquement en place le [hook npm test](https://raw.github.com/gist/1246769/pre-commit) en tant que `pre-commit` hook:
 
     git init
+
     curl https://raw.github.com/gist/1246769/pre-commit >> .git/hooks/pre-commit
+
     chmod +x .git/hooks/pre-commit
+
     git commit
 
 Le même script pointant sur [la version hook jshint](https://raw.github.com/gist/1367701/pre-commit):
 
     git init
+
     curl https://raw.github.com/gist/1367701/pre-commit >> .git/hooks/pre-commit
+
     chmod +x .git/hooks/pre-commit
+
     git commit
 
 ### hg
@@ -174,29 +262,49 @@ Concernant hg, le script est légèrement différent. Dans le cas de Mercurial, 
 Voici le script équivalent pour installer le [hook npm test](https://raw.github.com/gist/1246769/pre-commit) en tant que pre-commit hook hg:
 
     hg init
+
     mkdir .hg/hooks
+
     curl https://raw.github.com/gist/1246769/pre-commit >> .hg/hooks/pre-commit
+
     chmod +x .hg/hooks/pre-commit
+
     
+
     echo '[hooks]' >> .hg/hgrc
+
     echo 'pre-commit = ./.hg/pre-commit' >> .hg/hgrc
+
     cat .hg/hgrc
+
     
+
     hg commit
+
 
 
 Le même pour installer la [version jshint](https://raw.github.com/gist/1367701/pre-commit):
 
 
+
     hg init
+
     mkdir .hg/hooks
+
     curl https://raw.github.com/gist/1367701/pre-commit >> .hg/hooks/pre-commit
+
     chmod +x .hg/hooks/pre-commit
+
     
+
     echo '[hooks]' >> .hg/hgrc
+
     echo 'pre-commit = ./.hg/pre-commit' >> .hg/hgrc
+
     cat .hg/hgrc
+
     
+
     hg commit
 
 ### tips
@@ -218,8 +326,14 @@ Happy hooking :p
 ### Ressources
 
 * git: http://progit.org/book/ch7-3.html
+
 * git: http://book.git-scm.com/5_git_hooks.html
+
 * git: http://schacon.github.com/git/githooks.html ou lancer `git help hooks`
+
 * hg: http://hgbook.red-bean.com/read/handling-repository-events-with-hooks.html
+
 * npm scripts: http://npmjs.org/doc/scripts.html
+
 * jshint: http://www.jshint.com/
+

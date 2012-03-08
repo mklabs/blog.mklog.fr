@@ -1,20 +1,12 @@
-Title: node et travis-ci
-Author: Mickael Daniel
-Date: Wed Sep 14 2011 22:08:40 GMT+0200 (CEST)
-Categories: javascript
-Tags: travis, javascript, ci
-
-**[Travis-Ci](http://travis-ci.org)**: Mon nouveau coup de coeur.
-
-Et je pèse mes mots.
-
-![build-history](/travis/build-history.png)
-
-Si vous avez besoin d'une solution d'intégration continue pour vos projets open source, alors Travis CI est fait pour vous. C'est gratuit et ca fonctionne merveilleusement bien. Très facile à mettre en place. C'est officiel, il n'y a désormais plus aucune raisons de ne pas mettre en place un CI sur un projet open-source.
-
-Travis est une initiative venant de la communauté Ruby, utilisant massivement [Vagrant](http://vagrantup.com) venant lui aussi de cette même communauté. Ceci n'est vraiment pas surprenant, depuis quelques années les rubyistes nous font profiter de la formidable effervescence de cette communauté en donnant très souvent naissance à de fantastiques projets, outils, plateformes et j'en passe. Ce n'est également pas étonnant quand l'on voit d'autres communautés s'inspirer et utiliser efficacement des patterns et la philosophie inhérente à cette communauté (Rails -> Play coté Java).
-
-On peut retrouver une effervescence, une énergie similaire dans la communauté node. Ici encore, pas de surprises, un grands nombre de noders venant à la base de la communauté Ruby...
+<!--config
+{
+  "Title": "node et travis-ci",
+  "Author": "Mickael Daniel",
+  "Date": "Wed Sep 14 2011 22:08:40 GMT+0200 (CDT)",
+  "Categories": "javascript",
+  "Tags": "travis, javascript, ci"
+}
+config-->
 
 Mais revenons au sujet du post: Utiliser Travis pour vos projets node
 
@@ -27,9 +19,13 @@ Yay ! La première fois que j'ai entendu parler de Travis, le projet se décriva
 Puis récemment, [@loicfrering](http://twitter.com/#!/loicfrering), alors qu'on en était venu à parler CI, m'a refillé le lien vers Travis en me disant quelque chose du genre:
 
 * "Tu devrais y jetter un coup d'oeil."
+
 * moi: "ruby only?"
+
 * lui: "tout, ruby, node, python, php, etc."
+
 * moi: "http://about.travis-ci.org/docs/user/languages/javascript-with-nodejs/ ?"
+
 * moi: "Enorme, exactement ce que je cherchais.."
 
 Rapidement, le principe de Travis est de fournir [une VM avec un environnement complet](http://about.travis-ci.org/docs/user/ci-environment/), et de trigger un build sur le déclenchement d'un [post-receive hook](http://help.github.com/post-receive-hooks/) sur un de vos repository. Pour ce faire, il suffit de le configurer en fonction. Étant plutôt sympa, travis s'en charge également. C'est la raison pour laquelle Github OAuth demande des droits d'écriture sur votre compte: configurer le post-receive hook de votre repo pour pinger travis-ci.org. Le hook étant déclenché sur chacun des push effectué sur le repo. Travis n'effectuera aucun autre manipulation d'écriture sur votre compte.
@@ -79,6 +75,7 @@ Le but étant de lancer une suite de tests pour un projet node, il nous faut uti
 Okay, rendons nous alors au niveau de la page  [javascript-with-nodejs](http://about.travis-ci.org/docs/user/languages/javascript-with-nodejs/) pour en apprendre un peu plus...
 
     before_script: "npm install --dev"
+
     script: "npm test"
 
 *note:* c'était peut-être le cas avec de précédente version de npm (pre 1.0), je peux également dire une énorme connerie mais... je vous invite à essayer sans le `--dev`. L'idée étant d'install également les dependencies définies dans le `devDependencies` du package.json, censé contenir les dépendences de dev, nécessaire par expl à l'éxecution de tests. Cependant, le `--dev` n'est normalement pas nécessaire, les `devDependencies` du projet devrait être gérés. La présence du `--dev` par contre a une incidence sur comment npm gére les `devDeps` des sous modules, en les installant pouvant inutilement alonger le temps de build
@@ -110,6 +107,7 @@ Si tout est ok, un push sur votre repo, ou l'utilisation du bouton `Test Hook` d
 Les VMs Travis intégrant node dans sa version 0.4.8, assurez vous d'utiliser des librairies correctement packagés, et ainsi vous éviter la frusration du build ne passant pas pour un [engine mal configuré](http://travis-ci.org/#!/mklabs/nabe/builds/156402)...
 
     npm ERR! Required: {"node":">= 0.5.0"}
+
     npm ERR! Actual:   {"npm":"1.0.12","node":"v0.4.8"}
 
 Mon environnement de dev disposant de node dans sa version unstable > 0.5.0, l'erreur n'est alors pas apparente.
