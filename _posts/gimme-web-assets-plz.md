@@ -14,7 +14,7 @@ config-->
 />
 </p>
 
-[gimme-assets](github.com/mklabs/gimme-assets) est un petit outil que
+[gimme-assets](https://github.com/mklabs/gimme-assets) est un petit outil que
 j'ai développé pour répondre à un rapide besoin.
 
 Complètement inspiré de [asset](https://github.com/visionmedia/asset) par @visionmedia,
