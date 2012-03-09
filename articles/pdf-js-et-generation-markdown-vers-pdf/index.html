@@ -1,4 +1,36 @@
-<!doctype html><head></head><body><p>Certains sont certainement déjà au courant de l'existence de l'excellent outil de génération pdf écrit purement en JavaScript par James Hall: <a href="http://snapshotmedia.co.uk/blog/jspdf">jsPDF</a> (<a href="https://github.com/MrRio/jsPDF">source</a>).</p>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>blog.mklog.fr .::. pdf.js et génération markdown vers pdf</title>
+  <meta name="description" content="@mklabs blog">
+  <meta name="viewport" content="width=device-width">
+  <meta name="generator" content="nabe 0.2.0" />
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <!-- <link rel="alternate" type="application/rss+xml" title="blog.mklog.fr feed" href="http://blog.mklog.fr/feed/"> -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="pdf-js-et-generation-markdown-vers-pdf">
+  
+
+<div class="post">
+
+  <header>
+    <div class="container">
+      <h1><a href="/">blog.mklog.fr</a></h1>
+      <h2>pdf.js et génération markdown vers pdf</h2>
+      <span class="date">9 avr. 2011</span>
+      <span class="date date-hidden right" data-format="from">1302368400000</span>
+    </div>
+  </header>
+
+  <div role="main" class="markdown container">
+    <p>Certains sont certainement déjà au courant de l'existence de l'excellent outil de génération pdf écrit purement en JavaScript par James Hall: <a href="http://snapshotmedia.co.uk/blog/jspdf">jsPDF</a> (<a href="https://github.com/MrRio/jsPDF">source</a>).</p>
 
 <p>Un <a href="https://github.com/marak/pdf.js">module node</a> existe également basé essentiellement sur jsPDF effectué par <a href="https://github.com/marak/">Marak</a> permettant de facilement générer des documents pdf avec node. En fait, je suis venu à m'intéresser à ce sujet en cherchant quelque chose me permettant de générer des documents pdf à partir de fichiers markdown. Et je voulais pouvoir le faire aussi bien complètement coté client qu'en environnement node.js.</p>
 
@@ -61,4 +93,39 @@
 
 <p>Une démo est accessible <a href="http://mklabs.github.com/pdf.js/markdown/">ici</a>. Il suffit de taper votre texte markdown formaté (ou markup html, showdown le laissera en l'état) et clicker sur le lien permettant la génération pdf. Un nouveau fichier pdf sera généré(dataURIs) que vous pourrez ensuite <code>Right click and save as</code>. Marche encore mieux sous navigateur Webkit où vous pourrez directement ouvrir le fichier.</p>
 
-<p>Pour les curieux, voici un lien vers le <a href="https://github.com/mklabs/pdf.js/tree/markdown-pdf">fork de pdf.js</a> où vous pourrez retrouver les sources. J'ai également ajouté la possibilité de spécifier différentes fonts en modifiant un poil les sources de pdf.js. <a href="https://github.com/marak/pdf.js/issues#issue/3">Pull request</a> envisageable si je trouve le temps de nettoyer un peu le tout (et implémenter la méthode setFont. Pour l'instant, j'ai ajouté la possibilité de spécifier la font à utilisée via <code>doc.text(x, y, text, font)</code> et leur initialisation au niveau de <code>doc.setProperties()</code>).</p></body></html>
+<p>Pour les curieux, voici un lien vers le <a href="https://github.com/mklabs/pdf.js/tree/markdown-pdf">fork de pdf.js</a> où vous pourrez retrouver les sources. J'ai également ajouté la possibilité de spécifier différentes fonts en modifiant un poil les sources de pdf.js. <a href="https://github.com/marak/pdf.js/issues#issue/3">Pull request</a> envisageable si je trouve le temps de nettoyer un peu le tout (et implémenter la méthode setFont. Pour l'instant, j'ai ajouté la possibilité de spécifier la font à utilisée via <code>doc.text(x, y, text, font)</code> et leur initialisation au niveau de <code>doc.setProperties()</code>).</p>
+
+      <p class="twitter-share">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </p>
+    <div class="whatev">
+      <h3>Commentaire?</h3>
+
+
+      <p>Une remarque, un retour ou à peu près n'importe quoi relatif à
+      cet article ? Ca se passe désormais <a
+        href="https://github.com/mklabs/blog.mklog.fr/issues/new">ici</a>,
+      les commentaires passent maintenant par GitHub et sont gérés via bug
+      tracker ☺.</p>
+
+    </div>
+  </div>
+
+</div>
+
+
+  <footer>
+    <div class="container"></div>
+  </footer>
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <script src="/assets/js/libs/es5-shim.min.js"></script>
+  <script src="/assets/js/libs/moment.min.js"></script>
+  <script src="/assets/js/libs/hijs.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>
