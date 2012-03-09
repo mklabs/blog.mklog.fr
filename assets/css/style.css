@@ -1,6 +1,8 @@
 /* =============================================================================
    CSS App imports.
 
+   Avoid @import, unless it works in conjunction with a build system.
+   Not done yet, but build system coming.
    ========================================================================== */
 
 

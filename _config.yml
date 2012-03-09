@@ -15,6 +15,7 @@ permalink: 'articles/:title/'
 exclude:
   - 'node_modules/**/*'
   - 'articles/**/*.js'
+  - 'oldies/**/*'
 
 # layout - if set, will use this layout as default one when no config is
 # found in the front yaml/json config.

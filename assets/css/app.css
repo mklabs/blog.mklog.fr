@@ -116,3 +116,8 @@ code .class, code .special { color: #034; }
   text-align: right;
   margin: 4em 0 -4em 0;
 }
+
+/** helpers **/
+.txt-center {
+  text-align: center;
+}

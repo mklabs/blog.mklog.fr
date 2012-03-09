@@ -206,7 +206,7 @@ table tr,table tr a{padding:1em 0;}
 table tr.hover{background-color:#dedede;}
 img{max-width:100%;height:auto; margin: 2em; }
 img.mk-blog-img {float: left; border: solid 3px #ccc;}
-img.mk-blog-img-center, .entry-content img { border: solid 3px #ccc; }
+img.mk-blog-img-center, .markdown img { border: solid 3px #ccc; }
 
 .gist { clear: both; }
 
