@@ -4,8 +4,7 @@
   "Author": "Mickael Daniel",
   "Date": "Apr 09 2011 18:00:00 GMT+0100 (CDT)",
   "Categories": "javascript, node",
-  "Tags": "javascript, markdown, node, pdf",
-  "layout": "main"
+  "Tags": "javascript, markdown, node, pdf"
 }
 config-->
 
