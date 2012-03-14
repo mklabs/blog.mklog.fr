@@ -29,5 +29,7 @@ pages: &pages
     - '**/*.markdown'
     - 'examples/**/*.js'
 
-watch:
-  <<: *pages
+deploy:
+  git:
+    url: https://mklabs@github.com/mklabs/blog.mklog.fr.git
+    branch: deploy
