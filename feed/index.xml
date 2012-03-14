@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>@mklabs blog</title>
+  <link href="http://blog.mklog.fr/feed/" rel="self"/>
+  <link href="http://blog.mklog.fr/"/>
+  <updated>2012-03-14T15:03:22+01:00</updated>
+  <id>http://blog.mklog.fr/</id>
+  <author>
+    <name>Mickael Daniel</name>
+  </author>
+
+  
+  <entry>
+    <title>Just gimme web assets please</title>
+    <link href="http://blog.mklog.fr/articles/just-gimme-web-assets-please/"/>
+    <updated>2012-03-09T11:03:09+01:00</updated>
+    <id>http://blog.mklog.fr/articles/just-gimme-web-assets-please</id>
+    <content type="html">&lt;p class=&quot;txt-center&quot;&gt;
+  &lt;img src=&quot;/assets/img/gimme/preview.2.png&quot; title=&quot;Gimme preview plz&quot;
+/&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;github.com/mklabs/gimme-assets&quot;&gt;gimme-assets&lt;/a&gt; est un petit outil que j&#x27;ai développé pour répondre à un rapide besoin.&lt;/p&gt;
+
+&lt;p&gt;Complètement inspiré de &lt;a href=&quot;https://github.com/visionmedia/asset&quot;&gt;asset&lt;/a&gt; par @visionmedia, gimme-assets est un outil en ligne de commande écrit en node pour gérer et télécharger facilement n&#x27;importe quelle librairie sur &lt;a href=&quot;http://www.cdnjs.com/&quot;&gt;cdnjs.com&lt;/a&gt; ou &lt;a href=&quot;http://microjs.com/&quot;&gt;microjs.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bien sûr d&#x27;autres projets similaires existent, que je recommende fortement:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://ender.no.de/&quot;&gt;ender&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://getbpm.org/&quot;&gt;bpm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/volojs/volo&quot;&gt;volojs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ender comme bpm reposent sur l&#x27;idée d&#x27;un registry. Bpm est grosso-modo une tentative de npm coté-client avec la maintenance d&#x27;un registry propre à bpm, ender quant à lui repose sur le registry de npm et propose tout un outillage pour se composer son propre &quot;micro&quot; framework basé sur des packages npm taggués &lt;code&gt;ender&lt;/code&gt; et obéissant à une certaine interface pour exposer ce qui doit l&#x27;être et augmenter la variable &lt;code&gt;$&lt;/code&gt; qui est alors une composition d&#x27;un tas de lib différentes (backbone, underscore, bonzo, qwery, jquery etc.)&lt;/p&gt;
+
+&lt;p&gt;J&#x27;adôre l&#x27;approche d&#x27;ender, et ces deux projets proposent également une gestion de dépendances entre les packages.&lt;/p&gt;
+
+&lt;p&gt;Volo est une autre belle alternative par @jrburke, contrairemnt à ender ou bpm, volo ne repose pas sur un registry spécialisé mais traite github comme un registry unique. La plupart des projets open-source aujourd&#x27;hui (surtout niveau web et JS) sont hébergés sur github, traiter github comme le registry principal a donc beaucoup de sens, et est selon moi la bonne façon de traiter cette problématique. A moins d&#x27;être npm lui-même, je ne crois pas vraiment en l&#x27;idée d&#x27;un repository personnalisé qu&#x27;il faudrait maintenir.&lt;/p&gt;
+
+&lt;p&gt;La seule chose me gênant un peu dans volo est l&#x27;approche &lt;em&gt;full AMD&lt;/em&gt;. Bien que volo stipule vouloir &quot;&lt;a href=&quot;https://github.com/volojs/volo/blob/master/docs/designGoals.md&quot;&gt;Treat AMD as first class, but don&#x27;t be annoying about it&lt;/a&gt;&quot;, il est quand même pensé en premier lieu pour une utilisation sur des sources AMD. Bien que rien ne nous empêche d&#x27;utiliser volo en mode non AMD, volo lui même qui est un package node est écrit en AMD.. coté serveur.. où les modules commonjs et le chargement des modules node fonctionnent tout à fait correctement et représente un réel plaisir à utiliser. Déjà que j&#x27;ai de plus en plus tendance coté client à éviter l&#x27;AMD, rentrer dans les sources d&#x27;un projet node lui même développé via syntaxe AMD m&#x27;a paru rédibitoire...&lt;/p&gt;
+
+&lt;h3&gt;Gimme web assets plz&lt;/h3&gt;
+
+&lt;p&gt;gimme-assets ne fait pas tout ça. Il est beaucoup plus bête dans son approche et ne se contente que de télécharger les libs et de les placer dans un répertoire particulier (&lt;code&gt;js/libs&lt;/code&gt; par défaut). Ni plus, ni moins.&lt;/p&gt;
+
+&lt;p&gt;Il ne dispose pas d&#x27;un système de gestion de dépendences comme le fait npm, ou ender (qui repose sur npm), ou bien bpm et ne le fera probablement jamais. C&#x27;est une problématique trop complexe, et nécessittant trop de travail pour être bien fait, que l&#x27;intégrer dans gimme me semble limité. Si la gestion des dépendences entre libs et leur téléchagement / install est un pré-requis, bpm ou ender semble beaucoup plus approprié.&lt;/p&gt;
+
+&lt;p&gt;Par contre, gimme devrait pouvoir être utilisé depuis windows (naturellement unix / osx également) et depuis derrière un proxy (qui est tellement commun dans nos entreprises respectives, n&#x27;est ce pas?).&lt;/p&gt;
+
+&lt;p&gt;gimme se repose sur un &quot;registry&quot; unique (github) et sur deux &quot;dictionnaires&quot; de données différents: &lt;a href=&quot;http://www.cdnjs.com/&quot;&gt;cdnjs.com&lt;/a&gt; ou &lt;a href=&quot;http://microjs.com/&quot;&gt;microjs.com&lt;/a&gt;. cdnjs propose près de 80 libs, microjs propose quant à lui pas loin de 180 libs, ce qui donne un potentiel honnête d&#x27;à peu près 260 librairies installable en une ligne de commande.&lt;/p&gt;
+
+&lt;p&gt;Bien sûr, certains doublons existent entre ces deux sources de données (ex. backbone), dans ce cas, gimme traite les libs de cdnjs comme &quot;prioritaire&quot; et installera les version de cdnjs plutôt que celle de microjs.&lt;/p&gt;
+
+&lt;h3&gt;gimme cached&lt;/h3&gt;
+
+&lt;p&gt;Lors de la première commande, les deux sources de données sont téléchargées / parsées et fusionnées en un seul et même fichier ensuite utilisé pour chacune des commandes.&lt;/p&gt;
+
+&lt;p&gt;Ces deux différentes sources de données sont:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;cdnjs: &lt;a href=&#x27;https://github.com/cdnjs/website/blob/gh-pages/packages.json&#x27;&gt;https://github.com/cdnjs/website/blob/gh-pages/packages.json&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;microjs: &lt;a href=&#x27;https://github.com/madrobby/microjs.com/blob/master/data.js&#x27;&gt;https://github.com/madrobby/microjs.com/blob/master/data.js&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;gimme gérera un cache au niveau du répertoire $HOME du user (ou $USERPROFILE sur windows) au sein d&#x27;un dossier spécial nommé &lt;code&gt;.gimme&lt;/code&gt; (ex. &lt;code&gt;C:\Users\fancyname\.gimme&lt;/code&gt; sur windows ou &lt;code&gt;/home/fancyname/.gimme&lt;/code&gt; sur unix).&lt;/p&gt;
+
+&lt;p&gt;Ce réperoire servira notamment à stocker les librairies qui ont pu être déja téléchargées pour les récupérer en local et éviter des requêtes non nécessaires, ce qui rend l&#x27;install immédiate une fois qu&#x27;une librairie dans une version donnée à été téléchargé.&lt;/p&gt;
+
+&lt;p&gt;Ce dossier peut également contenir d&#x27;autres &quot;staging&quot; files utilisés dans des commandes particulières, je pense notamment à &lt;code&gt;gimme readme&lt;/code&gt; mais j&#x27;y reviendrais un poil plus tard.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;~/.gimme/commands&lt;/code&gt; est un dossier particulier qui peut-être utilisé pour créer des commands custom, mais ici aussi j&#x27;y reviendrais un peu plus tard.&lt;/p&gt;
+
+&lt;h3&gt;Utilisation basique&lt;/h3&gt;
+
+&lt;p&gt;gimme est sur npm, l&#x27;install se résume donc à:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install gimme-assets -g
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Une fois installé, depuis n&#x27;importe où sur le système, la commande &lt;code&gt;gimme&lt;/code&gt; (ou &lt;code&gt;gimme help&lt;/code&gt;, ou &lt;code&gt;gimme --help&lt;/code&gt;) devrait retourner:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Usage:
+  gimme [command] [options]
+
+Commands:
+  gimme completion              Setup tab completion
+  gimme list                    List available packages
+  gimme docs &lt;name&gt;             Tries to open package&#x27;s documentation using default browser
+  gimme install &lt;name ...&gt;      Installs the lib(s) &lt;name ...&gt;
+  gimme readme &lt;name&gt;           Show the appropriate documentation manpage generated from readme file
+
+Options:
+
+  -o, --out &lt;dir&gt;          output directory defaulting to ./js/libs
+  -l, --loglevel &lt;level&gt;   What level of logs to report
+  -v, --version            output program version
+  -h, --help               display help information
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ce petit output d&#x27;aide permet également de se rendre compte des commandes disponibles que je vais rapidement présenter. Certaines sont assez &quot;fantaisiste&quot;, d&#x27;autres ne seront supportés que sous un OS décent (pas windows, &lt;code&gt;/trollface&lt;/code&gt;), mais qui selon moi apportent un réel plus.&lt;/p&gt;
+
+&lt;h3&gt;gimme commands&lt;/h3&gt;
+
+&lt;h4&gt;completion&lt;/h4&gt;
+
+&lt;p&gt;Probablement ma commande préférée ☺ Et seule commande qui n&#x27;est pas supporté sous win32 ☹&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;gimme completion&lt;/code&gt; est typiquement une commande qu&#x27;on exécutera une seule fois et qui vous facilitera grandement la vie. Je suis assez fan des possibilités de completion que ce soit pour les commandes systèmes classique, la completion git ou encore la completion npm, etc. etc. Les mécanismes de tab-completion n&#x27;ont l&#x27;air de rien mais aident vraiment, que ce soit dans l&#x27;utilisation d&#x27;un outil ou son apprentissage. Je ne compte plus le nombre d&#x27;option bien sympa que j&#x27;ai découvert aprés avoir mis en place la completion de npm... (--save, --gangsta, ... --etc)&lt;/p&gt;
+
+&lt;p&gt;Dailleurs, la completion mise en place dans gimme et le mécanisme permettant de le mettre en oeuvre depuis du code JS est complètement basé sur celle de npm.&lt;/p&gt;
+
+&lt;p&gt;Tout &lt;a href=&quot;http://npmjs.org/doc/completion.html&quot;&gt;comme npm&lt;/a&gt;, la completion peut être installé avec cette simple commande:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;. &lt;(gimme completion)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ce qui aura pour effet de charger, dans le shell courant, le scipt sh permettant de faire le bridge entre le shell et le code de gimme (vous pouvez voir / vérifier l&#x27;output du script en lançant &lt;code&gt;gimme completion&lt;/code&gt;). Optionnellement, ajouter ce script à votre &lt;code&gt;~/.bashrc&lt;/code&gt; ou &lt;code&gt;~/.zshrc&lt;/code&gt; rendra la completion disponible depuis n&#x27;importe où, et pas seulement le shell actuel.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gimme completion &gt;&gt; ~/.bashrc  (ou ~/.zshrc)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Désintaller la completion est très simple et revient à enlever le script de completion de gimme prélablement ajouté dans votre &lt;code&gt;.bashrc&lt;/code&gt; ou &lt;code&gt;.zshrc&lt;/code&gt; et de recharger la config du shell (&lt;code&gt;source ~/.bashrc&lt;/code&gt; ou (&lt;code&gt;.zshrc&lt;/code&gt;), ou simplement relancer un nouveau shell).&lt;/p&gt;
+
+&lt;p&gt;Faire de la complétion de commande depuis du code node est un sujet super intéressant, que j&#x27;ai pu apprendre en naviguant dans les (fabuleuses) sources de npm, et mériterait probablement un article complet (qui peut-être viendra...)&lt;/p&gt;
+
+&lt;h4&gt;list&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;list&lt;/code&gt; est une commande basique qui se chargera de dumper dans la console une liste de toutes les libs disponibles, avec le nom et description du package.&lt;/p&gt;
+
+&lt;p&gt;Depuis le support des libs de microjs, cette liste est passé de 80 packages à plus de 230, je vous épargne donc l&#x27;output de la console ici. Mais on aura compris l&#x27;idée.&lt;/p&gt;
+
+&lt;p&gt;Une issue est ouverte pour diminuer la verbosité de cette commande, comme une idée de pagination. Alternativement, je pense depuis un moment à ajouter le support de &quot;term&quot; à cette commande qui ne retournerait que les packages validant la regexp construite à partir des arguments en ligne de commande (eg. &lt;code&gt;gimme list jquery&lt;/code&gt; ne retournerait que les libs avec &lt;code&gt;jquery&lt;/code&gt; dans le nom du package).&lt;/p&gt;
+
+&lt;h4&gt;docs&lt;/h4&gt;
+
+&lt;p&gt;Directement inspiré de l&#x27;excellente commande qu&#x27;offre npm: &lt;code&gt;npm docs packagename&lt;/code&gt;. Cette commande aura pour effet d&#x27;ouvrir dans le navigateur configuré par défaut la page de documentation du projet qui est parsé ou deviné par npm depuis les infos du package.json (bien souvent il s&#x27;agira du readme sur github). Ca a l&#x27;air de rien comme ça, mais c&#x27;est super pratique.&lt;/p&gt;
+
+&lt;p&gt;L&#x27;idée ici est la même, &lt;code&gt;gimme docs socket.io&lt;/code&gt; aura pour effet d&#x27;ouvrir la page du projet dans votre navigateur préféré.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ » gimme docs socket.io
+  info  - Opening HTML in default browser...
+  debug - docs done in 0.973s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;install&lt;/h4&gt;
+
+&lt;p&gt;La commande qu&#x27;on utilisera probablement le plus souvent. Elle permet de télécharger puis d&#x27;installer dans le répertoire par défaut (&lt;code&gt;./js/libs&lt;/code&gt;) les packages passés depuis la command line. On peut installer plusieurs libs en une seule commande:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ » gimme install zepto backbone.js underscore.js
+  log   - Installing... zepto backbone.js underscore.js
+  log   - all done
+  debug - install done in 0.016s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;0.016s&lt;/code&gt; presque immédiat car j&#x27;ai déja ces libs au niveau du cache de gimme, les premiers appels seraient un peu plus long mais dépendant de votre connection cela peut se dérouler très rapidement.&lt;/p&gt;
+
+&lt;h4&gt;readme&lt;/h4&gt;
+
+&lt;p&gt;Probablement ma seconde commande préféré après &lt;code&gt;completion&lt;/code&gt; ☺ Et elle aussi directement inspirée et basée sur le code de npm pour sa commande &lt;code&gt;npm help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cette commande tentera de récupérer le readme sur le repo github correspondant, générera une manpage temporaire à partir du markdown et l&#x27;affichera directement dans votre console si votre système le permet et a &lt;code&gt;man&lt;/code&gt; d&#x27;installé, où générera une page html correspondante qu&#x27;il affichera dans le navigateur par défaut (windows).&lt;/p&gt;
+
+&lt;p&gt;Il y a quelque chose de magique dans le fait de taper &lt;code&gt;gimme readme socket.io&lt;/code&gt; et de voir quelques secondes plus tard (ou immédiatement si prélablement caché) la documentation apparaissant dans le readme du projet directement dans la console :p&lt;/p&gt;
+
+&lt;h3&gt;custom commands&lt;/h3&gt;
+
+&lt;p&gt;Comment gimme est développé en interne et comment les commandes sont impléméntés est un autre sujet, mais je voulais parler ici de la possibilité qu&#x27;il offre à l&#x27;utilisateur de définir et d&#x27;enregistrer auprès de gimme un ensemble de commandes custom.&lt;/p&gt;
+
+&lt;p&gt;Au démararge (chaque fois que l&#x27;executable &lt;code&gt;gimme&lt;/code&gt; est executé), gimme &quot;scanne&quot; le répertoire &lt;code&gt;commands&lt;/code&gt; interne (avec list, install etc.) pour connaître et charger les commandes disponibles. Il vérifie également l&#x27;existence d&#x27;un répertoire particulier &lt;code&gt;~/.gimme/commands&lt;/code&gt; pour charger toute commande stockée ici (chaque fichier est un module commonjs définissant une commande) et la rendre disponible depuis la ligne de commande.&lt;/p&gt;
+
+&lt;p&gt;Pour connaître l&#x27;emplacement du répertoire &lt;code&gt;.gimme&lt;/code&gt; sur votre système, lancez un petit REPL node et tapez &lt;code&gt;process.env.HOME&lt;/code&gt; sous unix ou &lt;code&gt;process.env.USERPROFILE&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ » node
+&gt; process.env.HOME
+&gt;
+&gt; // ou sur win32
+&gt; process.env.USEPROFILE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Le repl devrait vous retourner l&#x27;emplacement de votre home directory où sera créé &lt;code&gt;.gimme&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Ainsi une commande tout bête (l&#x27;éternel helloworld) qui serait stocké dans un fichier &lt;code&gt;~/.gimme/commands/hello.js&lt;/code&gt; (le nom du fichier est important, nom du fichier = nom de la commande) avec le contenu suivant:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;module.exports = helloworld;
+
+helloworld.usage = &quot;gimme helloworld &lt;pkgname&gt;&quot;;
+helloworld.description = [&#x27;helloworld &lt;name&gt;&#x27;, &quot;best command ever&quot;];
+
+function helloworld (opts, cb) {
+  var args = opts.argv.remain.slice(1);
+  console.log(&#x27;Hello&#x27;, args.join(&#x27; &#x27;));
+  cb();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;permettrait de lancer la commande &lt;code&gt;gimme hello&lt;/code&gt; et d&#x27;obtenir l&#x27;output correspondant&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ » gimme hello from gimme
+Hello from gimme
+  debug - hello done in 0.004s
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;L&#x27;api et la manière de construire ses propres commandes sera sûrement ammenée à changer un peu, mais le concept restera le même.&lt;/p&gt;
+
+&lt;h3&gt;Chère proxy...&lt;/h3&gt;
+
+&lt;p&gt;Dans toutes les boites où j&#x27;ai pu travailler, j&#x27;ai toujours eu affaire à un proxy qui, la plupart du temps, m&#x27;empêche de travailler plus qu&#x27;autre chose.&lt;/p&gt;
+
+&lt;p&gt;Le développement de gimme n&#x27;a pas été epargné mais je voulais vraiment pouvoir l&#x27;utiliser depuis mon environnement de travail (car ca me fait gagner un peu de temps finalement...). Laissez moi vous dire que gérer à la fois unix/osx/windows et les environnements proxié/non-proxié n&#x27;est pas une mince affaire, qui ne va pas sans quelques &lt;a href=&quot;https://github.com/mklabs/gimme-assets/issues&quot;&gt;bugs et issues&lt;/a&gt; mais le support basique est là, et devrait s&#x27;améliorer au fur et à mesure.&lt;/p&gt;
+
+&lt;p&gt;Scénario classique: gimme pour fonctionner dérrière un proxy a besoin d&#x27;une variable d&#x27;environnement particulière (la même que celle utilisé par git). Si placé, gimme saura qu&#x27;il doit se débrouiller dans cet environnement et enclenchera la logique approprié.&lt;/p&gt;
+
+&lt;p&gt;Synopsis classique - Erreur proxy: si une install prends anormalement trop de temps (&lt;10s), gimme assumera que vous êtes derrière un proxy et qu&#x27;il lui faut les variables d&#x27;environnement correspondantes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ » gimme install ace
+  log   - Installing... ace
+  error - Request timeout: You may be behind an http proxy.
+
+Try setting up $http_proxy environement variable:
+
+Unixes:
+  export http_proxy=&lt;a href=&#x27;http://proxy:port&#x27;&gt;http://proxy:port&lt;/a&gt;
+
+Windows:
+  set http_proxy=&lt;a href=&#x27;http://proxy:port&#x27;&gt;http://proxy:port&lt;/a&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Une fois les bonnes variables d&#x27;environnement placées:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ » gimme install ace
+  log   - Installing... ace
+  log   - all done
+  debug - install done in 0.016s
+
+$ gimme install jquery
+  log   - Installing... jquery
+  log   - all done
+  debug - install done in 2.131s
+
+$ ls js/libs/
+ace.js  jquery.min.js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;BOOM. done.&lt;/p&gt;
+
+&lt;h3&gt;gimme vnext&lt;/h3&gt;
+
+&lt;p&gt;Je tente d&#x27;améliorer gimme régulièrement et ai sous le coude un tas d&#x27;idée et de commande qui resterait à implémenter. Certaines de ces fonctionnalités me font cruellement défaut, je devrais donc les ajouter très prochainement.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;commande html: une commande pour générer le bout d&#x27;html nécessaire et correspondant à une lib. Si cdnjs, le markup html retourné devrait utiliser la lib hébergés sur cdnjs avec le fallback correspondant.&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;une option comme &lt;code&gt;--append path/to/file.html&lt;/code&gt; pourrait ajouter directement l&#x27;import de la lib qui va bien, à l&#x27;endroit qui va bien.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;commande add: une commande add permettrait de définir et gérer un ensemble de package custom, c&#x27;est à dire n&#x27;apparaissant pas dans les repository de cdnjs ou microjs. En pratique, ce serait une commande qui se comporterait comme &lt;code&gt;npm init&lt;/code&gt; et lancerait une série de prompt pour définir un nouveau package (name, description, repo, branch, liste de fichiers). L&#x27;idée ici serait de pouvoir mapper non seulement un ensemble de fichier &lt;code&gt;.js&lt;/code&gt; mais aussi &lt;code&gt;.css&lt;/code&gt;, &lt;code&gt;.html&lt;/code&gt;, &lt;code&gt;.less&lt;/code&gt; ou encore un repository complet.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;compress / minify option: Toutes les libs présente sur cdnjs sont déja minifiés, l&#x27;intérêt est donc limité pour cdnjs mais une option &lt;code&gt;--compress&lt;/code&gt; pourrait automatiquement passer les libs (ne finissant pas par &lt;code&gt;.min.js&lt;/code&gt;) dans &lt;a href=&quot;https://github.com/mishoo/UglifyJS&quot;&gt;uglifyjs&lt;/a&gt; avant de les installer.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;commande bundle: ou tout autre nom approprié. Une légère variante à la commande install permettrait de concaténer / minifier la liste des libs en un seul &quot;bundle&quot; optimisé.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;commande coffee: Une simple commande qui s&#x27;interfacerait avec ma machine à expresso pour facilement... Okay, je →&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Conclusion / TLDR;&lt;/h3&gt;
+
+&lt;p&gt;gimme gimme gimme...&lt;/p&gt;</content>
+  </entry>
+ 
+
+</feed>
