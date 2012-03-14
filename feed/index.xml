@@ -3,13 +3,129 @@
   <title>@mklabs blog</title>
   <link href="http://blog.mklog.fr/feed/" rel="self"/>
   <link href="http://blog.mklog.fr/"/>
-  <updated>2012-03-14T15:03:22+01:00</updated>
+  <updated>2012-03-14T17:03:56+01:00</updated>
   <id>http://blog.mklog.fr/</id>
   <author>
     <name>Mickael Daniel</name>
   </author>
 
   
+  <entry>
+    <title>Un petit pattern pubsub avec Backbone</title>
+    <link href="http://blog.mklog.fr/articles/un-petit-pattern-pubsub-avec-backbone/"/>
+    <updated>2012-03-14T16:03:00+01:00</updated>
+    <id>http://blog.mklog.fr/articles/un-petit-pattern-pubsub-avec-backbone</id>
+    <content type="html">&lt;p&gt;Un petit article pour présenter un petit pattern pubsub que j&#x27;expérimente et affine sur plusieurs applications Backbone. Pour l&#x27;instant, j&#x27;en suis très satisfait et m&#x27;a aidé sur plusieurs points.&lt;/p&gt;
+
+&lt;p&gt;L&#x27;idée est:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;d&#x27;utiliser l&#x27;event spécial &lt;code&gt;all&lt;/code&gt; de Backbone pour écouter tous les évenements de l&#x27;appli&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;de se reposer sur une simple convention de &quot;namespacing&quot; des évenements&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;de &quot;walker&quot; l&#x27;object application (le point d&#x27;entrée de l&#x27;appli) et exécuter la bonne méthode, du bon composant.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ce pattern se repose sur le fait que l&#x27;application est organisé via un namespace et point d&#x27;entrée unique (et global) de l&#x27;appli (exit donc, requirejs qui permet de s&#x27;en passer).&lt;/p&gt;
+
+&lt;h2&gt;Simple backbone pubsub&lt;/h2&gt;
+
+&lt;p&gt;Il existe un nombre incroyable d&#x27;implémentation dites &quot;pubsub&quot; pour nos dévelopments front. Certains sont simplistes et peuvent être écrit en une 20aine de lignes, d&#x27;autres vont plus loin au niveau fonctionnalité (et a fortiori plus de complexité).&lt;/p&gt;
+
+&lt;p&gt;Backbone ne propose pas un système dit pubsub de base, mais fournit par contre &lt;code&gt;Backbone.Events&lt;/code&gt; (&lt;a href=&quot;http://documentcloud.github.com/backbone/docs/backbone.html#section-15&quot;&gt;src&lt;/a&gt;). Il s&#x27;agit de ce qu&#x27;on appelle un mixin qui peut être utilisé et mergé avec n&#x27;importe quel objet (son prototype) pour lui ajouter une api trigger/bind. C&#x27;est en fait ce qui est fait en interne pour chacun des composant fournis par Backbone (View, Model/Collection, Router. History également).&lt;/p&gt;
+
+&lt;p&gt;L&#x27;idée principal du pubsub et de disposer d&#x27;un &quot;bus de communication&quot; centralisé et unique à notre appli. On peut donc penser à utiliser &lt;code&gt;Backbone.Events&lt;/code&gt; pour fabriquer un objet destiné à assurer ce rôle. Encore mieux, on peut penser à concevoir notre &quot;top-level namespace&quot; (le point d&#x27;entrée de l&#x27;appli) de cette façon.&lt;/p&gt;
+
+&lt;p&gt;J&#x27;aime bien l&#x27;idée de considérer le namespace de l&#x27;application, ex. app, comme le moyen d&#x27;y accéder. Pouvant si besoin jouer le rôle de mediator dans la communication et appliquer un peu plus de logique. Ainsi non seulement l&#x27;objet app servira à contenir l&#x27;ensemble des sous namespace (ui, model, etc.), mais il aura les méthodes nécessaire pour emettre ou écouter des évenements.&lt;/p&gt;
+
+&lt;p&gt;Dans &lt;a href=&quot;https://github.com/tbranyen/backbone-boilerplate&quot;&gt;backbone-boilerplate&lt;/a&gt; (super projet, que je vous conseille fortement), on peut par exemple voir ce pattern mis en oeuvre &lt;a href=&quot;https://github.com/tbranyen/backbone-boilerplate/blob/40e49ba/app/namespace.js#L53&quot;&gt;ici&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;L&#x27;application, qui peut être un simple objet sur lequel on attache le reste des vues / models / routers, peut aussi être directement un object à qui l&#x27;on a ajouté l&#x27;api Event.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var app = _.extend({}, Backbone.Events);
+app.ui = {};
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;De cette façon, on dispose rapidement d&#x27;un mécanisme pubsub au sein de notre application, sans aucune dépendances externes (aussi légère soit-elle), avec une sémantique qui me plait bien.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// depuis n&#x27;importe ou dans l&#x27;appli
+app.trigger(&#x27;something&#x27;);
+
+// idem.. depuis un autre composant
+app.bind(&#x27;something&#x27;, function() {
+  // Logic...
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bien sûr, le nom de la variable &lt;code&gt;app&lt;/code&gt; est arbitraire et peut être changée de projet en projet. Idéallement, on prendra un nom relativement court, deux ou trois lettres suffisent.&lt;/p&gt;
+
+&lt;h3&gt;Object.create&lt;/h3&gt;
+
+&lt;p&gt;Une déclinaison que je préfère en utilisant &lt;code&gt;Object.create&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var app = Object.create(Backbone.Events);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Je tends a préférer cette approche car elle laisse l&#x27;object &lt;code&gt;app&lt;/code&gt; et ses propriétés clean en ayant les méthodes du mixin Backbone.Events contenu au niveau de son prototype (&lt;strong&gt;proto&lt;/strong&gt; au niveau de l&#x27;instance). C&#x27;est juste plus clean dans ma console :p&lt;/p&gt;
+
+&lt;p&gt;Plus sérieusement, cette alternative est tout à fait valide et justifiée du moment que vous avez accès à &lt;code&gt;Object.create&lt;/code&gt; (addition ES5), soit en contrôlant les navigateurs cibles, soit en se reposant sur un shim ES5 (&lt;a href=&quot;https://github.com/kriskowal/es5-shim&quot;&gt;es5-shim&lt;/a&gt; fait aujourd&#x27;hui parti de ma stack par défaut).&lt;/p&gt;
+
+&lt;h2&gt;Petit pattern pubsub bien pratique&lt;/h2&gt;
+
+&lt;p&gt;Maintenant que l&#x27;on a notre structure en place, on peut parler de ce pattern pubsub d&#x27;execution automatique de méthode.&lt;/p&gt;
+
+&lt;p&gt;Concrètement, il me permet de ne plus avoir à gérer les &lt;code&gt;bind&lt;/code&gt; explicites au niveau de mes objets mais de se reposer sur cette convention. Généralement, mes &lt;code&gt;bind&lt;/code&gt; depuis les composants Backbone ressemblent toujours à:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;app.bind(&#x27;something&#x27;, this.method.bind(this));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;**Note Je n&#x27;utilise pas ou peu &lt;code&gt;_.bind&lt;/code&gt; et &lt;code&gt;_.bindAll&lt;/code&gt; au profit de &lt;code&gt;Function.protype.bind&lt;/code&gt;. Question d&#x27;habitude coté node ou j&#x27;utilise beaucoup &lt;code&gt;.bind&lt;/code&gt;. Ici encore, cela suppose la présence d&#x27;es5-shim, mais il s&#x27;agit là juste d&#x27;une question de préférence. Je suppose que le principal étant de comprendre les implications et d&#x27;utiliser ce avec quoi on est le plus à l&#x27;aise.&lt;/p&gt;
+
+&lt;p&gt;Il s&#x27;agit donc presque toujours d&#x27;une méthode d&#x27;un de mes composants (souvent les vues) qui est executé lorsque qu&#x27;un évenement survient (a contrario d&#x27;une fonction anonyme passé à &lt;code&gt;app.bind&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Partant de ce postulat, j&#x27;ai donc expérimenté l&#x27;approche suivante:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;les évenements dans l&#x27;application sont délimités par &lt;code&gt;:&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;chaque &quot;partie&quot; de l&#x27;évenement représente un &quot;niveau&quot; au sein de la structure de l&#x27;objet app.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;la dernière partie de l&#x27;évenement représente toujours le nom de la méthode a appéllé.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;doit être un noop lorsque l&#x27;un des niveau n&#x27;a pu être trouvé, ou méthode absente (grosso-modo, pas d&#x27;erreur et silent fail).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ne doit pas dénaturer le concept du pubsub, et se comporter de la même façon.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ainsi, si depuis un composant, je lance un &lt;code&gt;app.trigger(&#x27;ui:panel:change&#x27;)&lt;/code&gt;, le système tentera d&#x27;appeller la méthode &lt;code&gt;app.ui.panel.change&lt;/code&gt;. Il s&#x27;agit par exemple dans mon cas d&#x27;utilisation de la méthode &lt;code&gt;change&lt;/code&gt; de la vue &lt;code&gt;panel&lt;/code&gt; qui est attaché au sous-namespace &lt;code&gt;ui&lt;/code&gt; de mon objet application &lt;code&gt;app&lt;/code&gt;. Très simpliste...&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// handy walk the application object to bride event triggered to function calls
+//
+//    app.trigger(&#x27;ui:panel:change&#x27;);
+//    // invoke the app.ui.panel.change method
+//
+app.on(&#x27;all&#x27;, function(ev) {
+  var parts = ev.split(&#x27;:&#x27;),
+    args = Array.prototype.slice.call(arguments, 1);
+
+  if(parts.length &lt; 2) return;
+  var memo = app;
+  parts.forEach(function(name) {
+    var ns = memo[name];
+    if(!ns) return;
+    // invoke!
+    if(typeof ns === &#x27;function&#x27;) return ns.apply(memo, args);
+    // or continue the walk through
+    memo = ns;
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Une petite quinzaine de ligne pour implémenter cette fonctionnalité qui me rend de sacrés services. Certains pourront détester cette approche, personnellement j&#x27;en suis fan (car feignant).&lt;/p&gt;
+
+&lt;p&gt;Cela me permet grosso modo d&#x27;éliminer une étape dans le processus, et de ne plus avoir à explicitement &quot;binder&quot; mes composants à certains évenements tout en me donnant la possibilité d&#x27;appeller absolument n&#x27;importe quelle méthodes de n&#x27;importe lequel de mes composants. Et cela, en restant tout aussi découplé que l&#x27;approche classique.&lt;/p&gt;
+
+&lt;p&gt;Cela marche très bien pour moi, cele pourrait peut être marcher pour vous ☺&lt;/p&gt;
+
+&lt;p&gt;Pour avoir un aperçu du code globale (et un poil plus évolué), voici un &lt;a href=&quot;https://gist.github.com/2037864&quot;&gt;gist&lt;/a&gt; illustrant cette approche.&lt;/p&gt;</content>
+  </entry>
+ 
   <entry>
     <title>Just gimme web assets please</title>
     <link href="http://blog.mklog.fr/articles/just-gimme-web-assets-please/"/>

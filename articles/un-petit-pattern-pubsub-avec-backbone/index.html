@@ -1,0 +1,176 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>blog.mklog.fr .::. Un petit pattern pubsub avec Backbone</title>
+  <meta name="description" content="@mklabs blog">
+  <meta name="viewport" content="width=device-width">
+  <meta name="generator" content="nabe 0.2.0" />
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <!-- <link rel="alternate" type="application/rss+xml" title="blog.mklog.fr feed" href="http://blog.mklog.fr/feed/"> -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body class="un-petit-pattern-pubsub-avec-backbone">
+  
+
+<div class="post">
+
+  <header>
+    <div class="container">
+      <h1><a href="/">blog.mklog.fr</a></h1>
+      <h2>Un petit pattern pubsub avec Backbone</h2>
+      <span class="date">14 mars 2012</span>
+      <span class="date right">il y a une heure</span>
+    </div>
+  </header>
+
+  <div role="main" class="markdown container">
+    <p>Un petit article pour présenter un petit pattern pubsub que j'expérimente et affine sur plusieurs applications Backbone. Pour l'instant, j'en suis très satisfait et m'a aidé sur plusieurs points.</p>
+
+<p>L'idée est:</p>
+
+<ul>
+<li><p>d'utiliser l'event spécial <code>all</code> de Backbone pour écouter tous les évenements de l'appli</p></li>
+<li><p>de se reposer sur une simple convention de "namespacing" des évenements</p></li>
+<li><p>de "walker" l'object application (le point d'entrée de l'appli) et exécuter la bonne méthode, du bon composant.</p></li>
+</ul>
+
+<p>Ce pattern se repose sur le fait que l'application est organisé via un namespace et point d'entrée unique (et global) de l'appli (exit donc, requirejs qui permet de s'en passer).</p>
+
+<h2>Simple backbone pubsub</h2>
+
+<p>Il existe un nombre incroyable d'implémentation dites "pubsub" pour nos dévelopments front. Certains sont simplistes et peuvent être écrit en une 20aine de lignes, d'autres vont plus loin au niveau fonctionnalité (et a fortiori plus de complexité).</p>
+
+<p>Backbone ne propose pas un système dit pubsub de base, mais fournit par contre <code>Backbone.Events</code> (<a href="http://documentcloud.github.com/backbone/docs/backbone.html#section-15">src</a>). Il s'agit de ce qu'on appelle un mixin qui peut être utilisé et mergé avec n'importe quel objet (son prototype) pour lui ajouter une api trigger/bind. C'est en fait ce qui est fait en interne pour chacun des composant fournis par Backbone (View, Model/Collection, Router. History également).</p>
+
+<p>L'idée principal du pubsub et de disposer d'un "bus de communication" centralisé et unique à notre appli. On peut donc penser à utiliser <code>Backbone.Events</code> pour fabriquer un objet destiné à assurer ce rôle. Encore mieux, on peut penser à concevoir notre "top-level namespace" (le point d'entrée de l'appli) de cette façon.</p>
+
+<p>J'aime bien l'idée de considérer le namespace de l'application, ex. app, comme le moyen d'y accéder. Pouvant si besoin jouer le rôle de mediator dans la communication et appliquer un peu plus de logique. Ainsi non seulement l'objet app servira à contenir l'ensemble des sous namespace (ui, model, etc.), mais il aura les méthodes nécessaire pour emettre ou écouter des évenements.</p>
+
+<p>Dans <a href="https://github.com/tbranyen/backbone-boilerplate">backbone-boilerplate</a> (super projet, que je vous conseille fortement), on peut par exemple voir ce pattern mis en oeuvre <a href="https://github.com/tbranyen/backbone-boilerplate/blob/40e49ba/app/namespace.js#L53">ici</a>.</p>
+
+<p>L'application, qui peut être un simple objet sur lequel on attache le reste des vues / models / routers, peut aussi être directement un object à qui l'on a ajouté l'api Event.</p>
+
+<pre><code>var app = _.extend({}, Backbone.Events);
+app.ui = {};
+...
+</code></pre>
+
+<p>De cette façon, on dispose rapidement d'un mécanisme pubsub au sein de notre application, sans aucune dépendances externes (aussi légère soit-elle), avec une sémantique qui me plait bien.</p>
+
+<pre><code>// depuis n'importe ou dans l'appli
+app.trigger('something');
+
+// idem.. depuis un autre composant
+app.bind('something', function() {
+  // Logic...
+});
+</code></pre>
+
+<p>Bien sûr, le nom de la variable <code>app</code> est arbitraire et peut être changée de projet en projet. Idéallement, on prendra un nom relativement court, deux ou trois lettres suffisent.</p>
+
+<h3>Object.create</h3>
+
+<p>Une déclinaison que je préfère en utilisant <code>Object.create</code>:</p>
+
+<pre><code>var app = Object.create(Backbone.Events);
+</code></pre>
+
+<p>Je tends a préférer cette approche car elle laisse l'object <code>app</code> et ses propriétés clean en ayant les méthodes du mixin Backbone.Events contenu au niveau de son prototype (<strong>proto</strong> au niveau de l'instance). C'est juste plus clean dans ma console :p</p>
+
+<p>Plus sérieusement, cette alternative est tout à fait valide et justifiée du moment que vous avez accès à <code>Object.create</code> (addition ES5), soit en contrôlant les navigateurs cibles, soit en se reposant sur un shim ES5 (<a href="https://github.com/kriskowal/es5-shim">es5-shim</a> fait aujourd'hui parti de ma stack par défaut).</p>
+
+<h2>Petit pattern pubsub bien pratique</h2>
+
+<p>Maintenant que l'on a notre structure en place, on peut parler de ce pattern pubsub d'execution automatique de méthode.</p>
+
+<p>Concrètement, il me permet de ne plus avoir à gérer les <code>bind</code> explicites au niveau de mes objets mais de se reposer sur cette convention. Généralement, mes <code>bind</code> depuis les composants Backbone ressemblent toujours à:</p>
+
+<pre><code>app.bind('something', this.method.bind(this));
+</code></pre>
+
+<p>**Note Je n'utilise pas ou peu <code>_.bind</code> et <code>_.bindAll</code> au profit de <code>Function.protype.bind</code>. Question d'habitude coté node ou j'utilise beaucoup <code>.bind</code>. Ici encore, cela suppose la présence d'es5-shim, mais il s'agit là juste d'une question de préférence. Je suppose que le principal étant de comprendre les implications et d'utiliser ce avec quoi on est le plus à l'aise.</p>
+
+<p>Il s'agit donc presque toujours d'une méthode d'un de mes composants (souvent les vues) qui est executé lorsque qu'un évenement survient (a contrario d'une fonction anonyme passé à <code>app.bind</code>).</p>
+
+<p>Partant de ce postulat, j'ai donc expérimenté l'approche suivante:</p>
+
+<ul>
+<li><p>les évenements dans l'application sont délimités par <code>:</code>.</p></li>
+<li><p>chaque "partie" de l'évenement représente un "niveau" au sein de la structure de l'objet app.</p></li>
+<li><p>la dernière partie de l'évenement représente toujours le nom de la méthode a appéllé.</p></li>
+<li><p>doit être un noop lorsque l'un des niveau n'a pu être trouvé, ou méthode absente (grosso-modo, pas d'erreur et silent fail).</p></li>
+<li><p>ne doit pas dénaturer le concept du pubsub, et se comporter de la même façon.</p></li>
+</ul>
+
+<p>Ainsi, si depuis un composant, je lance un <code>app.trigger('ui:panel:change')</code>, le système tentera d'appeller la méthode <code>app.ui.panel.change</code>. Il s'agit par exemple dans mon cas d'utilisation de la méthode <code>change</code> de la vue <code>panel</code> qui est attaché au sous-namespace <code>ui</code> de mon objet application <code>app</code>. Très simpliste...</p>
+
+<pre><code>// handy walk the application object to bride event triggered to function calls
+//
+//    app.trigger('ui:panel:change');
+//    // invoke the app.ui.panel.change method
+//
+app.on('all', function(ev) {
+  var parts = ev.split(':'),
+    args = Array.prototype.slice.call(arguments, 1);
+
+  if(parts.length &lt; 2) return;
+  var memo = app;
+  parts.forEach(function(name) {
+    var ns = memo[name];
+    if(!ns) return;
+    // invoke!
+    if(typeof ns === 'function') return ns.apply(memo, args);
+    // or continue the walk through
+    memo = ns;
+  });
+});
+</code></pre>
+
+<p>Une petite quinzaine de ligne pour implémenter cette fonctionnalité qui me rend de sacrés services. Certains pourront détester cette approche, personnellement j'en suis fan (car feignant).</p>
+
+<p>Cela me permet grosso modo d'éliminer une étape dans le processus, et de ne plus avoir à explicitement "binder" mes composants à certains évenements tout en me donnant la possibilité d'appeller absolument n'importe quelle méthodes de n'importe lequel de mes composants. Et cela, en restant tout aussi découplé que l'approche classique.</p>
+
+<p>Cela marche très bien pour moi, cele pourrait peut être marcher pour vous ☺</p>
+
+<p>Pour avoir un aperçu du code globale (et un poil plus évolué), voici un <a href="https://gist.github.com/2037864">gist</a> illustrant cette approche.</p>
+
+      <p class="twitter-share">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </p>
+    <div class="whatev">
+      <h3>Commentaire?</h3>
+
+
+      <p>Une remarque, un retour ou à peu près n'importe quoi relatif à
+      cet article ? Ca se passe désormais <a
+        href="https://github.com/mklabs/blog.mklog.fr/issues/new">ici</a>,
+      les commentaires passent maintenant par GitHub et sont gérés via bug
+      tracker ☺.</p>
+
+    </div>
+  </div>
+
+</div>
+
+
+  <footer>
+    <div class="container"></div>
+  </footer>
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="/assets/js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+
+  <script src="/assets/js/libs/es5-shim.min.js"></script>
+  <script src="/assets/js/libs/moment.min.js"></script>
+  <script src="/assets/js/libs/hijs.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>
