@@ -8,8 +8,8 @@ layout: layout
     <div class="container">
       <h1><a href="{{site.baseurl}}">{{site.title}}</a></h1>
       <h2>{{page.title}}</h2>
-      <span class="date">{{page.date}}</span>
-      <span class="date date-hidden right" data-format="from">{{page.time}}</span>
+      <span class="date">{{moment page.time "D MMM YYYY"}}</span>
+      <span class="date right">{{moment page.time}}</span>
     </div>
   </header>
 
