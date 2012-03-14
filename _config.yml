@@ -24,6 +24,7 @@ layout: 'post'
 pages: &pages
   files:
     - '*.html'
+    - 'feed/index.xml'
     - '**/*.md'
     - '**/*.markdown'
     - 'examples/**/*.js'
