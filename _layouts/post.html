@@ -30,6 +30,24 @@ layout: layout
       les commentaires passent maintenant par GitHub et sont gérés via bug
       tracker ☺.</p>
 
+      <div class="gh-issues">
+        <span class="spinner"></span>
+
+        <script type="text/template" id="tmpl-issues">
+          <ul>
+            <% _.each(issues, function(issue) { %>
+            <li><p><%= issue.issue.body %></p></li>
+            <li class="gh-issues-thread">
+              <ul>
+              <% _.each(issue.comments, function(comment) { %>
+                <li><p><%= comment.body %></p></li>
+              <% }); %>
+              </ul>
+            </li>
+            <% }); %>
+          </ul>
+        </script>
+      </div>
     </div>
   </div>
 
