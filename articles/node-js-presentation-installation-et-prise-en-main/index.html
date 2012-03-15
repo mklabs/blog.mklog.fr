@@ -300,7 +300,7 @@ Félicitations et bienvenue dans l'avenir du développement web!
 
             <li class="gh-issues-thread">
               <ul>
-              <% _.each(issue.comments, function(comment) { %>
+              <% _.each(issue.comments.data, function(comment) { %>
                 <li>
                   <span class="avatar">
                     <img src="<%= comment.user.avatar_url %>" />

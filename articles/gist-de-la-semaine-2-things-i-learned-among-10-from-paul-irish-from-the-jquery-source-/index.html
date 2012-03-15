@@ -156,7 +156,7 @@ Au fait, vous ai-je déjà dit de vous abonner au podcast <a href="http://yayque
 
             <li class="gh-issues-thread">
               <ul>
-              <% _.each(issue.comments, function(comment) { %>
+              <% _.each(issue.comments.data, function(comment) { %>
                 <li>
                   <span class="avatar">
                     <img src="<%= comment.user.avatar_url %>" />

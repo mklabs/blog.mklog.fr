@@ -116,7 +116,7 @@ Qui sait le prochain Picasso naîtra peut être de la fusion du JS, des canvas e
 
             <li class="gh-issues-thread">
               <ul>
-              <% _.each(issue.comments, function(comment) { %>
+              <% _.each(issue.comments.data, function(comment) { %>
                 <li>
                   <span class="avatar">
                     <img src="<%= comment.user.avatar_url %>" />

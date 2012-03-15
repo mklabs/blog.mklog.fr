@@ -927,7 +927,7 @@ $.plugin('feature', Feature()); // Module pattern, mais l'on pourrait adapter no
 
             <li class="gh-issues-thread">
               <ul>
-              <% _.each(issue.comments, function(comment) { %>
+              <% _.each(issue.comments.data, function(comment) { %>
                 <li>
                   <span class="avatar">
                     <img src="<%= comment.user.avatar_url %>" />

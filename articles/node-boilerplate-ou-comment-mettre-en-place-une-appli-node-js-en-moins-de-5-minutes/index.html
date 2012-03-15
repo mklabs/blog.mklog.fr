@@ -230,7 +230,7 @@ Un grand merci à <a href="https://github.com/robrighter">Rob Righter</a> d'avoi
 
             <li class="gh-issues-thread">
               <ul>
-              <% _.each(issue.comments, function(comment) { %>
+              <% _.each(issue.comments.data, function(comment) { %>
                 <li>
                   <span class="avatar">
                     <img src="<%= comment.user.avatar_url %>" />
