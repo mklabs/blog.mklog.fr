@@ -53,7 +53,7 @@
       if(!ln) return app.renderIssues();
 
       related.forEach(function(rel) {
-        var req = $.getJSON(api + '/repos/mklabs/blog.mklog.fr/issues/' + rel.number + '/comments');
+        var req = $.getJSON(api + '/repos/mklabs/blog.mklog.fr/issues/' + rel.number + '/comments?callback=?');
         req.success(function(data) {
           comments.push({
             issue: rel,
@@ -83,8 +83,6 @@
   // - model   - a Hash object to pass to templates
   app.renderIssues = function renderIssues(model) {
     model = model || [];
-
-    console.log('model', model);
 
     var num = model
       .map(function(issue) {
