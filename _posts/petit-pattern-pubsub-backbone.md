@@ -23,15 +23,15 @@ L'idée est:
 * de "walker" l'object application (le point d'entrée de l'appli) et exécuter la
   bonne méthode, du bon composant.
 
-Ce pattern se repose sur le fait que l'application est organisé via un namespace et
+Ce pattern se repose sur le fait que l'application soit organisée via un namespace et
 point d'entrée unique (et global) de l'appli (exit donc, requirejs qui permet de s'en
 passer).
 
 ## Simple backbone pubsub
 
-Il existe un nombre incroyable d'implémentation dites "pubsub" pour nos dévelopments
+Il existe un nombre incroyable d'implémentation dites "pubsub" pour nos dévelopements
 front. Certains sont simplistes et peuvent être écrit en une 20aine de lignes,
-d'autres vont plus loin au niveau fonctionnalité (et a fortiori plus de complexité).
+d'autres vont plus loin au niveau fonctionnalités (et a fortiori plus de complexité).
 
 Backbone ne propose pas un système dit pubsub de base, mais fournit par contre
 `Backbone.Events`
@@ -108,7 +108,7 @@ depuis les composants Backbone ressemblent toujours à:
 
     app.bind('something', this.method.bind(this));
 
-**Note Je n'utilise pas ou peu `_.bind` et `_.bindAll` au profit de
+**Note** Je n'utilise pas ou peu `_.bind` et `_.bindAll` au profit de
 `Function.protype.bind`. Question d'habitude coté node ou j'utilise beaucoup `.bind`.
 Ici encore, cela suppose la présence d'es5-shim, mais il s'agit là juste d'une
 question de préférence. Je suppose que le principal étant de comprendre les
@@ -125,7 +125,7 @@ Partant de ce postulat, j'ai donc expérimenté l'approche suivante:
 * chaque "partie" de l'évenement représente un "niveau" au sein de la structure de
   l'objet app.
 
-* la dernière partie de l'évenement représente toujours le nom de la méthode a appéllé.
+* la dernière partie de l'évenement représente toujours le nom de la méthode a appeller.
 
 * doit être un noop lorsque l'un des niveau n'a pu être trouvé, ou méthode absente
   (grosso-modo, pas d'erreur et silent fail).
@@ -134,11 +134,11 @@ Partant de ce postulat, j'ai donc expérimenté l'approche suivante:
 
 Ainsi, si depuis un composant, je lance un `app.trigger('ui:panel:change')`, le
 système tentera d'appeller la méthode `app.ui.panel.change`. Il s'agit par exemple
-dans mon cas d'utilisation de la méthode `change` de la vue `panel` qui est attaché
+dans mon cas d'utilisation de la méthode `change` de la vue `panel` qui est attachée
 au sous-namespace `ui` de mon objet application `app`. Très simpliste...
 
 
-    // handy walk the application object to bride event triggered to function calls
+    // handy walk the application object to bridge event triggered to function calls
     //
     //    app.trigger('ui:panel:change');
     //    // invoke the app.ui.panel.change method
@@ -171,7 +171,7 @@ classique.
 
 Cela marche très bien pour moi, cele pourrait peut être marcher pour vous ☺
 
-Pour avoir un aperçu du code globale (et un poil plus évolué), voici un [gist](https://gist.github.com/2037864)
+Pour avoir un aperçu du code global (et un poil plus évolué), voici un [gist](https://gist.github.com/2037864)
 illustrant cette approche.
 
 
