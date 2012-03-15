@@ -25,7 +25,7 @@
       <h1><a href="/">blog.mklog.fr</a></h1>
       <h2>Play Framework, CRUD et intégration avec jQuery UI Grid</h2>
       <span class="date">16 mars 2011</span>
-      <span class="date right">il y a une année</span>
+      <span class="date date-hidden right" data-format="from">1300258800000</span>
     </div>
   </header>
 
@@ -466,13 +466,13 @@ GET        /grid/        staticDir:app/public
 
 <p>Je suis très enthousiaste concernant cette annonce et ce nouveau widget en développement. non pas que, datatable ou jqGrid soient mauvais.. Loin de là, ils sont par ailleurs utilisés et analysés pour la conception d'UI Grid, mais la perspective d'avoir un widget officiel, complétement intégré dans la librairie et disposant d'une API claire et bien foutue ne me laisse pas indifférent...</p>
 
-      <p class="twitter-share">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      </p>
-    <div class="whatev">
-      <h3>Commentaire?</h3>
+    <p class="twitter-share">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </p>
 
+    <div class="gh-issues">
+      <h3>Commentaire?</h3>
 
       <p>Une remarque, un retour ou à peu près n'importe quoi relatif à
       cet article ? Ca se passe désormais <a
@@ -480,6 +480,39 @@ GET        /grid/        staticDir:app/public
       les commentaires passent maintenant par GitHub et sont gérés via bug
       tracker ☺.</p>
 
+      <div id="gh-comments">
+
+        <span class="spinner"></span>
+
+        <script type="text/template" id="tmpl-issues">
+          <p class="comment-count"><%= num %></p>
+          <ul>
+            <% _.each(issues, function(issue) { %>
+            <li class="comment-first">
+              <span class="avatar">
+                <img src="<%= issue.issue.user.avatar_url %>" />
+                <p class="author"><a href="https://github.com/<%= issue.issue.user.login %>">@<%= issue.issue.user.login %></a></p>
+              </span>
+              <div class="comment-body"><%= ghm(issue.issue.body, 'mklabs/blog.mklog.fr') %></div>
+            </li>
+
+            <li class="gh-issues-thread">
+              <ul>
+              <% _.each(issue.comments, function(comment) { %>
+                <li>
+                  <span class="avatar">
+                    <img src="<%= comment.user.avatar_url %>" />
+                    <p class="author"><a href="https://github.com/<%= comment.user.login %>">@<%= comment.user.login %></a></p>
+                  </span>
+                  <div class="comment-body"><%= ghm(comment.body, 'mklabs/blog.mklog.fr') %></div>
+                </li>
+              <% }); %>
+              </ul>
+            </li>
+            <% }); %>
+          </ul>
+        </script>
+      </div>
     </div>
   </div>
 
@@ -496,7 +529,11 @@ GET        /grid/        staticDir:app/public
 
   <script src="/assets/js/libs/es5-shim.min.js"></script>
   <script src="/assets/js/libs/moment.min.js"></script>
+  <script src="/assets/js/lang/fr.js"></script>
   <script src="/assets/js/libs/hijs.js"></script>
+
+  <script src="/assets/js/libs/github-flavored-markdown.js"></script>
+  <script src="/assets/js/libs/underscore.js"></script>
   <script src="/assets/js/app.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
   <title>@mklabs blog</title>
   <link href="http://blog.mklog.fr/feed/" rel="self"/>
   <link href="http://blog.mklog.fr/"/>
-  <updated>2012-03-14T17:03:56+01:00</updated>
+  <updated>2012-03-15T23:03:42+01:00</updated>
   <id>http://blog.mklog.fr/</id>
   <author>
     <name>Mickael Daniel</name>
@@ -25,11 +25,11 @@
 &lt;li&gt;&lt;p&gt;de &quot;walker&quot; l&#x27;object application (le point d&#x27;entrée de l&#x27;appli) et exécuter la bonne méthode, du bon composant.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Ce pattern se repose sur le fait que l&#x27;application est organisé via un namespace et point d&#x27;entrée unique (et global) de l&#x27;appli (exit donc, requirejs qui permet de s&#x27;en passer).&lt;/p&gt;
+&lt;p&gt;Ce pattern se repose sur le fait que l&#x27;application soit organisée via un namespace et point d&#x27;entrée unique (et global) de l&#x27;appli (exit donc, requirejs qui permet de s&#x27;en passer).&lt;/p&gt;
 
 &lt;h2&gt;Simple backbone pubsub&lt;/h2&gt;
 
-&lt;p&gt;Il existe un nombre incroyable d&#x27;implémentation dites &quot;pubsub&quot; pour nos dévelopments front. Certains sont simplistes et peuvent être écrit en une 20aine de lignes, d&#x27;autres vont plus loin au niveau fonctionnalité (et a fortiori plus de complexité).&lt;/p&gt;
+&lt;p&gt;Il existe un nombre incroyable d&#x27;implémentation dites &quot;pubsub&quot; pour nos dévelopements front. Certains sont simplistes et peuvent être écrit en une 20aine de lignes, d&#x27;autres vont plus loin au niveau fonctionnalités (et a fortiori plus de complexité).&lt;/p&gt;
 
 &lt;p&gt;Backbone ne propose pas un système dit pubsub de base, mais fournit par contre &lt;code&gt;Backbone.Events&lt;/code&gt; (&lt;a href=&quot;http://documentcloud.github.com/backbone/docs/backbone.html#section-15&quot;&gt;src&lt;/a&gt;). Il s&#x27;agit de ce qu&#x27;on appelle un mixin qui peut être utilisé et mergé avec n&#x27;importe quel objet (son prototype) pour lui ajouter une api trigger/bind. C&#x27;est en fait ce qui est fait en interne pour chacun des composant fournis par Backbone (View, Model/Collection, Router. History également).&lt;/p&gt;
 
@@ -79,7 +79,7 @@ app.bind(&#x27;something&#x27;, function() {
 &lt;pre&gt;&lt;code&gt;app.bind(&#x27;something&#x27;, this.method.bind(this));
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;**Note Je n&#x27;utilise pas ou peu &lt;code&gt;_.bind&lt;/code&gt; et &lt;code&gt;_.bindAll&lt;/code&gt; au profit de &lt;code&gt;Function.protype.bind&lt;/code&gt;. Question d&#x27;habitude coté node ou j&#x27;utilise beaucoup &lt;code&gt;.bind&lt;/code&gt;. Ici encore, cela suppose la présence d&#x27;es5-shim, mais il s&#x27;agit là juste d&#x27;une question de préférence. Je suppose que le principal étant de comprendre les implications et d&#x27;utiliser ce avec quoi on est le plus à l&#x27;aise.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; Je n&#x27;utilise pas ou peu &lt;code&gt;_.bind&lt;/code&gt; et &lt;code&gt;_.bindAll&lt;/code&gt; au profit de &lt;code&gt;Function.protype.bind&lt;/code&gt;. Question d&#x27;habitude coté node ou j&#x27;utilise beaucoup &lt;code&gt;.bind&lt;/code&gt;. Ici encore, cela suppose la présence d&#x27;es5-shim, mais il s&#x27;agit là juste d&#x27;une question de préférence. Je suppose que le principal étant de comprendre les implications et d&#x27;utiliser ce avec quoi on est le plus à l&#x27;aise.&lt;/p&gt;
 
 &lt;p&gt;Il s&#x27;agit donc presque toujours d&#x27;une méthode d&#x27;un de mes composants (souvent les vues) qui est executé lorsque qu&#x27;un évenement survient (a contrario d&#x27;une fonction anonyme passé à &lt;code&gt;app.bind&lt;/code&gt;).&lt;/p&gt;
 
@@ -88,14 +88,14 @@ app.bind(&#x27;something&#x27;, function() {
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;les évenements dans l&#x27;application sont délimités par &lt;code&gt;:&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;chaque &quot;partie&quot; de l&#x27;évenement représente un &quot;niveau&quot; au sein de la structure de l&#x27;objet app.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;la dernière partie de l&#x27;évenement représente toujours le nom de la méthode a appéllé.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;la dernière partie de l&#x27;évenement représente toujours le nom de la méthode a appeller.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;doit être un noop lorsque l&#x27;un des niveau n&#x27;a pu être trouvé, ou méthode absente (grosso-modo, pas d&#x27;erreur et silent fail).&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;ne doit pas dénaturer le concept du pubsub, et se comporter de la même façon.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Ainsi, si depuis un composant, je lance un &lt;code&gt;app.trigger(&#x27;ui:panel:change&#x27;)&lt;/code&gt;, le système tentera d&#x27;appeller la méthode &lt;code&gt;app.ui.panel.change&lt;/code&gt;. Il s&#x27;agit par exemple dans mon cas d&#x27;utilisation de la méthode &lt;code&gt;change&lt;/code&gt; de la vue &lt;code&gt;panel&lt;/code&gt; qui est attaché au sous-namespace &lt;code&gt;ui&lt;/code&gt; de mon objet application &lt;code&gt;app&lt;/code&gt;. Très simpliste...&lt;/p&gt;
+&lt;p&gt;Ainsi, si depuis un composant, je lance un &lt;code&gt;app.trigger(&#x27;ui:panel:change&#x27;)&lt;/code&gt;, le système tentera d&#x27;appeller la méthode &lt;code&gt;app.ui.panel.change&lt;/code&gt;. Il s&#x27;agit par exemple dans mon cas d&#x27;utilisation de la méthode &lt;code&gt;change&lt;/code&gt; de la vue &lt;code&gt;panel&lt;/code&gt; qui est attachée au sous-namespace &lt;code&gt;ui&lt;/code&gt; de mon objet application &lt;code&gt;app&lt;/code&gt;. Très simpliste...&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;// handy walk the application object to bride event triggered to function calls
+&lt;pre&gt;&lt;code&gt;// handy walk the application object to bridge event triggered to function calls
 //
 //    app.trigger(&#x27;ui:panel:change&#x27;);
 //    // invoke the app.ui.panel.change method
@@ -123,7 +123,7 @@ app.on(&#x27;all&#x27;, function(ev) {
 
 &lt;p&gt;Cela marche très bien pour moi, cele pourrait peut être marcher pour vous ☺&lt;/p&gt;
 
-&lt;p&gt;Pour avoir un aperçu du code globale (et un poil plus évolué), voici un &lt;a href=&quot;https://gist.github.com/2037864&quot;&gt;gist&lt;/a&gt; illustrant cette approche.&lt;/p&gt;</content>
+&lt;p&gt;Pour avoir un aperçu du code global (et un poil plus évolué), voici un &lt;a href=&quot;https://gist.github.com/2037864&quot;&gt;gist&lt;/a&gt; illustrant cette approche.&lt;/p&gt;</content>
   </entry>
  
   <entry>
@@ -136,7 +136,7 @@ app.on(&#x27;all&#x27;, function(ev) {
 /&gt;
 &lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;github.com/mklabs/gimme-assets&quot;&gt;gimme-assets&lt;/a&gt; est un petit outil que j&#x27;ai développé pour répondre à un rapide besoin.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/mklabs/gimme-assets&quot;&gt;gimme-assets&lt;/a&gt; est un petit outil que j&#x27;ai développé pour répondre à un rapide besoin.&lt;/p&gt;
 
 &lt;p&gt;Complètement inspiré de &lt;a href=&quot;https://github.com/visionmedia/asset&quot;&gt;asset&lt;/a&gt; par @visionmedia, gimme-assets est un outil en ligne de commande écrit en node pour gérer et télécharger facilement n&#x27;importe quelle librairie sur &lt;a href=&quot;http://www.cdnjs.com/&quot;&gt;cdnjs.com&lt;/a&gt; ou &lt;a href=&quot;http://microjs.com/&quot;&gt;microjs.com&lt;/a&gt;&lt;/p&gt;
 

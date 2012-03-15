@@ -100,18 +100,6 @@ code .class, code .special { color: #034; }
   list-style: none;
 }
 
-/** whatev **/
-.post .whatev {
-  margin: 25px 0;
-  padding: 10px 0;
-  font-family: Helvetica, sans-serif;
-  font-style: italic;
-}
-
-.post .whatev h3 {
-  font-size: 22px;
-}
-
 .post .twitter-share {
   text-align: right;
   margin: 4em 0 -4em 0;

@@ -25,7 +25,7 @@
       <h1><a href="/">blog.mklog.fr</a></h1>
       <h2>Un petit pattern pubsub avec Backbone</h2>
       <span class="date">14 mars 2012</span>
-      <span class="date right">il y a une heure</span>
+      <span class="date date-hidden right" data-format="from">1331740500000</span>
     </div>
   </header>
 
@@ -40,11 +40,11 @@
 <li><p>de "walker" l'object application (le point d'entrée de l'appli) et exécuter la bonne méthode, du bon composant.</p></li>
 </ul>
 
-<p>Ce pattern se repose sur le fait que l'application est organisé via un namespace et point d'entrée unique (et global) de l'appli (exit donc, requirejs qui permet de s'en passer).</p>
+<p>Ce pattern se repose sur le fait que l'application soit organisée via un namespace et point d'entrée unique (et global) de l'appli (exit donc, requirejs qui permet de s'en passer).</p>
 
 <h2>Simple backbone pubsub</h2>
 
-<p>Il existe un nombre incroyable d'implémentation dites "pubsub" pour nos dévelopments front. Certains sont simplistes et peuvent être écrit en une 20aine de lignes, d'autres vont plus loin au niveau fonctionnalité (et a fortiori plus de complexité).</p>
+<p>Il existe un nombre incroyable d'implémentation dites "pubsub" pour nos dévelopements front. Certains sont simplistes et peuvent être écrit en une 20aine de lignes, d'autres vont plus loin au niveau fonctionnalités (et a fortiori plus de complexité).</p>
 
 <p>Backbone ne propose pas un système dit pubsub de base, mais fournit par contre <code>Backbone.Events</code> (<a href="http://documentcloud.github.com/backbone/docs/backbone.html#section-15">src</a>). Il s'agit de ce qu'on appelle un mixin qui peut être utilisé et mergé avec n'importe quel objet (son prototype) pour lui ajouter une api trigger/bind. C'est en fait ce qui est fait en interne pour chacun des composant fournis par Backbone (View, Model/Collection, Router. History également).</p>
 
@@ -94,7 +94,7 @@ app.bind('something', function() {
 <pre><code>app.bind('something', this.method.bind(this));
 </code></pre>
 
-<p>**Note Je n'utilise pas ou peu <code>_.bind</code> et <code>_.bindAll</code> au profit de <code>Function.protype.bind</code>. Question d'habitude coté node ou j'utilise beaucoup <code>.bind</code>. Ici encore, cela suppose la présence d'es5-shim, mais il s'agit là juste d'une question de préférence. Je suppose que le principal étant de comprendre les implications et d'utiliser ce avec quoi on est le plus à l'aise.</p>
+<p><strong>Note</strong> Je n'utilise pas ou peu <code>_.bind</code> et <code>_.bindAll</code> au profit de <code>Function.protype.bind</code>. Question d'habitude coté node ou j'utilise beaucoup <code>.bind</code>. Ici encore, cela suppose la présence d'es5-shim, mais il s'agit là juste d'une question de préférence. Je suppose que le principal étant de comprendre les implications et d'utiliser ce avec quoi on est le plus à l'aise.</p>
 
 <p>Il s'agit donc presque toujours d'une méthode d'un de mes composants (souvent les vues) qui est executé lorsque qu'un évenement survient (a contrario d'une fonction anonyme passé à <code>app.bind</code>).</p>
 
@@ -103,14 +103,14 @@ app.bind('something', function() {
 <ul>
 <li><p>les évenements dans l'application sont délimités par <code>:</code>.</p></li>
 <li><p>chaque "partie" de l'évenement représente un "niveau" au sein de la structure de l'objet app.</p></li>
-<li><p>la dernière partie de l'évenement représente toujours le nom de la méthode a appéllé.</p></li>
+<li><p>la dernière partie de l'évenement représente toujours le nom de la méthode a appeller.</p></li>
 <li><p>doit être un noop lorsque l'un des niveau n'a pu être trouvé, ou méthode absente (grosso-modo, pas d'erreur et silent fail).</p></li>
 <li><p>ne doit pas dénaturer le concept du pubsub, et se comporter de la même façon.</p></li>
 </ul>
 
-<p>Ainsi, si depuis un composant, je lance un <code>app.trigger('ui:panel:change')</code>, le système tentera d'appeller la méthode <code>app.ui.panel.change</code>. Il s'agit par exemple dans mon cas d'utilisation de la méthode <code>change</code> de la vue <code>panel</code> qui est attaché au sous-namespace <code>ui</code> de mon objet application <code>app</code>. Très simpliste...</p>
+<p>Ainsi, si depuis un composant, je lance un <code>app.trigger('ui:panel:change')</code>, le système tentera d'appeller la méthode <code>app.ui.panel.change</code>. Il s'agit par exemple dans mon cas d'utilisation de la méthode <code>change</code> de la vue <code>panel</code> qui est attachée au sous-namespace <code>ui</code> de mon objet application <code>app</code>. Très simpliste...</p>
 
-<pre><code>// handy walk the application object to bride event triggered to function calls
+<pre><code>// handy walk the application object to bridge event triggered to function calls
 //
 //    app.trigger('ui:panel:change');
 //    // invoke the app.ui.panel.change method
@@ -138,15 +138,15 @@ app.on('all', function(ev) {
 
 <p>Cela marche très bien pour moi, cele pourrait peut être marcher pour vous ☺</p>
 
-<p>Pour avoir un aperçu du code globale (et un poil plus évolué), voici un <a href="https://gist.github.com/2037864">gist</a> illustrant cette approche.</p>
+<p>Pour avoir un aperçu du code global (et un poil plus évolué), voici un <a href="https://gist.github.com/2037864">gist</a> illustrant cette approche.</p>
 
-      <p class="twitter-share">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      </p>
-    <div class="whatev">
+    <p class="twitter-share">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </p>
+
+    <div class="gh-issues">
       <h3>Commentaire?</h3>
-
 
       <p>Une remarque, un retour ou à peu près n'importe quoi relatif à
       cet article ? Ca se passe désormais <a
@@ -154,6 +154,39 @@ app.on('all', function(ev) {
       les commentaires passent maintenant par GitHub et sont gérés via bug
       tracker ☺.</p>
 
+      <div id="gh-comments">
+
+        <span class="spinner"></span>
+
+        <script type="text/template" id="tmpl-issues">
+          <p class="comment-count"><%= num %></p>
+          <ul>
+            <% _.each(issues, function(issue) { %>
+            <li class="comment-first">
+              <span class="avatar">
+                <img src="<%= issue.issue.user.avatar_url %>" />
+                <p class="author"><a href="https://github.com/<%= issue.issue.user.login %>">@<%= issue.issue.user.login %></a></p>
+              </span>
+              <div class="comment-body"><%= ghm(issue.issue.body, 'mklabs/blog.mklog.fr') %></div>
+            </li>
+
+            <li class="gh-issues-thread">
+              <ul>
+              <% _.each(issue.comments, function(comment) { %>
+                <li>
+                  <span class="avatar">
+                    <img src="<%= comment.user.avatar_url %>" />
+                    <p class="author"><a href="https://github.com/<%= comment.user.login %>">@<%= comment.user.login %></a></p>
+                  </span>
+                  <div class="comment-body"><%= ghm(comment.body, 'mklabs/blog.mklog.fr') %></div>
+                </li>
+              <% }); %>
+              </ul>
+            </li>
+            <% }); %>
+          </ul>
+        </script>
+      </div>
     </div>
   </div>
 
@@ -170,7 +203,11 @@ app.on('all', function(ev) {
 
   <script src="/assets/js/libs/es5-shim.min.js"></script>
   <script src="/assets/js/libs/moment.min.js"></script>
+  <script src="/assets/js/lang/fr.js"></script>
   <script src="/assets/js/libs/hijs.js"></script>
+
+  <script src="/assets/js/libs/github-flavored-markdown.js"></script>
+  <script src="/assets/js/libs/underscore.js"></script>
   <script src="/assets/js/app.js"></script>
 </body>
 </html>

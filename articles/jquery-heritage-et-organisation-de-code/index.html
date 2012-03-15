@@ -25,7 +25,7 @@
       <h1><a href="/">blog.mklog.fr</a></h1>
       <h2>jQuery, héritage et organisation de code</h2>
       <span class="date">6 févr. 2011</span>
-      <span class="date right">il y a une année</span>
+      <span class="date date-hidden right" data-format="from">1297000800000</span>
     </div>
   </header>
 
@@ -895,13 +895,13 @@ $.plugin('feature', Feature()); // Module pattern, mais l'on pourrait adapter no
 
 <p>L'approche d'Alex Sexton est tout simplement énorme et vous permet d'accéder à un niveau de modularité rarement atteint. Vous pouvez parfaitement utiliser la forme d'héritage de votre choix et l'utiliser dans un contexte d'application jQuery. La gestion des dépendances est également un point critique de toute application web. Le degré de modularité ainsi atteint implique un grand nombre de chargement de fichiers, ce qui est un peu contre-performant. C'est ici que l'utilisation d'une solution de gestions de dépendances et de script loading se prouve le plus utile. Javascript ne le permet pas par défaut comme le font beaucoup d'autres langages (includre, require, système de packages, etc.), mais des solutions robustes existent dont LABjs et RequireJS. Le prochain post représentera sûrement la seconde partie de ce billet avec la mise en pratique de cette approche DOM to Bridge et l'utilisation de RequireJS qui se marie particulièrement bien avec cette approche.</p>
 
-      <p class="twitter-share">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-      </p>
-    <div class="whatev">
-      <h3>Commentaire?</h3>
+    <p class="twitter-share">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-via="mklabs" data-lang="fr">Tweeter</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </p>
 
+    <div class="gh-issues">
+      <h3>Commentaire?</h3>
 
       <p>Une remarque, un retour ou à peu près n'importe quoi relatif à
       cet article ? Ca se passe désormais <a
@@ -909,6 +909,39 @@ $.plugin('feature', Feature()); // Module pattern, mais l'on pourrait adapter no
       les commentaires passent maintenant par GitHub et sont gérés via bug
       tracker ☺.</p>
 
+      <div id="gh-comments">
+
+        <span class="spinner"></span>
+
+        <script type="text/template" id="tmpl-issues">
+          <p class="comment-count"><%= num %></p>
+          <ul>
+            <% _.each(issues, function(issue) { %>
+            <li class="comment-first">
+              <span class="avatar">
+                <img src="<%= issue.issue.user.avatar_url %>" />
+                <p class="author"><a href="https://github.com/<%= issue.issue.user.login %>">@<%= issue.issue.user.login %></a></p>
+              </span>
+              <div class="comment-body"><%= ghm(issue.issue.body, 'mklabs/blog.mklog.fr') %></div>
+            </li>
+
+            <li class="gh-issues-thread">
+              <ul>
+              <% _.each(issue.comments, function(comment) { %>
+                <li>
+                  <span class="avatar">
+                    <img src="<%= comment.user.avatar_url %>" />
+                    <p class="author"><a href="https://github.com/<%= comment.user.login %>">@<%= comment.user.login %></a></p>
+                  </span>
+                  <div class="comment-body"><%= ghm(comment.body, 'mklabs/blog.mklog.fr') %></div>
+                </li>
+              <% }); %>
+              </ul>
+            </li>
+            <% }); %>
+          </ul>
+        </script>
+      </div>
     </div>
   </div>
 
@@ -925,7 +958,11 @@ $.plugin('feature', Feature()); // Module pattern, mais l'on pourrait adapter no
 
   <script src="/assets/js/libs/es5-shim.min.js"></script>
   <script src="/assets/js/libs/moment.min.js"></script>
+  <script src="/assets/js/lang/fr.js"></script>
   <script src="/assets/js/libs/hijs.js"></script>
+
+  <script src="/assets/js/libs/github-flavored-markdown.js"></script>
+  <script src="/assets/js/libs/underscore.js"></script>
   <script src="/assets/js/app.js"></script>
 </body>
 </html>
