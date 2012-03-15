@@ -86,7 +86,7 @@
 
     var num = model
       .map(function(issue) {
-        return issue.comments.length + 1;
+        return issue.comments.data.length + 1;
       })
       .reduce(function(a, b) {
         return a + b;
