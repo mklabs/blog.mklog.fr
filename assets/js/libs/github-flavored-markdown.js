@@ -74,22 +74,18 @@
 // Modifications are tagged with "isaacs"
 // **************************************************
 
+(function(exports) {
+
 //
 // Showdown namespace
 //
-var Showdown = {};
+var Showdown = exports.Showdown = {};
 
-//
-// isaacs: export the Showdown object
-//
-if (typeof exports === "object") {
-  Showdown = exports;
-  // isaacs: expose top-level parse() method, like other to-html parsers.
-  Showdown.parse = function (md, gh) {
-    var converter = new Showdown.converter();
-    return converter.makeHtml(md, gh);
-  };
-}
+// isaacs: expose top-level parse() method, like other to-html parsers.
+Showdown.parse = function (md, gh) {
+  var converter = new Showdown.converter();
+  return converter.makeHtml(md, gh);
+};
 
 //
 // isaacs: Declare "GitHub" object in here, since Node modules
@@ -1412,3 +1408,5 @@ var escapeCharacters_callback = function(wholeMatch,m1) {
 }
 
 } // end of Showdown.converter
+
+})(typeof exports !== 'undefined' ? exports : this);

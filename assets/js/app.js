@@ -6,8 +6,15 @@
 
   // start all that jazz
   app.init = function init() {
-    this.moment();
-    this.issues(location.pathname);
+    this.ghissues = $('#gh-comments');
+    this.template = _.template($('#tmpl-issues').html());
+
+    this.ghm = new Showdown.converter();
+    this.ghm = this.ghm.makeHtml.bind(this.ghm);
+
+    this
+      .moment()
+      .issues(location.pathname);
   };
 
   // configure moment js for automatic format on data-*
@@ -20,6 +27,8 @@
 
       t.text(/from/.test(fmt) ? now.fromNow() : now.format(fmt)).removeClass('date-hidden');
     });
+
+    return this;
   };
 
   // github-issues as blog comment system <3
@@ -32,7 +41,6 @@
 
     req.success(function(res) {
       var data = res.data;
-      console.log('filter out the results', data);
       if(!data || !data.length) return;
 
       var related = data.filter(function(issue) {
@@ -42,10 +50,11 @@
       var ln = related.length,
         comments = [];
 
+      if(!ln) return app.renderIssues();
+
       related.forEach(function(rel) {
         var req = $.getJSON(api + '/repos/mklabs/blog.mklog.fr/issues/' + rel.number + '/comments');
         req.success(function(data) {
-          console.log('success>', res);
           comments.push({
             issue: rel,
             comments: data
@@ -65,25 +74,30 @@
     });
 
     req.error(console.error.bind(console));
+
+    return this;
   };
 
   // render the issues / comments listing.
   //
   // - model   - a Hash object to pass to templates
   app.renderIssues = function renderIssues(model) {
-    var tmpl = _.template($('#tmpl-issues').html()),
-      target = $('.gh-issues');
+    model = model || [];
 
-    console.log('template is', tmpl);
-    console.log('model is', {
-      issues: model
-    });
+    console.log('model', model);
 
-    target.html(tmpl({
-      issues: model
-    }));
+    var num = model
+      .map(function(issue) {
+        return issue.comments.length + 1;
+      })
+      .reduce(function(a, b) {
+        return a + b;
+      }, 0);
+
+    num = num + ' commentaire' + (num > 1 ? 's' : '');
+    this.ghissues.html(this.template({ issues: model, ghm: this.ghm, num: num }));
+    return this;
   };
-
 
   exports.app = Object.create(app);
 
