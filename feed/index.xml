@@ -1,0 +1,25 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>@mklabs blog</title>
+  <link href="http://blog.mklog.fr/feed/" rel="self"/>
+  <link href="http://blog.mklog.fr/"/>
+  <updated>{{moment site.time "YYYY-MM-DDTHH:MM:ssZ"}}</updated>
+  <id>http://blog.mklog.fr/</id>
+  <author>
+    <name>Mickael Daniel</name>
+  </author>
+
+  {{#each site.feed_posts}}
+  <entry>
+    <title>{{ title }}</title>
+    <link href="http://blog.mklog.fr/{{ url }}"/>
+    <updated>{{moment time "YYYY-MM-DDTHH:MM:ssZ"}}</updated>
+    <id>http://blog.mklog.fr/{{ id }}</id>
+    <content type="html">{{ content }}</content>
+  </entry>
+ {{/each}}
+
+</feed>
