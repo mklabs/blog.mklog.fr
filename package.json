@@ -1,0 +1,14 @@
+{
+  "author": "mklabs",
+  "name": "blog.mklog.fr",
+  "description": "blog thing",
+  "version": "0.0.0",
+  "homepage": "http://blog.mklog.fr",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mklabs/blog.mklog.fr.git"
+  },
+  "dependencies": {
+    "nabe": "http://nodeload.github.com/mklabs/nabe/tarball/dev"
+  }
+}
