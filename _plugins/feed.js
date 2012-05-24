@@ -1,6 +1,6 @@
 
 
-var nabe = require('../../nabe'),
+var nabe = require('nabe'),
   moment = nabe.moment;
 
 
@@ -15,6 +15,7 @@ var Feed = module.exports = nabe.Generator.extend({
 
   generate: function generate(site) {
     nabe.log.info('feed:generator', 'Filtering posts for feed from ', moment(this.from).format('LL'));
+
     var from = this.from;
 
     var posts = site.posts.filter(function(post) {
