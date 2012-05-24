@@ -10,5 +10,12 @@
   },
   "dependencies": {
     "nabe": "http://nodeload.github.com/mklabs/nabe/tarball/dev"
+  },
+
+  "scripts": {
+    "help"        : "node node_modules/nabe/bin/nabe --help",
+    "generate"    : "node node_modules/nabe/bin/nabe generate",
+    "serve"       : "node node_modules/nabe/bin/nabe serve",
+    "watch"       : "node node_modules/nabe/bin/nabe watch"
   }
 }
