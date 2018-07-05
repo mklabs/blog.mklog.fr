@@ -9,14 +9,14 @@
   <title>Nabe tests</title>
   <meta name="description" content="Generation tests for nabe-vnext">
   <meta name="viewport" content="width=device-width">
-  <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="//mklabs.github.com/blog.mklog.fr/assets/css/style.css">
-  <link rel="stylesheet" href="//mklabs.github.com/blog.mklog.fr/assets/css/markdown.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://mklabs.github.com/blog.mklog.fr/assets/css/style.css">
+  <link rel="stylesheet" href="https://mklabs.github.com/blog.mklog.fr/assets/css/markdown.css">
 </head>
 <body data-controller="post" class="post travis-node">
   <header>
     <div class="container">
-      <h1><a href="//mklabs.github.com/blog.mklog.fr">blog.mklog.fr</a></h1>
+      <h1><a href="https://mklabs.github.com/blog.mklog.fr">blog.mklog.fr</a></h1>
       <h2>node et travis-ci</h2>
       <span class="date date-hidden" data-format="MMMM DD, YYYY">Wed Sep 14 2011 22:08:40 GMT+0200 (CDT)</span>
       <span class="date date-hidden right" data-format="">Wed Sep 14 2011 22:08:40 GMT+0200 (CDT)</span>
@@ -43,7 +43,7 @@ config-->
 
 <p>Yay ! La première fois que j'ai entendu parler de Travis, le projet se décrivait "... for the ruby community". Le projet semblait très intéressant (il semble pas, il l'est), mais semblait ne pas s'appliquer à mon besoin: node (je ne suis suis pas (encore) un rubyist.. personne n'est parfait).</p>
 
-<p>Puis récemment, <a href="//twitter.com/#!/loicfrering">@loicfrering</a>, alors qu'on en était venu à parler CI, m'a refillé le lien vers Travis en me disant quelque chose du genre:</p>
+<p>Puis récemment, <a href="https://twitter.com/loicfrering">@loicfrering</a>, alors qu'on en était venu à parler CI, m'a refillé le lien vers Travis en me disant quelque chose du genre:</p>
 
 <ul>
 <li><p>"Tu devrais y jetter un coup d'oeil."</p></li>
@@ -53,7 +53,7 @@ config-->
 <li><p>moi: "Enorme, exactement ce que je cherchais.."</p></li>
 </ul>
 
-<p>Rapidement, le principe de Travis est de fournir <a href="//about.travis-ci.org/docs/user/ci-environment/">une VM avec un environnement complet</a>, et de trigger un build sur le déclenchement d'un <a href="//help.github.com/post-receive-hooks/">post-receive hook</a> sur un de vos repository. Pour ce faire, il suffit de le configurer en fonction. Étant plutôt sympa, travis s'en charge également. C'est la raison pour laquelle Github OAuth demande des droits d'écriture sur votre compte: configurer le post-receive hook de votre repo pour pinger travis-ci.org. Le hook étant déclenché sur chacun des push effectué sur le repo. Travis n'effectuera aucun autre manipulation d'écriture sur votre compte.</p>
+<p>Rapidement, le principe de Travis est de fournir <a href="https://about.travis-ci.org/docs/user/ci-environment/">une VM avec un environnement complet</a>, et de trigger un build sur le déclenchement d'un <a href="https://help.github.com/post-receive-hooks/">post-receive hook</a> sur un de vos repository. Pour ce faire, il suffit de le configurer en fonction. Étant plutôt sympa, travis s'en charge également. C'est la raison pour laquelle Github OAuth demande des droits d'écriture sur votre compte: configurer le post-receive hook de votre repo pour pinger travis-ci.org. Le hook étant déclenché sur chacun des push effectué sur le repo. Travis n'effectuera aucun autre manipulation d'écriture sur votre compte.</p>
 
 <p>Les VMs Travis intègre donc node 0.4.8 et npm 1.0.12. Les builds spawnant une VMs à chaque build en la rollbackant une fois terminé. Travis utilise l'excellentissime Vagrant pour gérer ses VMs, mais vous n'avez pas besoin de toucher à Vagrant pour faire tourner le tout (même s'il est fortement recommendé d'y jeter un oeil...)</p>
 
@@ -160,11 +160,11 @@ npm ERR! Actual:   {"npm":"1.0.12","node":"v0.4.8"}
     <div class="container"></div>
   </footer>
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
-  <script src="//mklabs.github.com/blog.mklog.fr/assets/js/libs/es5-shim.min.js"></script>
-  <script src="//mklabs.github.com/blog.mklog.fr/assets/js/libs/moment.min.js"></script>
-  <script src="//mklabs.github.com/blog.mklog.fr/assets/js/libs/hijs.js"></script>
-  <script src="//mklabs.github.com/blog.mklog.fr/assets/js/app.js"></script>
+  <script src="https://mklabs.github.com/blog.mklog.fr/assets/js/libs/es5-shim.min.js"></script>
+  <script src="https://mklabs.github.com/blog.mklog.fr/assets/js/libs/moment.min.js"></script>
+  <script src="https://mklabs.github.com/blog.mklog.fr/assets/js/libs/hijs.js"></script>
+  <script src="https://mklabs.github.com/blog.mklog.fr/assets/js/app.js"></script>
 </body>
 </html>
